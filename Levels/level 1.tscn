@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=4 uid="uid://bhl4vueljftp1"]
+
+[ext_resource type="Texture2D" uid="uid://d3ucxnaftuyiu" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="1_p48sa"]
+[ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_p48sa"]
+[ext_resource type="PackedScene" uid="uid://b6s6e1afvs4ki" path="res://prefabs/rock_on_grass.tscn" id="3_540j4"]
+[ext_resource type="PackedScene" uid="uid://djrepn2djvyae" path="res://characters/playa.tscn" id="3_a63mx"]
+[ext_resource type="PackedScene" uid="uid://p7y3h1rt3bir" path="res://Enemies/Swordman.tscn" id="5_540j4"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_540j4"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="WaterBackgroundColor" type="Sprite2D" parent="."]
+position = Vector2(802, 611.5)
+scale = Vector2(42.9375, 34.890625)
+texture = ExtResource("1_p48sa")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_540j4")
+
+[node name="TileMapLayer" parent="NavigationRegion2D" instance=ExtResource("2_p48sa")]
+position = Vector2(0, 0)
+
+[node name="RockOnGrass" parent="NavigationRegion2D" instance=ExtResource("3_540j4")]
+tile_map_data = PackedByteArray("AAAVACcAAAAAAAAAAQA6ACEAAAAAAAAAAQA1AA0AAAAAAAAAAQAZABAAAAAAAAAAAQAbABkAAAAAAAAAAQArACsAAAAAAAAAAQA2ABYAAAAAAAAAAQAPAA0AAAAAAAAAAQA=")
+
+[node name="Swordman" parent="." instance=ExtResource("5_540j4")]
+position = Vector2(64, 48)
+wall_min_slide_angle = 0.12740904
+
+[node name="Playa" parent="." instance=ExtResource("3_a63mx")]
+position = Vector2(56, 216)

@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 250
+
+func _ready() -> void:
+	add_to_group("Player")
 
 func _physics_process(delta: float) -> void:
 	var direction := Vector2.ZERO

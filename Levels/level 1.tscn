@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://p7y3h1rt3bir" path="res://Enemies/Swordman.tscn" id="5_540j4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_540j4"]
+vertices = PackedVector2Array(894.8125, 216, 2150, -486, 969.6172, 516.59375, 955.40625, 502.3828, 910.8125, 360, 905.6172, 340.59375, 889.6172, 235.40625, 734.8125, 696, 936, 574.8125, 955.40625, 569.6172, 729.6172, 715.40625, 852.59375, 326.3828, 446.8125, 264, 836.59375, 249.61719, 856, 254.8125, 872, 321.1875, 473.6172, 427.40625, 478.8125, 408, 852.59375, 393.6172, 872, 398.8125, 916.59375, 502.3828, 902.3828, 516.59375, 459.40625, 441.6172, 696, 657.1875, 676.59375, 662.3828, 382.8125, 632, 377.6172, 612.59375, 891.40625, 326.3828, 875.40625, 249.61719, 916.59375, 569.6172, 729.6172, 676.59375, 822.3828, 235.40625, 838.3828, 379.40625, 2150, 1702, 974.8125, 536, 662.3828, 676.59375, 969.6172, 555.40625, 905.6172, 379.40625, 936, 497.1875, 891.40625, 393.6172, 902.3828, 555.40625, 715.40625, 662.3828, 889.6172, 196.59375, 817.1875, 216, 441.6172, 244.59375, 833.1875, 360, 473.6172, 388.59375, 657.1875, 696, 377.6172, 651.40625, -550, 1702, 715.40625, 729.6172, 838.3828, 340.59375, 441.6172, 283.40625, 459.40625, 374.3828, 427.40625, 297.6172, 440, 369.1875, 408, 302.8125, 420.59375, 374.3828, 897.1875, 536, 822.3828, 196.59375, 408, 225.1875, 286.8125, 216, 281.6172, 196.59375, 875.40625, 182.38281, -550, -486, 856, 177.1875, 836.59375, 182.38281, 267.40625, 182.38281, 248, 177.1875, 440, 446.8125, 363.40625, 598.3828, 420.59375, 441.6172, 344, 593.1875, 406.3828, 427.40625, 324.59375, 598.3828, 662.3828, 715.40625, 363.40625, 665.6172, 388.59375, 297.6172, 406.3828, 388.59375, 427.40625, 230.38281, 228.59375, 182.38281, 214.38281, 196.59375, 209.1875, 216, 214.38281, 235.40625, 228.59375, 249.61719, 248, 254.8125, 267.40625, 249.61719, 310.3828, 612.59375, 305.1875, 632, 401.1875, 408, 344, 670.8125, 676.59375, 729.6172, 374.3828, 283.40625, 281.6172, 235.40625, 369.1875, 264, 388.59375, 230.38281, 374.3828, 244.59375, 310.3828, 651.40625, 324.59375, 665.6172, 696, 734.8125)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 13, 14, 15), PackedInt32Array(16, 17, 18, 19, 20, 21), PackedInt32Array(22, 16, 23, 24, 25, 26), PackedInt32Array(6, 5, 27, 28), PackedInt32Array(29, 8, 7, 30), PackedInt32Array(31, 13, 12), PackedInt32Array(32, 18, 17), PackedInt32Array(1, 33, 34, 2), PackedInt32Array(25, 24, 35), PackedInt32Array(36, 34, 33), PackedInt32Array(28, 27, 15, 14), PackedInt32Array(37, 4, 3, 38), PackedInt32Array(39, 37, 38, 20), PackedInt32Array(40, 29, 30, 41), PackedInt32Array(1, 0, 42), PackedInt32Array(43, 31, 12, 44), PackedInt32Array(12, 45, 32, 17, 46), PackedInt32Array(25, 35, 47, 48), PackedInt32Array(19, 39, 20), PackedInt32Array(9, 36, 33), PackedInt32Array(9, 33, 49, 50), PackedInt32Array(12, 11, 51), PackedInt32Array(12, 51, 45), PackedInt32Array(52, 12, 46, 53), PackedInt32Array(54, 52, 53, 55), PackedInt32Array(56, 54, 55, 57), PackedInt32Array(16, 58, 40, 41, 23), PackedInt32Array(59, 43, 60, 61, 62), PackedInt32Array(1, 42, 63), PackedInt32Array(64, 1, 63, 65), PackedInt32Array(64, 65, 66), PackedInt32Array(64, 66, 59, 67, 68), PackedInt32Array(16, 21, 58), PackedInt32Array(69, 22, 26, 70), PackedInt32Array(71, 69, 70, 72), PackedInt32Array(73, 71, 72, 74), PackedInt32Array(48, 47, 75, 76), PackedInt32Array(77, 56, 57, 78), PackedInt32Array(43, 44, 79), PackedInt32Array(59, 62, 67), PackedInt32Array(64, 68, 80), PackedInt32Array(64, 80, 81), PackedInt32Array(49, 64, 81, 82), PackedInt32Array(49, 82, 83), PackedInt32Array(49, 83, 84), PackedInt32Array(49, 84, 85), PackedInt32Array(49, 85, 86, 87, 88), PackedInt32Array(89, 73, 74), PackedInt32Array(90, 76, 75, 91, 49), PackedInt32Array(92, 77, 78, 89, 74, 87), PackedInt32Array(93, 94, 92, 87, 86), PackedInt32Array(43, 79, 60), PackedInt32Array(61, 60, 95), PackedInt32Array(61, 95, 96, 93), PackedInt32Array(93, 96, 94), PackedInt32Array(49, 88, 97), PackedInt32Array(49, 97, 98), PackedInt32Array(49, 98, 90), PackedInt32Array(49, 91, 99), PackedInt32Array(49, 99, 50), PackedInt32Array(9, 50, 10)])
 
 [node name="Level1" type="Node2D"]
 
@@ -20,13 +22,13 @@ navigation_polygon = SubResource("NavigationPolygon_540j4")
 
 [node name="TileMapLayer" parent="NavigationRegion2D" instance=ExtResource("2_p48sa")]
 position = Vector2(0, 0)
+navigation_enabled = false
 
 [node name="RockOnGrass" parent="NavigationRegion2D" instance=ExtResource("3_540j4")]
 tile_map_data = PackedByteArray("AAAVACcAAAAAAAAAAQA6ACEAAAAAAAAAAQA1AA0AAAAAAAAAAQAZABAAAAAAAAAAAQAbABkAAAAAAAAAAQArACsAAAAAAAAAAQA2ABYAAAAAAAAAAQAPAA0AAAAAAAAAAQA=")
 
-[node name="Swordman" parent="." instance=ExtResource("5_540j4")]
-position = Vector2(64, 48)
-wall_min_slide_angle = 0.12740904
-
 [node name="Playa" parent="." instance=ExtResource("3_a63mx")]
-position = Vector2(56, 216)
+position = Vector2(552, 448)
+
+[node name="Swordman" parent="." instance=ExtResource("5_540j4")]
+position = Vector2(680, 248)

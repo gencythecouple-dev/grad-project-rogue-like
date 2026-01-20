@@ -7,19 +7,17 @@
 radius = 17.0
 
 [node name="Playa" type="CharacterBody2D"]
-position = Vector2(0, -2)
+position = Vector2(64, 154)
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_1vl2s")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(590, 322)
 texture = ExtResource("2_dk32m")
 hframes = 6
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 326)
+position = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(590, 330)
 shape = SubResource("CircleShape2D_1vl2s")

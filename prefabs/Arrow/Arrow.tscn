@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs13wkskfqj0c"]
+
+[ext_resource type="Texture2D" uid="uid://bfqemdck281hd" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Arrow.png" id="1_kn6v5"]
+[ext_resource type="Script" uid="uid://5fyb0fskr01n" path="res://prefabs/Arrow/arrow.gd" id="1_mcjxc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mcjxc"]
+size = Vector2(26, 5)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 6
+motion_mode = 1
+script = ExtResource("1_mcjxc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_kn6v5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -0.5)
+shape = SubResource("RectangleShape2D_mcjxc")

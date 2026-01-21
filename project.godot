@@ -22,6 +22,12 @@ window/size/viewport_height=960
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+MainScene=""
+Player=""
+Enemy=""
+
 [input]
 
 ui_left={
@@ -62,6 +68,7 @@ ui_down={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Environent"
+2d_physics/layer_4="Projectile"
 
 [rendering]
 

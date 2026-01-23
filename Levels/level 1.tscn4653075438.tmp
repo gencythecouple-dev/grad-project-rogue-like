@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=4 uid="uid://bhl4vueljftp1"]
+
+[ext_resource type="Script" uid="uid://c1b0awynnrd1s" path="res://Levels/level_1.gd" id="1_oalwn"]
+[ext_resource type="Texture2D" uid="uid://d3ucxnaftuyiu" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Terrain/Tileset/Water Background color.png" id="1_p48sa"]
+[ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_p48sa"]
+[ext_resource type="PackedScene" uid="uid://b6s6e1afvs4ki" path="res://prefabs/rock_on_grass.tscn" id="3_540j4"]
+[ext_resource type="PackedScene" uid="uid://djrepn2djvyae" path="res://characters/playa.tscn" id="3_a63mx"]
+[ext_resource type="PackedScene" uid="uid://p7y3h1rt3bir" path="res://Enemies/Swordman.tscn" id="5_540j4"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_540j4"]
+vertices = PackedVector2Array(894.8125, 216, 2150, -486, 2150, 1702, 974.8125, 536, 969.6172, 516.59375, 734.8125, 696, 936, 574.8125, 955.40625, 569.6172, 729.6172, 715.40625, 664, 590.8125, 696, 657.1875, 676.59375, 662.3828, 382.8125, 632, 644.59375, 585.6172, 889.6172, 235.40625, 955.40625, 502.3828, 916.59375, 569.6172, 729.6172, 676.59375, 662.3828, 676.59375, 440, 641.1875, 875.40625, 249.61719, 936, 497.1875, 969.6172, 555.40625, 657.1875, 696, 478.8125, 680, 473.6172, 660.59375, 697.6172, 571.40625, 702.8125, 552, 897.1875, 536, 902.3828, 555.40625, 715.40625, 662.3828, 683.40625, 585.6172, 889.6172, 196.59375, 630.3828, 571.40625, 856, 254.8125, 916.59375, 502.3828, 625.1875, 552, 377.6172, 612.59375, -550, 1702, 715.40625, 729.6172, 473.6172, 699.40625, 662.3828, 715.40625, 902.3828, 516.59375, 697.6172, 532.59375, 836.59375, 249.61719, 875.40625, 182.38281, -550, -486, 856, 177.1875, 836.59375, 182.38281, 822.3828, 196.59375, 817.1875, 216, 683.40625, 518.3828, 822.3828, 235.40625, 664, 513.1875, 630.3828, 532.59375, 363.40625, 598.3828, 459.40625, 713.6172, 676.59375, 729.6172, 644.59375, 518.3828, 344, 593.1875, 324.59375, 598.3828, 310.3828, 612.59375, 305.1875, 632, 310.3828, 651.40625, 324.59375, 665.6172, 344, 670.8125, 459.40625, 646.3828, 420.59375, 713.6172, 363.40625, 665.6172, 406.3828, 699.40625, 440, 718.8125, 696, 734.8125, 401.1875, 680, 377.6172, 651.40625, 406.3828, 660.59375, 420.59375, 646.3828)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(9, 10, 11, 12, 13), PackedInt32Array(14, 0, 4, 15), PackedInt32Array(16, 6, 5, 17), PackedInt32Array(12, 11, 18, 19), PackedInt32Array(20, 14, 15, 21), PackedInt32Array(22, 3, 2), PackedInt32Array(18, 23, 24, 25), PackedInt32Array(26, 27, 28, 29, 17, 30), PackedInt32Array(29, 16, 17), PackedInt32Array(31, 26, 30, 10), PackedInt32Array(1, 0, 32), PackedInt32Array(9, 31, 10), PackedInt32Array(33, 13, 12), PackedInt32Array(34, 20, 21, 35), PackedInt32Array(36, 33, 12, 37), PackedInt32Array(7, 22, 2), PackedInt32Array(7, 2, 38, 39), PackedInt32Array(40, 24, 23, 41), PackedInt32Array(42, 28, 27, 43, 44), PackedInt32Array(1, 32, 45), PackedInt32Array(46, 1, 45, 47), PackedInt32Array(46, 47, 48), PackedInt32Array(46, 48, 49), PackedInt32Array(46, 49, 50), PackedInt32Array(44, 34, 35, 42), PackedInt32Array(44, 43, 51), PackedInt32Array(52, 44, 51, 53, 46), PackedInt32Array(54, 36, 37, 55, 46), PackedInt32Array(56, 40, 41, 57), PackedInt32Array(46, 50, 52), PackedInt32Array(46, 53, 58), PackedInt32Array(46, 58, 54), PackedInt32Array(46, 55, 59), PackedInt32Array(46, 59, 60), PackedInt32Array(46, 60, 61), PackedInt32Array(38, 46, 61, 62), PackedInt32Array(38, 62, 63), PackedInt32Array(38, 63, 64), PackedInt32Array(38, 64, 65), PackedInt32Array(18, 25, 66), PackedInt32Array(67, 38, 65, 68, 69), PackedInt32Array(70, 56, 57, 71, 38), PackedInt32Array(39, 8, 7), PackedInt32Array(71, 39, 38), PackedInt32Array(67, 70, 38), PackedInt32Array(72, 69, 68, 73), PackedInt32Array(74, 72, 73, 12), PackedInt32Array(75, 74, 12), PackedInt32Array(19, 75, 12), PackedInt32Array(19, 18, 66)])
+
+[node name="Level1" type="Node2D" groups=["MainScene"]]
+script = ExtResource("1_oalwn")
+spawn_area = Rect2(-512, 450, 2048, 1120)
+enemy_scene = ExtResource("5_540j4")
+
+[node name="WaterBackgroundColor" type="Sprite2D" parent="."]
+position = Vector2(802, 611.5)
+scale = Vector2(42.9375, 34.890625)
+texture = ExtResource("1_p48sa")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_540j4")
+
+[node name="TileMapLayer" parent="NavigationRegion2D" instance=ExtResource("2_p48sa")]
+position = Vector2(0, 0)
+navigation_enabled = false
+
+[node name="RockOnGrass" parent="NavigationRegion2D" instance=ExtResource("3_540j4")]
+tile_map_data = PackedByteArray("AAAVACcAAAAAAAAAAQA6ACEAAAAAAAAAAQA1AA0AAAAAAAAAAQArACsAAAAAAAAAAQAbACoAAAAAAAAAAQApACIAAAAAAAAAAQA=")
+
+[node name="Playa" parent="." instance=ExtResource("3_a63mx")]
+position = Vector2(552, 448)
+
+[node name="ArrowHolder" type="Node2D" parent="."]
+
+[node name="EnemyHolder" type="Node2D" parent="."]
+
+[node name="Swordman" parent="EnemyHolder" instance=ExtResource("5_540j4")]
+position = Vector2(680, 248)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

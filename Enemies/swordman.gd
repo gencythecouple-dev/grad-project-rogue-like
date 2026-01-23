@@ -5,12 +5,14 @@ extends CharacterBody2D
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var attack_cooldown: Timer = $AttackCooldown
 
+@onready var health_bar = $ProgressBar
 @onready var run_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Run.png")
 @onready var attack_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Attack1.png")
 
 const SPEED := 150
 const ATTACK_RANGE := 75
 
+var current_scene
 
 var player_ref
 var current_state: STATE
@@ -22,7 +24,13 @@ enum STATE {
 	ATTACK
 }
 
+var base_hp :=3
+var max_hp : int
+var current_hp : int
+
 func _ready() -> void:
+	current_scene = get_tree().get_first_node_in_group("MainScene")
+	SetStats(1)
 	player_ref = get_tree().get_first_node_in_group("Player")
 	attack_cooldown.one_shot = true
 	current_state = STATE.RUN
@@ -62,6 +70,17 @@ func ChangeState(new_state: STATE) -> void:
 		anim_player.play("attack")
 
 		attack_cooldown.start()
+
+
+func SetStats(level_num):
+	max_hp = base_hp * level_num
+	current_hp = max_hp
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
+
+func UpdateUI():
+	health_bar.value = current_hp
+
 func is_player_in_attack_range() -> bool:
 	if player_ref == null:
 		return false
@@ -85,3 +104,14 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "attack":
 		ChangeState(STATE.RUN)
 		attack_cooldown.start()
+
+
+func _on_hurt_box_body_entered(body: Node2D) -> void:
+	current_hp -= body.damage
+	if current_hp <= 0:
+		current_scene.enemy_died.emit(self)
+		queue_free()
+	else:
+		health_bar.value = current_hp
+		
+	body._on_hit_enemy()

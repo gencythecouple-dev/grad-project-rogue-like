@@ -5,6 +5,7 @@ class_name Arrow
 
 var target: CharacterBody2D
 var flight_direction: Vector2
+var damage : float
 
 const ENEMY_LAYER := 1 << 1
 const ENV_LAYER   := 1 << 2
@@ -29,11 +30,12 @@ func _physics_process(delta: float) -> void:
 
 		if body == null:
 			continue
-
 		var layer: int = body.collision_layer
 
-		# Hit enemy
-		if layer & ENEMY_LAYER:
+		# ---- ENEMY ----
+		if body.is_in_group("enemy"):
+			if body.has_method("take_damage"):
+				body.take_damage(damage)
 			queue_free()
 			return
 
@@ -41,3 +43,6 @@ func _physics_process(delta: float) -> void:
 		if layer & ENV_LAYER:
 			queue_free()
 			return
+			
+func _on_hit_enemy():
+	queue_free()

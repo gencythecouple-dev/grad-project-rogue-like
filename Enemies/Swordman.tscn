@@ -1,7 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://p7y3h1rt3bir"]
+[gd_scene load_steps=12 format=3 uid="uid://p7y3h1rt3bir"]
 
 [ext_resource type="Script" uid="uid://dxal77sr4yrxa" path="res://Enemies/swordman.gd" id="1_mfj8p"]
 [ext_resource type="Texture2D" uid="uid://dvb7pe66dyxtt" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Attack1.png" id="2_mfj8p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfj8p"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8uqdf"]
+bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8vjfr"]
 radius = 24.0
@@ -158,11 +164,23 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_mfj8p"]
 radius = 72.443085
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_8uqdf"]
+radius = 38.013157
+
 [node name="Swordman" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 7
 motion_mode = 1
 script = ExtResource("1_mfj8p")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -51.0
+offset_top = -79.0
+offset_right = 53.0
+offset_bottom = -60.0
+theme_override_styles/background = SubResource("StyleBoxFlat_mfj8p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8uqdf")
+show_percentage = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_mfj8p")
@@ -181,6 +199,7 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -190,5 +209,14 @@ shape = SubResource("CircleShape2D_mfj8p")
 [node name="AttackCooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-7, 2)
+shape = SubResource("CircleShape2D_8uqdf")
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

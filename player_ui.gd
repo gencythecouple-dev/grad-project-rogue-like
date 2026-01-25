@@ -1,23 +1,64 @@
 extends CanvasLayer
 
-@onready var exp_bar = $"MarginContainer/VBoxContainer/ExpBar"
-@onready var level_label = $"MarginContainer/VBoxContainer/LevelLabel"
+@onready var exp_bar = $"VBoxContainer/ExpBar"
+@onready var level_label = $"VBoxContainer/HBoxContainer/LevelLabel"
+
+# Item display slots
+@onready var active_slots = [
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot1/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot2/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot3/TextureRect"
+]
+
+@onready var passive_slots = [
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot1/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot2/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot3/TextureRect"
+]
+
+# Track which slots are filled
+var active_count = 0
+var passive_count = 0
 
 func _ready():
 	add_to_group("PlayerUI")
-	print("PlayerUI _ready - exp_bar: ", exp_bar, " level_label: ", level_label)
 	if exp_bar:
 		exp_bar.show_percentage = false
+	
+	# Dim all empty slots
+	for slot in active_slots + passive_slots:
+		if slot:
+			slot.modulate = Color(0.3, 0.3, 0.3, 0.5)
 
 func update_exp(current: int, needed: int):
 	if exp_bar == null:
-		print("ERROR: exp_bar is null!")
 		return
 	exp_bar.max_value = needed
 	exp_bar.value = current
 
 func update_level(level: int):
 	if level_label == null:
-		print("ERROR: level_label is null!")
 		return
 	level_label.text = "Level " + str(level)
+
+# Add an active weapon/upgrade icon
+func add_active_item(icon_texture: Texture2D):
+	if active_count >= active_slots.size():
+		return
+	
+	var slot = active_slots[active_count]
+	if slot:
+		slot.texture = icon_texture
+		slot.modulate = Color.WHITE
+		active_count += 1
+
+# Add a passive upgrade icon
+func add_passive_item(icon_texture: Texture2D):
+	if passive_count >= passive_slots.size():
+		return
+	
+	var slot = passive_slots[passive_count]
+	if slot:
+		slot.texture = icon_texture
+		slot.modulate = Color.WHITE
+		passive_count += 1

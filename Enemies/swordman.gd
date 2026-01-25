@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var run_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Run.png")
 @onready var attack_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Attack1.png")
 
-@export var damage_number_scene: PackedScene  # Assign DamageNumber.tscn here
+@export var damage_number_scene: PackedScene
 
 var knockback_velocity := Vector2.ZERO
 var knockback_decay := 10.0
@@ -17,7 +17,7 @@ const SPEED := 150
 const ATTACK_RANGE := 75
 const KNOCKBACK_STRENGTH := 300.0
 const ATTACK_DAMAGE := 10.0
-const FLASH_DURATION := 0.15  # How long the flash lasts
+const FLASH_DURATION := 0.15 
 
 var current_scene
 var player_ref
@@ -49,7 +49,6 @@ func _physics_process(delta: float) -> void:
 	if player_ref == null:
 		return
 	
-	# Handle flash effect
 	if flash_timer > 0:
 		flash_timer -= delta
 		var material = sprite.material as ShaderMaterial
@@ -110,23 +109,16 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		attack_cooldown.start()
 
 func _on_hurt(damage: float):
-	print("Enemy _on_hurt called! Damage: ", damage, " Current HP: ", current_hp)
 	current_hp -= damage
-	
-	# Trigger flash effect
 	flash_timer = FLASH_DURATION
-	
-	# Spawn damage number
 	spawn_damage_number(damage)
 	
 	if player_ref:
 		var knockback_dir = (global_position - player_ref.global_position).normalized()
 		knockback_velocity = knockback_dir * KNOCKBACK_STRENGTH
 	
-	print("After damage HP: ", current_hp, "/", max_hp)
 	
 	if current_hp <= 0:
-		print("Enemy died!")
 		current_scene.enemy_died.emit(self)
 		queue_free()
 
@@ -135,7 +127,6 @@ func spawn_damage_number(damage: float):
 		return
 	
 	var dmg_num = damage_number_scene.instantiate()
-	# Spawn slightly above the enemy
 	var spawn_pos = global_position + Vector2(randf_range(-10, 10), -20)
 	current_scene.add_child(dmg_num)
 	dmg_num.setup(damage, spawn_pos)
@@ -145,7 +136,6 @@ func _on_attack_hit_player(body: Node2D) -> void:
 		has_hit_player = true
 		if body.has_method("TakeDamage"):
 			body.TakeDamage(ATTACK_DAMAGE)
-			print("Swordman dealt ", ATTACK_DAMAGE, " damage to player!")
 
 func enable_attack_hitbox():
 	attack_hitbox.monitoring = true

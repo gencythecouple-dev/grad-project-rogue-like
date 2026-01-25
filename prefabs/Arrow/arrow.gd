@@ -15,8 +15,14 @@ func _ready() -> void:
 	if target == null or !is_instance_valid(target):
 		queue_free()
 		return
-
+	
 	flight_direction = global_position.direction_to(target.global_position)
+	
+	# Apply spread angle if it exists
+	if has_meta("angle_offset"):
+		var angle_offset = get_meta("angle_offset")
+		flight_direction = flight_direction.rotated(deg_to_rad(angle_offset))
+	
 	rotation = flight_direction.angle()
 
 

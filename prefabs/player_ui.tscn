@@ -11,24 +11,19 @@ bg_color = Color(0, 0.71458954, 0.64481264, 1)
 [node name="PlayerUI" type="CanvasLayer" groups=["PlayerUI"]]
 script = ExtResource("1_66t03")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 15
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, -1000)
+anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.09
+offset_top = 2.0
+offset_right = -1.0
+offset_bottom = 90.6
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_stretch_ratio = 0.0
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = -10
-theme_override_constants/margin_bottom = -10
+theme_override_constants/separation = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-custom_minimum_size = Vector2(0, -1000)
-layout_mode = 2
-theme_override_constants/separation = -1
-
-[node name="ExpBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+[node name="ExpBar" type="ProgressBar" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_66t03")
@@ -36,7 +31,108 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_kgtvv")
 max_value = 10.0
 show_percentage = false
 
-[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+
+[node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ItemContainerDisplay" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ActiveItemsRow" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay"]
+layout_mode = 2
+
+[node name="ActiveSlot1" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="ActiveSlot2" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="ActiveSlot3" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="PassiveItemsRow" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay"]
+layout_mode = 2
+
+[node name="PassiveSlot1" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="PassiveSlot2" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="PassiveSlot3" type="Panel" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LevelLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+size_flags_stretch_ratio = 0.0
+localize_numeral_system = false
 text = "Level 1"
 horizontal_alignment = 2

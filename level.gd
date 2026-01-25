@@ -5,13 +5,13 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 @export var spawn_area: Rect2
 @export var enemy_scene: PackedScene
-@export var experience_gem_scene: PackedScene  # Assign your ExpGem.tscn here
+@export var experience_gem_scene: PackedScene
 @export var map_bounds: Rect2
 
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var arrow_holder := $ArrowHolder
 @onready var enemy_holder := $EnemyHolder
-@onready var gem_holder := $GemHolder  # Make sure to add this Node2D to your scene
+@onready var gem_holder := $GemHolder
 
 var enemy_list = []
 
@@ -68,21 +68,17 @@ func _on_enemy_died(enemy_that_died: CharacterBody2D):
 	if enemy_list.has(enemy_that_died):
 		enemy_list.erase(enemy_that_died)
 	
-	# Spawn experience gem when enemy dies
 	spawn_experience_gem(enemy_that_died.global_position)
 
 func spawn_experience_gem(position: Vector2):
 	if experience_gem_scene == null:
-		print("ERROR: Experience gem scene not assigned!")
 		return
 	
 	var gem = experience_gem_scene.instantiate()
-	print("Spawning gem at: ", position)
 	
 	gem.setup(5, "default")
 	gem.global_position = position
 	gem_holder.add_child(gem)
-	print("Gem added! Total children in gem_holder: ", gem_holder.get_child_count())
 
 
 func spawn_enemy():

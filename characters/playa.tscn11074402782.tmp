@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://djrepn2djvyae"]
+[gd_scene load_steps=33 format=3 uid="uid://djrepn2djvyae"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_1vl2s"]
 [ext_resource type="Texture2D" uid="uid://bafio0j5v7kpq" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Archer_Shoot.png" id="2_1vl2s"]
@@ -6,87 +6,87 @@
 [ext_resource type="Texture2D" uid="uid://d2pjy1cbg42hl" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Archer_Idle.png" id="4_b4hm6"]
 [ext_resource type="Texture2D" uid="uid://bwtanlw20m73p" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Yellow Units/Archer/Archer_Run.png" id="5_ea6wu"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b4hm6"]
-atlas = ExtResource("2_1vl2s")
-region = Rect2(0, 0, 192, 192)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dk32m"]
+bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ea6wu"]
-atlas = ExtResource("2_1vl2s")
-region = Rect2(192, 0, 192, 192)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuv0p"]
+bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fnt63"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(384, 0, 192, 192)
+region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y0sxe"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(576, 0, 192, 192)
+region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rjqh8"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(768, 0, 192, 192)
+region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7va15"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(960, 0, 192, 192)
+region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5j7t"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(1152, 0, 192, 192)
+region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gdyd3"]
 atlas = ExtResource("2_1vl2s")
-region = Rect2(1344, 0, 192, 192)
+region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kbhrb"]
-atlas = ExtResource("4_b4hm6")
-region = Rect2(0, 0, 192, 192)
+atlas = ExtResource("2_1vl2s")
+region = Rect2(1152, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x5u6u"]
-atlas = ExtResource("4_b4hm6")
-region = Rect2(192, 0, 192, 192)
+atlas = ExtResource("2_1vl2s")
+region = Rect2(1344, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7rrou"]
 atlas = ExtResource("4_b4hm6")
-region = Rect2(384, 0, 192, 192)
+region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a5q40"]
 atlas = ExtResource("4_b4hm6")
-region = Rect2(576, 0, 192, 192)
+region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_o7e5v"]
 atlas = ExtResource("4_b4hm6")
-region = Rect2(768, 0, 192, 192)
+region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yfjir"]
 atlas = ExtResource("4_b4hm6")
-region = Rect2(960, 0, 192, 192)
+region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aixxv"]
-atlas = ExtResource("5_ea6wu")
-region = Rect2(0, 0, 192, 192)
+atlas = ExtResource("4_b4hm6")
+region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wnoq2"]
-atlas = ExtResource("5_ea6wu")
-region = Rect2(192, 0, 192, 192)
+atlas = ExtResource("4_b4hm6")
+region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xx4a6"]
 atlas = ExtResource("5_ea6wu")
-region = Rect2(384, 0, 192, 192)
+region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_oblmb"]
 atlas = ExtResource("5_ea6wu")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ewc8d"]
+atlas = ExtResource("5_ea6wu")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv6da"]
+atlas = ExtResource("5_ea6wu")
 region = Rect2(576, 0, 192, 192)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ewc8d"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_ked2w"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b4hm6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ea6wu")
-}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fnt63")
 }, {
@@ -104,18 +104,18 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gdyd3")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 8.0
 }, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kbhrb")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_x5u6u")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 7.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_7rrou")
 }, {
@@ -127,37 +127,107 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yfjir")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
 }, {
-"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_aixxv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wnoq2")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
 }, {
+"frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xx4a6")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oblmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ewc8d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv6da")
 }],
 "loop": true,
 "name": &"run",
-"speed": 6.0
+"speed": 8.0
 }]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dk32m"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tuv0p"]
-bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1vl2s"]
 radius = 17.0
+
+[sub_resource type="Animation" id="Animation_tuv0p"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_ea6wu"]
+resource_name = "attack"
+length = 0.8
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Attack"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"end_attack"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackTimer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [-1],
+"method": &"start"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_dk32m"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+step = 0.1
+
+[sub_resource type="Animation" id="Animation_b4hm6"]
+resource_name = "run"
+length = 0.4
+loop_mode = 1
+step = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ea6wu"]
+_data = {
+&"RESET": SubResource("Animation_tuv0p"),
+&"attack": SubResource("Animation_ea6wu"),
+&"idle": SubResource("Animation_dk32m"),
+&"run": SubResource("Animation_b4hm6")
+}
 
 [node name="Playa" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(64, 154)
@@ -166,30 +236,35 @@ motion_mode = 1
 script = ExtResource("1_1vl2s")
 arrow_scene = ExtResource("2_dk32m")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-30, -2)
-sprite_frames = SubResource("SpriteFrames_ewc8d")
-animation = &"attack"
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -79.0
-offset_top = 34.0
-offset_right = 19.0
-offset_bottom = 45.0
+offset_left = -67.0
+offset_top = 25.0
+offset_right = 31.0
+offset_bottom = 36.0
 theme_override_styles/background = SubResource("StyleBoxFlat_dk32m")
 theme_override_styles/fill = SubResource("StyleBoxFlat_tuv0p")
 show_percentage = false
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-24, -12)
+sprite_frames = SubResource("SpriteFrames_ked2w")
+animation = &"attack"
+frame_progress = 0.1469529
+
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-62, -148)
+position = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-31, 4)
+position = Vector2(-24, -7)
 shape = SubResource("CircleShape2D_1vl2s")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ea6wu")
+}
 
-[connection signal="animation_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_changed"]
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

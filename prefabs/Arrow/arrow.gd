@@ -30,19 +30,18 @@ func _physics_process(delta: float) -> void:
 
 		if body == null:
 			continue
-		var layer: int = body.collision_layer
 
-		# ---- ENEMY ----
-		if body.is_in_group("enemy"):
-			if body.has_method("take_damage"):
-				body.take_damage(damage)
+		# --- Hit enemy ---
+		# In the collision handling
+		if body is CharacterBody2D and body.has_method("_on_hurt"):
+			body._on_hurt(damage)
 			queue_free()
 			return
 
-		# Hit wall / obstacle / environment
-		if layer & ENV_LAYER:
+		# --- Hit environment (TileMapLayer) ---
+		if body is TileMapLayer:
 			queue_free()
 			return
-			
+
 func _on_hit_enemy():
 	queue_free()

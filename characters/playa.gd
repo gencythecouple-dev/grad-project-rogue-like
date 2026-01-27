@@ -7,7 +7,7 @@ var SPEED := 250
 @onready var health_bar: ProgressBar = $ProgressBar
 
 @export var arrow_scene: PackedScene
-
+var target: CharacterBody2D
 var current_scene: Node2D
 var player_ui  
 var level_up_menu
@@ -103,7 +103,7 @@ func Attack() -> void:
 	if arrow_scene == null:
 		return
 	
-	# Find closest enemy once
+	# Find closest enemy
 	var closest_distance: float = INF
 	var target_enemy: CharacterBody2D = null
 	
@@ -116,19 +116,36 @@ func Attack() -> void:
 			closest_distance = dist
 			target_enemy = enemy
 	
+	
 	if target_enemy == null:
 		return
-	
-	# Spawn arrows with delay
+
+	var target_position = target_enemy.global_position
+
+# Spawn arrows with delay
 	var angle_spread = 15
 	var start_angle = -(projectile_count - 1) * angle_spread / 2.0
-	
+
 	for i in range(projectile_count):
-		# Create a timer for each arrow with increasing delay
-		var delay = i * 0.1  # 0.1 second between each arrow
+		var delay = i * 0.1
+		var current_angle = start_angle + (i * angle_spread)
 		get_tree().create_timer(delay).timeout.connect(
-			func(): _spawn_arrow(target_enemy, start_angle + (i * angle_spread))
-		)
+			func(): _spawn_arrow_at_position(target_position, current_angle)
+	)
+
+func _spawn_arrow_at_position(target_pos: Vector2, angle_offset: float) -> void:
+	if arrow_scene == null:
+		return
+	
+	var new_arrow: Arrow = arrow_scene.instantiate()
+	new_arrow.global_position = global_position
+	new_arrow.damage = current_attack
+	
+	var direction = global_position.direction_to(target_pos)
+	direction = direction.rotated(deg_to_rad(angle_offset))
+	
+	new_arrow.set_meta("direction", direction)
+	current_scene.arrow_holder.add_child(new_arrow)
 
 
 #New Arroww spawns.
@@ -240,7 +257,7 @@ func TakeDamage(damage: float) -> void:
 		Die()
 
 func Die() -> void:
-	get_tree().reload_current_scene()
+	get_tree().reload_current_scene.call_deferred()
 
 func _on_attack_timer_timeout() -> void:
 	start_attack()

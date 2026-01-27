@@ -13,6 +13,8 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @onready var enemy_holder := $EnemyHolder
 @onready var gem_holder := $GemHolder
 
+var game_time : float
+var player_ui
 var enemy_list = []
 
 func _ready() -> void:
@@ -20,12 +22,17 @@ func _ready() -> void:
 	enemy_died.connect(_on_enemy_died)
 	GetEnemies()
 	spawn_timer.start()
+	player_ui = get_tree().get_first_node_in_group("PlayerUI")
 
 func get_camera_rect() -> Rect2:
 	var cam := get_viewport().get_camera_2d()
 	var viewport_size := get_viewport_rect().size / cam.zoom
 	var top_left := cam.global_position - viewport_size * 0.5
 	return Rect2(top_left, viewport_size)
+	
+func _process(delta: float) -> void:
+	game_time += delta
+	player_ui.update_timer(game_time)
 
 func get_offscreen_spawn_position() -> Vector2:
 	var cam := get_viewport().get_camera_2d()
@@ -58,6 +65,8 @@ func get_offscreen_spawn_position() -> Vector2:
 			)
 	
 	return spawn_pos
+
+
 
 func GetEnemies():
 	enemy_list = []

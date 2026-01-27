@@ -12,13 +12,17 @@ const ENV_LAYER   := 1 << 2
 
 
 func _ready() -> void:
+	if has_meta("direction"):
+		flight_direction = get_meta("direction")
+		rotation = flight_direction.angle()
+		return
+	
 	if target == null or !is_instance_valid(target):
 		queue_free()
 		return
 	
 	flight_direction = global_position.direction_to(target.global_position)
 	
-	# Apply spread angle if it exists
 	if has_meta("angle_offset"):
 		var angle_offset = get_meta("angle_offset")
 		flight_direction = flight_direction.rotated(deg_to_rad(angle_offset))

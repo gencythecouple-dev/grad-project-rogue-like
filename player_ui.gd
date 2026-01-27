@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var exp_bar = $"VBoxContainer/ExpBar"
 @onready var level_label = $"VBoxContainer/HBoxContainer/LevelLabel"
-
+@onready var timer_label = $"VBoxContainer/HBoxContainer/Label"
 # Item display slots
 @onready var active_slots = [
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot1/TextureRect",
@@ -62,3 +62,11 @@ func add_passive_item(icon_texture: Texture2D):
 		slot.texture = icon_texture
 		slot.modulate = Color.WHITE
 		passive_count += 1
+
+#Timer stuff
+func update_timer(time: float) -> void:
+	var total_seconds: int = int(time)
+	var minutes: int = floor(total_seconds / 60.0)
+	var seconds: int = total_seconds - (minutes * 60)
+	var time_string: String = "%02d:%02d" % [minutes, seconds]
+	timer_label.text = time_string

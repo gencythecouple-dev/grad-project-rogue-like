@@ -1,16 +1,13 @@
 extends EnemyBase
 
-@onready var anim_player = $AnimationPlayer
-@onready var sprite = $Sprite2D
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_cooldown: Timer = $AttackCooldown
 @onready var attack_hitbox: Area2D = $HurtBox
-@onready var run_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Run.png")
-@onready var attack_sheet = load("res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Attack1.png")
 
 var knockback_decay := 10.0
 
 
-const SPEED := 150
+const SPEED := 135
 const ATTACK_RANGE := 75
 const ATTACK_DAMAGE := 10.0
 
@@ -28,7 +25,6 @@ func _ready() -> void:
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	attack_hitbox.body_entered.connect(_on_attack_hit_player)
-	attack_cooldown.one_shot = true
 	attack_hitbox.monitoring = false
 	
 	ChangeState(STATE.RUN)
@@ -52,26 +48,30 @@ func _physics_process(delta: float) -> void:
 					ChangeState(STATE.ATTACK)
 			STATE.ATTACK:
 				velocity = Vector2.ZERO
-	
 	move_and_slide()
+
+
+func apply_flash(intensity: float):
+	var material = sprite.material as ShaderMaterial
+	if material:
+		material.set_shader_parameter("flash_intensity", intensity)
+
 
 func chase_player():
 	var dir := global_position.direction_to(player_ref.global_position)
 	velocity = dir * SPEED
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
+	
+	if dir.x != 0:
+		sprite.flip_h = dir.x < 0
+
 
 func ChangeState(new_state: STATE) -> void:
 	current_state = new_state
+	
 	if new_state == STATE.RUN:
-		sprite.texture = run_sheet
-		anim_player.play("run")
-		attack_hitbox.monitoring = false
+		sprite.play("run")
 	elif new_state == STATE.ATTACK:
-		sprite.texture = attack_sheet
-		anim_player.play("attack")
-		attack_cooldown.start()
-		has_hit_player = false
+		sprite.play("attack")
 
 
 func is_player_in_attack_range() -> bool:
@@ -85,12 +85,13 @@ func _on_attack_cooldown_timeout() -> void:
 	if current_state == STATE.RUN and is_player_in_attack_range():
 		ChangeState(STATE.ATTACK)
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "attack":
+func _on_sprite_animation_finished() -> void:
+	var anim_name = sprite.animation
+	
+	if anim_name.begins_with("attack"):
 		attack_hitbox.monitoring = false
 		ChangeState(STATE.RUN)
 		attack_cooldown.start()
-		
 
 func _on_attack_hit_player(body: Node2D) -> void:
 	if body.is_in_group("Player") and not has_hit_player:
@@ -103,3 +104,19 @@ func enable_attack_hitbox():
 
 func disable_attack_hitbox():
 	attack_hitbox.monitoring = false
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	print("Animation finished: ", sprite.animation)  # What animation just finished?
+	print("Current state: ", current_state)  # What state are we in?
+	
+	if sprite.animation == "attack":
+		print("Switching to RUN state")
+		disable_attack_hitbox()
+		ChangeState(STATE.RUN)
+		attack_cooldown.start()
+
+
+func _on_animated_sprite_2d_frame_changed() -> void:
+	if sprite.animation.begins_with("attack") and sprite.frame == 6:
+		enable_attack_hitbox()

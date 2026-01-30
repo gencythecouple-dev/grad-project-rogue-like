@@ -5,6 +5,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 @export var spawn_area: Rect2
 @export var enemy_scene: PackedScene
+@export var slime_scene: PackedScene
 @export var experience_gem_scene: PackedScene
 @export var map_bounds: Rect2
 
@@ -76,22 +77,29 @@ func GetEnemies():
 func _on_enemy_died(enemy_that_died: CharacterBody2D):
 	if enemy_list.has(enemy_that_died):
 		enemy_list.erase(enemy_that_died)
+		
+	var exp_to_drop = 5
 	
-	spawn_experience_gem(enemy_that_died.global_position)
+	spawn_experience_gem(enemy_that_died.global_position,exp_to_drop)
 
-func spawn_experience_gem(position: Vector2):
+func spawn_experience_gem(position: Vector2, exp_amount: int):
 	if experience_gem_scene == null:
 		return
 	
 	var gem = experience_gem_scene.instantiate()
 	
-	gem.setup(5, "default")
+	gem.setup(exp_amount, "default")
 	gem.global_position = position
 	gem_holder.add_child(gem)
 
 
 func spawn_enemy():
-	var enemy = enemy_scene.instantiate()
+	var enemy
+	 # Decide which enemy to spawn based on game time
+	if game_time < 1:
+		enemy = enemy_scene.instantiate()
+	else:
+		enemy = slime_scene.instantiate()
 	enemy.global_position = get_offscreen_spawn_position()
 	enemy_holder.add_child(enemy)
 	enemy_list.append(enemy)

@@ -18,7 +18,6 @@ var passive_upgrades_taken := 0
 const MAX_ACTIVE := 3
 const MAX_PASSIVE := 3
 
-# Define all possible upgrades with max levels
 var all_upgrades := [
 	{
 		"name": "Increase Attack", 
@@ -76,6 +75,30 @@ var all_upgrades := [
 		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
 		"upgrade_type": "active"  
 	},
+	{
+		"name": "Ice Hammer",
+		"description": "Equip the Ice Hammer weapon!",
+		"stat": "ice_hammer",
+		"max_level": 1,
+		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"upgrade_type": "active",
+		"requires": ""
+	},
+	{
+	"name": "Ice Hammer Upgrade",
+	"stat": "ice_hammer_upgrade",
+	"max_level": 5,
+	"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+	"upgrade_type": "active",
+	"requires": "ice_hammer",
+	"level_descriptions": {
+	1: "+2 Damage",
+	2: "Bigger Swing",
+	3: "Faster Cooldown",
+	4: "ALL: +Damage, Bigger, Faster",
+	5: "Ice Shockwave Unlocked!"
+},
+	},
 ]
 
 var upgrade_levels := {}
@@ -96,36 +119,31 @@ func _ready():
 func show_upgrades():
 	var available = []
 	for upgrade in all_upgrades:
-		# Check if upgrade is maxed
 		if upgrade_levels[upgrade["stat"]] >= upgrade["max_level"]:
 			continue
-		
-		# Check if slot type is full
-		if upgrade["upgrade_type"] == "active" and active_upgrades_taken >= MAX_ACTIVE:
-			continue
-		if upgrade["upgrade_type"] == "passive" and passive_upgrades_taken >= MAX_PASSIVE:
-			continue
-		
+
+		if upgrade.has("requires") and upgrade["requires"] != "":
+			if upgrade_levels.get(upgrade["requires"], 0) < 1:
+				continue
+
 		available.append(upgrade)
 	
-	# If no upgrades available, don't show menu
+	print("available upgrades: ", available.size())
+	print("active taken: ", active_upgrades_taken)
+	print("ice_hammer_upgrade level: ", upgrade_levels.get("ice_hammer_upgrade", 0))
+
 	if available.size() == 0:
 		get_tree().paused = false
 		return
-	
+
 	show()
 	get_tree().paused = true
-	
-	# Pick up to 3 random upgrades from available ones
 	available.shuffle()
-	
 	current_choices = []
 	var num_choices = min(3, available.size())
-	
 	for i in range(num_choices):
 		current_choices.append(available[i])
-	
-	# Update button visibility, text, and icons
+
 	_update_button(choice1, choice1_label, choice1_icon, 0)
 	_update_button(choice2, choice2_label, choice2_icon, 1)
 	_update_button(choice3, choice3_label, choice3_icon, 2)
@@ -135,7 +153,6 @@ func _apply_upgrade(index: int):
 		var upgrade = current_choices[index]
 		upgrade_levels[upgrade["stat"]] += 1
 		
-		# Track which type of upgrade was taken
 		if upgrade["upgrade_type"] == "active":
 			active_upgrades_taken += 1
 		elif upgrade["upgrade_type"] == "passive":
@@ -151,11 +168,16 @@ func _update_button(button: Button, label: Label, icon: TextureRect, index: int)
 		var current_level = upgrade_levels[upgrade["stat"]]
 		var max_level = upgrade["max_level"]
 		
-		# Set icon
 		icon.texture = upgrade["icon"]
 		
-		# Show level progress in description
-		label.text = upgrade["name"] + " [" + str(current_level) + "/" + str(max_level) + "]\n" + upgrade["description"]
+		var desc: String
+		if upgrade.has("level_descriptions"):
+			var next_level = current_level + 1
+			desc = upgrade["level_descriptions"].get(next_level, "")
+		else:
+			desc = upgrade["description"]
+		
+		label.text = upgrade["name"] + " [" + str(current_level) + "/" + str(max_level) + "]\n" + desc
 	else:
 		button.hide()
 

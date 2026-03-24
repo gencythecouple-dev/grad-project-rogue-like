@@ -19,6 +19,7 @@ var player_ui
 var enemy_list = []
 
 func _ready() -> void:
+	add_to_group("MainScene")
 	randomize()
 	enemy_died.connect(_on_enemy_died)
 	GetEnemies()
@@ -80,14 +81,13 @@ func _on_enemy_died(enemy_that_died: CharacterBody2D):
 		
 	var exp_to_drop = 5
 	
-	spawn_experience_gem(enemy_that_died.global_position,exp_to_drop)
+	call_deferred("spawn_experience_gem", enemy_that_died.global_position, exp_to_drop)
 
 func spawn_experience_gem(position: Vector2, exp_amount: int):
 	if experience_gem_scene == null:
 		return
 	
 	var gem = experience_gem_scene.instantiate()
-	
 	gem.setup(exp_amount, "default")
 	gem.global_position = position
 	gem_holder.add_child(gem)
@@ -95,7 +95,6 @@ func spawn_experience_gem(position: Vector2, exp_amount: int):
 
 func spawn_enemy():
 	var enemy
-	 # Decide which enemy to spawn based on game time
 	if game_time < 1:
 		enemy = enemy_scene.instantiate()
 	else:

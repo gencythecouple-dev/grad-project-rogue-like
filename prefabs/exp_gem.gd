@@ -8,13 +8,13 @@ class_name ExperienceGem
 
 var player_ref = null
 var is_collected := false
-var chase_timer: float = 0.0  # Track how long we've been chasing
+var chase_timer: float = 0.0
 var speed_boosted: bool = false
 
 func _ready() -> void:
 	player_ref = get_tree().get_first_node_in_group("Player")	
-	monitoring = true
-	monitorable = true
+	set_deferred("monitoring", true)
+	set_deferred("monitorable", true)
 	
 	collision_layer = 1
 	collision_mask = 5
@@ -37,18 +37,16 @@ func _physics_process(delta: float) -> void:
 	if distance < 100:
 		chase_timer += delta
 		
-		# Speed boost after 0.5 seconds of chasing
 		if chase_timer >= 0.5 and not speed_boosted:
 			speed_boosted = true
-			move_speed *= 2.0  # Double the speed
+			move_speed *= 2.0
 		
 		var direction = global_position.direction_to(player_ref.global_position)
 		global_position += direction * move_speed * delta
 	else:
-		# Reset timer if player moves away
 		chase_timer = 0.0
 		speed_boosted = false
-		move_speed = 300.0  # Reset to base speed
+		move_speed = 300.
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and not is_collected:

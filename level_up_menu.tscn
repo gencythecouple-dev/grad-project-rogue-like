@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://wntqgq4l5ek2" path="res://level_up_menu.gd" id="1_pn0h5"]
 [ext_resource type="Texture2D" uid="uid://hd74m31adhrj" path="res://Assets/UIBundleFree/UIBundleFree/UiCozyFree.png" id="2_j46r6"]
 
-[node name="LevelUpMenu" type="CanvasLayer"]
+[node name="LevelUpMenu" type="CanvasLayer" groups=["PlayerUI"]]
 script = ExtResource("1_pn0h5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

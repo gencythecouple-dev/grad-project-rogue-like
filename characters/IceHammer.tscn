@@ -1,0 +1,140 @@
+[gd_scene load_steps=20 format=3 uid="uid://c175c04b6qn46"]
+
+[ext_resource type="Texture2D" uid="uid://mghsubx3afov" path="res://Assets/Pixel Art VFX - Frost Knight - FREE Version/VFX1/sprite-sheet/sprite-sheet.png" id="1_k7s07"]
+[ext_resource type="Script" uid="uid://bqw1ofg00pbil" path="res://characters/ice_hammer.gd" id="1_nkg6k"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkg6k"]
+radius = 52.0
+height = 197.93494
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0bre"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(0, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_db3n4"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(256, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64h4v"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(512, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wqava"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(768, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pc8rt"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(1024, 0, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iyk2b"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(0, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ohbdi"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(256, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45ci7"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(512, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y8g1p"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(768, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x43j2"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(1024, 128, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lnceg"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(0, 256, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3p8ok"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(256, 256, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gs58c"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(512, 256, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dw4s"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(768, 256, 256, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k7g44"]
+atlas = ExtResource("1_k7s07")
+region = Rect2(1024, 256, 256, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qd0l2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0bre")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_db3n4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64h4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wqava")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pc8rt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iyk2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ohbdi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45ci7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y8g1p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x43j2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lnceg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3p8ok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gs58c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dw4s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k7g44")
+}],
+"loop": false,
+"name": &"swing",
+"speed": 15.0
+}]
+
+[node name="IceHammer" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_nkg6k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(53, -1)
+shape = SubResource("CapsuleShape2D_nkg6k")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(78, -127)
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_qd0l2")
+animation = &"swing"
+centered = false
+offset = Vector2(0, -50)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

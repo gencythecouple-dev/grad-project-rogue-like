@@ -107,16 +107,12 @@ func disable_attack_hitbox():
 
 
 func _on_animated_sprite_2d_animation_finished() -> void:
-	print("Animation finished: ", sprite.animation)  # What animation just finished?
-	print("Current state: ", current_state)  # What state are we in?
-	
 	if sprite.animation == "attack":
-		print("Switching to RUN state")
 		disable_attack_hitbox()
 		ChangeState(STATE.RUN)
 		attack_cooldown.start()
 
 
 func _on_animated_sprite_2d_frame_changed() -> void:
-	if sprite.animation.begins_with("attack") and sprite.frame == 6:
+	if sprite.animation.begins_with("attack") and sprite.frame == 5:
 		enable_attack_hitbox()

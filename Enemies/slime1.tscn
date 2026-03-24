@@ -145,7 +145,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jl1js"]
-radius = 23.086792
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_020c1"]
 radius = 58.21512
@@ -161,6 +161,8 @@ damage_number_scene = ExtResource("2_tgr6y")
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_cpi68")
 animation = &"attack"
+frame = 9
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 7)

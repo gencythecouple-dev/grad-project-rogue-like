@@ -48,7 +48,6 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
-# Virtual functions - children override these
 func setup_enemy():
 	pass
 
@@ -58,10 +57,12 @@ func enemy_behavior(delta: float):
 func apply_flash(intensity: float):
 	pass
 
-# Common functionality all enemies share
 func SetStats(level_num: int):
 	max_hp = base_hp * level_num
 	current_hp = max_hp
+	
+func TakeDamage(damage: float) -> void:
+	_on_hurt(damage)
 
 func _on_hurt(damage: float):
 	current_hp -= damage

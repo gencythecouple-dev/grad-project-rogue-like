@@ -31,7 +31,8 @@ var current_hp: int
 
 var projectile_count: int = 1
 var hammer_scale: float = 1.0
-	
+var hammer_level: int = 0
+
 
 var current_exp: int = 0
 var exp_to_next_level: int = 10
@@ -144,24 +145,13 @@ func Attack() -> void:
 		elif weapon == arrow_scene:
 			_spawn_arrows(target_enemy)
 
-var hammer_level: int = 1
 
 func _spawn_hammer() -> void:
 	if hammer_scene == null:
 		return
-	
-	var input_dir = Vector2(
-		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
-		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	).normalized()
-	
-	if input_dir == Vector2.ZERO:
-		input_dir = last_direction
-	
 	var hammer = hammer_scene.instantiate()
 	add_child(hammer)
-	hammer.position = input_dir * 50
-	hammer.rotation = input_dir.angle()
+	hammer.position = Vector2(80 if facing_right else -80, 0)
 	hammer.setup(self, current_attack, hammer_level, hammer_scale)
 
 func _spawn_arrows(target_enemy: CharacterBody2D) -> void:
@@ -222,7 +212,17 @@ func level_up() -> void:
 func _on_upgrade_selected(upgrade_stat: String) -> void:
 	match upgrade_stat:
 		"ice_hammer":
-			_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			hammer_level += 1
+			if hammer_level == 1:
+				_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			match hammer_level:
+				2: current_attack += 2.0
+				3: hammer_scale += 0.3
+				4: attack_timer.wait_time *= 0.80
+				5:
+					current_attack += 2.0
+					attack_timer.wait_time *= 0.80
+					hammer_scale += 0.3
 		"arrow":
 			_equip_weapon(arrow_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
 		"attack":
@@ -252,17 +252,7 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 		"more_projectile":
 			projectile_count += 1
 			_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
-		"ice_hammer_upgrade":
-			hammer_level += 1
-			match hammer_level:
-				2: current_attack += 2.0
-				3: hammer_scale += 0.3
-				4: attack_timer.wait_time *= 0.80
-				5:
-					current_attack += 2.0
-					attack_timer.wait_time *= 0.80
-					hammer_scale += 0.3
-				6: pass
+
 
 func TakeDamage(damage: float) -> void:
 	current_hp -= damage

@@ -32,6 +32,8 @@ position = Vector2(2, 2)
 
 [node name="IceHammerHolder" type="Node2D" parent="."]
 
+[node name="ShockwaveHolder" type="Node2D" parent="."]
+
 [node name="EnemyHolder" type="Node2D" parent="."]
 position = Vector2(0, 2)
 

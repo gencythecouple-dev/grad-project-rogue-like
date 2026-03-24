@@ -2,10 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://mghsubx3afov" path="res://Assets/Pixel Art VFX - Frost Knight - FREE Version/VFX1/sprite-sheet/sprite-sheet.png" id="1_k7s07"]
 [ext_resource type="Script" uid="uid://bqw1ofg00pbil" path="res://characters/ice_hammer.gd" id="1_nkg6k"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nkg6k"]
-radius = 52.0
-height = 197.93494
+[ext_resource type="PackedScene" uid="uid://c1qi3quul8rt5" path="res://shockwave.tscn" id="2_f0bre"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f0bre"]
 atlas = ExtResource("1_k7s07")
@@ -123,18 +120,13 @@ animations = [{
 [node name="IceHammer" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_nkg6k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(53, -1)
-shape = SubResource("CapsuleShape2D_nkg6k")
+shockwave_scene = ExtResource("2_f0bre")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(78, -127)
-rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_qd0l2")
 animation = &"swing"
-centered = false
-offset = Vector2(0, -50)
+frame = 14
+frame_progress = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

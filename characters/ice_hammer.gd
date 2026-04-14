@@ -68,6 +68,7 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
 		body.TakeDamage(damage)
+		player.total_damage_dealt += damage
 
 func _on_animation_finished() -> void:
 	hide()

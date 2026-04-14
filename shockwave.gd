@@ -18,4 +18,5 @@ func _on_body_entered(body: Node2D) -> void:
 		body.TakeDamage(damage)
 
 func _on_animation_finished() -> void:
+	monitoring = false
 	queue_free()

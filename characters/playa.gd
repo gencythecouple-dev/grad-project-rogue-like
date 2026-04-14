@@ -38,6 +38,10 @@ var current_exp: int = 0
 var exp_to_next_level: int = 10
 var player_level: int = 1
 
+var total_damage_dealt: float = 0.0
+var total_kills: int = 0
+var total_exp_collected: int = 0
+
 
 
 func _ready() -> void:
@@ -189,15 +193,29 @@ func SetStats() -> void:
 
 func CollectExperience(amount: int) -> void:
 	current_exp += amount
+	total_exp_collected += amount
 	if player_ui:
 		player_ui.update_exp(current_exp, exp_to_next_level)
 	while current_exp >= exp_to_next_level:
 		level_up()
 
+func _calculate_exp_to_next_level(level: int) -> int:
+	if level == 1:
+		return 5
+	elif level <= 30:
+		return 5 + (level - 1) * 10
+	elif level <= 55:
+		return 5 + (29 * 10) + (level - 30) * 13
+	else:
+		return 5 + (29 * 10) + (25 * 13) + (level - 55) * 16
+
+
+
+
 func level_up() -> void:
 	player_level += 1
 	current_exp -= exp_to_next_level
-	exp_to_next_level = int(exp_to_next_level * 1.5)
+	exp_to_next_level = _calculate_exp_to_next_level(player_level)
 	if player_ui:
 		player_ui.update_exp(current_exp, exp_to_next_level)
 		player_ui.update_level(player_level)

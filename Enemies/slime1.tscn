@@ -145,10 +145,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jl1js"]
-radius = 28.0
+radius = 19.235384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_020c1"]
-radius = 58.21512
+radius = 36.013885
 
 [node name="Slime1" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
@@ -158,7 +158,7 @@ script = ExtResource("1_i2kp5")
 damage_number_scene = ExtResource("2_tgr6y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(3.5, 3.5)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cpi68")
 animation = &"attack"
 frame = 9

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bujnoxhiqejh0" path="res://shockwave.gd" id="1_yccnn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pkgyo"]
-radius = 39.0
+radius = 31.0
 height = 124.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yccnn"]

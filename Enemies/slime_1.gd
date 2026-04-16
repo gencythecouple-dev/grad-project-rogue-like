@@ -17,16 +17,11 @@ var current_state: STATE = STATE.RUN
 var has_hit_player := false
 
 func _ready() -> void:
-	current_scene = get_tree().get_first_node_in_group("MainScene")
-	player_ref = get_tree().get_first_node_in_group("Player")
-	SetStats(1)
 	attack_cooldown.one_shot = true
-	
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	attack_hitbox.body_entered.connect(_on_attack_hit_player)
 	attack_hitbox.monitoring = false
-	
 	ChangeState(STATE.RUN)
 
 func _physics_process(delta: float) -> void:
@@ -85,14 +80,6 @@ func _on_attack_cooldown_timeout() -> void:
 	if current_state == STATE.RUN and is_player_in_attack_range():
 		ChangeState(STATE.ATTACK)
 
-func _on_sprite_animation_finished() -> void:
-	var anim_name = sprite.animation
-	
-	if anim_name.begins_with("attack"):
-		attack_hitbox.monitoring = false
-		ChangeState(STATE.RUN)
-		attack_cooldown.start()
-
 func _on_attack_hit_player(body: Node2D) -> void:
 	if body.is_in_group("Player") and not has_hit_player:
 		has_hit_player = true
@@ -109,6 +96,7 @@ func disable_attack_hitbox():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if sprite.animation == "attack":
 		disable_attack_hitbox()
+		has_hit_player = false
 		ChangeState(STATE.RUN)
 		attack_cooldown.start()
 

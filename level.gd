@@ -8,6 +8,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @export var experience_gem_scene: PackedScene
 @export var map_bounds: Rect2
 
+@onready var game_over_screen = $GameOver
 @onready var spawn_timer: Timer = $SpawnTimer
 @onready var arrow_holder := $ArrowHolder
 @onready var enemy_holder := $EnemyHolder
@@ -43,9 +44,6 @@ func _process(delta: float) -> void:
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
 		_spawn_horde()
-		
-	if game_time >= 600:
-		game_over()
 
 func _game_over() -> void:
 	get_tree().paused = true
@@ -150,6 +148,19 @@ func _spawn_horde() -> void:
 		enemy.global_position = pos
 		enemy_holder.add_child(enemy)
 		enemy_list.append(enemy)
+
+
+func show_game_over(player: CharacterBody2D) -> void:
+	get_tree().paused = true
+	game_over_screen.setup(
+		game_time,
+		player.total_kills,
+		player.total_damage_dealt,
+		player.total_exp_collected
+	)
+	game_over_screen.show()
+
+
 
 func _on_spawn_timer_timeout() -> void:
 	spawn_wave(current_spawn_config["count"])

@@ -280,7 +280,8 @@ func TakeDamage(damage: float) -> void:
 		Die()
 
 func Die() -> void:
-	get_tree().reload_current_scene.call_deferred()
+	var level = get_tree().root.get_child(0)
+	level.show_game_over(self)
 
 func _on_attack_timer_timeout() -> void:
 	start_attack()

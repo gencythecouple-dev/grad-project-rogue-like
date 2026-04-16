@@ -92,4 +92,3 @@ func spawn_damage_number(damage: float):
 func chase_player():
 	var dir := global_position.direction_to(player_ref.global_position)
 	velocity = dir * speed
-	print("Velocity length: ", velocity.length()) 

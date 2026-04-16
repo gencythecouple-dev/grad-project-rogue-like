@@ -16,9 +16,8 @@ custom_minimum_size = Vector2(0, -1000)
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 0.09
-offset_top = 2.0
-offset_right = -1.0
-offset_bottom = 90.6
+offset_left = -1.0
+offset_bottom = 88.6
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 4
@@ -33,6 +32,7 @@ show_percentage = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="Control2" type="Control" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -151,6 +151,8 @@ grow_vertical = 2
 expand_mode = 1
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(-12.82, 0)
+layout_direction = 1
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 0

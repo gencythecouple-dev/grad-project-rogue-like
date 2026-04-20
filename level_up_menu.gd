@@ -88,7 +88,16 @@ var all_upgrades := [
 			3: "Bigger Spikes",
 			4: "Faster Cooldown",
 			5: "ALL: +Damage, Bigger, Faster + Ice Shockwave!"
-		}
+		},
+		},
+		{
+		"name": "Iron Skin",
+		"description": "Reduce incoming damage",
+		"stat": "armor",
+		"max_level": 5,
+		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"upgrade_type": "passive",
+		"requires": ""
 	},
 ]
 

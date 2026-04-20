@@ -21,7 +21,7 @@ const KNOCKBACK_DECAY := 10.0
 const FLASH_DURATION := 0.15
 
 func _ready() -> void:
-	current_scene = get_tree().get_first_node_in_group("MainScene")
+	current_scene = get_tree().root.get_child(0)
 	player_ref = get_tree().get_first_node_in_group("Player")
 	SetStats(1)
 	setup_enemy()
@@ -76,9 +76,9 @@ func _on_hurt(damage: float):
 	if current_hp <= 0:
 		on_death()
 
-func on_death():
+func on_death() -> void:
 	current_scene.enemy_died.emit(self)
-	queue_free()
+	current_scene.return_to_pool(self)
 
 func spawn_damage_number(damage: float):
 	if damage_number_scene == null:

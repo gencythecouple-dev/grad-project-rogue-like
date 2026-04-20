@@ -160,9 +160,7 @@ damage_number_scene = ExtResource("2_tgr6y")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cpi68")
-animation = &"attack"
-frame = 9
-frame_progress = 1.0
+animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -3)

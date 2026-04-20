@@ -24,8 +24,9 @@ var last_direction := Vector2.RIGHT
 
 var base_attack: float = 3.0
 var current_attack: float
-
-var base_hp := 50
+var base_armor: float = 5.0
+var current_armor: float
+var base_hp := 200
 var max_hp: int
 var current_hp: int
 
@@ -186,6 +187,7 @@ func end_attack() -> void:
 
 func SetStats() -> void:
 	current_attack = base_attack
+	current_armor = base_armor
 	max_hp = base_hp
 	current_hp = max_hp
 	health_bar.max_value = max_hp
@@ -270,9 +272,13 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 		"more_projectile":
 			projectile_count += 1
 			_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		"armor":
+			current_armor += 1.0
+			_equip_passive("armor", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
 
 
 func TakeDamage(damage: float) -> void:
+	var actual_damage = max(0.05, damage - current_armor)
 	current_hp -= damage
 	current_hp = max(0, current_hp)
 	health_bar.value = current_hp

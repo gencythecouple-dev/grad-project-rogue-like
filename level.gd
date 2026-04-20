@@ -5,6 +5,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 @export var spawn_area: Rect2
 @export var slime_scene: PackedScene
+@export var slime2_scene: PackedScene
 @export var experience_gem_scene: PackedScene
 @export var map_bounds: Rect2
 
@@ -16,13 +17,17 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 var horde_timer: float = 0.0
 var horde_interval: float = 30.0
-var game_time : float
+var game_time : float = 400
 var base_interval: float = 2.0
 var player_ui
 var enemy_list = []
+var enemy_pool: Array = []
+const POOL_SIZE := 100
+
 
 func _ready() -> void:
 	add_to_group("MainScene")
+	_create_pool()
 	randomize()
 	enemy_died.connect(_on_enemy_died)
 	GetEnemies()
@@ -81,11 +86,25 @@ func get_offscreen_spawn_position() -> Vector2:
 	return spawn_pos
 
 
+func _create_pool() -> void:
+	for i in range(POOL_SIZE):
+		var enemy = slime_scene.instantiate()
+		enemy_holder.add_child(enemy)
+		enemy.hide()
+		enemy.process_mode = Node.PROCESS_MODE_DISABLED
+		enemy_pool.append(enemy)
 
-func GetEnemies():
+func _get_pooled_enemy():
+	for enemy in enemy_pool:
+		if not enemy.visible:
+			return enemy
+	return null
+
+func GetEnemies() -> void:
 	enemy_list = []
 	for child in enemy_holder.get_children():
-		enemy_list.append(child)
+		if child.visible:
+			enemy_list.append(child)
 
 func _on_enemy_died(enemy_that_died: CharacterBody2D):
 	if enemy_list.has(enemy_that_died):
@@ -108,20 +127,34 @@ func spawn_experience_gem(position: Vector2, exp_amount: int):
 	gem_holder.add_child(gem)
 
 
-func spawn_enemy():
-	var enemy = slime_scene.instantiate()
+func spawn_enemy() -> void:
+	var enemy_types = current_spawn_config["enemies"]
+	var chosen = enemy_types[randi() % enemy_types.size()]
+	
+	var enemy
+	match chosen:
+		"slime": enemy = slime_scene.instantiate()
+		"slime2": enemy = slime2_scene.instantiate()
+	
 	enemy.global_position = get_offscreen_spawn_position()
 	enemy_holder.add_child(enemy)
 	enemy_list.append(enemy)
 
+func return_to_pool(enemy) -> void:
+	enemy.hide()
+	enemy.process_mode = Node.PROCESS_MODE_DISABLED
+	enemy.current_hp = enemy.max_hp
+	if enemy_list.has(enemy):
+		enemy_list.erase(enemy)
+
 var spawn_table = [
-	{"time": 0,   "count": 2,  "interval": 2.0},
-	{"time": 60,  "count": 3,  "interval": 1.5},
-	{"time": 120, "count": 4,  "interval": 1.2},
-	{"time": 180, "count": 5,  "interval": 1.0},
-	{"time": 240, "count": 6,  "interval": 0.8},
-	{"time": 300, "count": 8,  "interval": 0.6},
-	{"time": 360, "count": 10, "interval": 0.4},
+	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["slime"]},
+	{"time": 60,  "count": 3,  "interval": 1.5, "enemies": ["slime"]},
+	{"time": 120, "count": 4,  "interval": 1.2, "enemies": ["slime"]},
+	{"time": 180, "count": 5,  "interval": 1.0, "enemies": ["slime", "slime2"]},
+	{"time": 240, "count": 6,  "interval": 0.8, "enemies": ["slime", "slime2"]},
+	{"time": 300, "count": 8,  "interval": 0.6, "enemies": ["slime2"]},
+	{"time": 360, "count": 10, "interval": 0.4, "enemies": ["slime2"]},
 	{"time": 420, "count": 15, "interval": 0.25},
 	{"time": 480, "count": 20, "interval": 0.15},
 	{"time": 540, "count": 30, "interval": 0.1},]

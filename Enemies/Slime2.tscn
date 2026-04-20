@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://b64lhd845uvnd"]
+
+[ext_resource type="Texture2D" uid="uid://c3p7c17ryxf8g" path="res://Assets/Slime2/Run/Slime2_Run_full.png" id="1_8twnp"]
+[ext_resource type="Script" uid="uid://dagwlvlmu8d6" path="res://Enemies/slime_2.gd" id="1_ey5l8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h0xdq"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5f4pk"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_15qfl"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20j8w"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ymn1m"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqs8x"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olhf0"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncxtt"]
+atlas = ExtResource("1_8twnp")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lhe75"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h0xdq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5f4pk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_15qfl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20j8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ymn1m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqs8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olhf0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncxtt")
+}],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evdwb"]
+radius = 9.0
+
+[node name="Slime2" type="CharacterBody2D" groups=["Enemy"]]
+script = ExtResource("1_ey5l8")
+exp_value = null
+base_hp = null
+speed = null
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lhe75")
+animation = &"run"
+frame_progress = 0.66709703
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_evdwb")

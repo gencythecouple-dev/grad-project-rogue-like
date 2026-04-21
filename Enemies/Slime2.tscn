@@ -1,7 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://b64lhd845uvnd"]
+[gd_scene load_steps=16 format=3 uid="uid://b64lhd845uvnd"]
 
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="1_2gapv"]
 [ext_resource type="Texture2D" uid="uid://c3p7c17ryxf8g" path="res://Assets/Slime2/Run/Slime2_Run_full.png" id="1_8twnp"]
 [ext_resource type="Script" uid="uid://dagwlvlmu8d6" path="res://Enemies/slime_2.gd" id="1_ey5l8"]
+[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_n0hi4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2gapv"]
+shader = ExtResource("1_2gapv")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h0xdq"]
 atlas = ExtResource("1_8twnp")
@@ -64,22 +70,29 @@ animations = [{
 }],
 "loop": true,
 "name": &"run",
-"speed": 8.0
+"speed": 10.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evdwb"]
-radius = 9.0
+radius = 7.0
 
 [node name="Slime2" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 5
+motion_mode = 1
 script = ExtResource("1_ey5l8")
-exp_value = null
-base_hp = null
-speed = null
+exp_value = 10
+base_hp = 15
+damage_number_scene = ExtResource("2_n0hi4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_2gapv")
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_lhe75")
 animation = &"run"
-frame_progress = 0.66709703
+frame = 7
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_evdwb")

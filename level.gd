@@ -17,7 +17,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 var horde_timer: float = 0.0
 var horde_interval: float = 30.0
-var game_time : float = 400
+var game_time : float
 var base_interval: float = 2.0
 var player_ui
 var enemy_list = []
@@ -142,6 +142,7 @@ func spawn_enemy() -> void:
 
 func return_to_pool(enemy) -> void:
 	enemy.hide()
+	enemy.is_dying = false 
 	enemy.process_mode = Node.PROCESS_MODE_DISABLED
 	enemy.current_hp = enemy.max_hp
 	if enemy_list.has(enemy):
@@ -155,9 +156,9 @@ var spawn_table = [
 	{"time": 240, "count": 6,  "interval": 0.8, "enemies": ["slime", "slime2"]},
 	{"time": 300, "count": 8,  "interval": 0.6, "enemies": ["slime2"]},
 	{"time": 360, "count": 10, "interval": 0.4, "enemies": ["slime2"]},
-	{"time": 420, "count": 15, "interval": 0.25},
-	{"time": 480, "count": 20, "interval": 0.15},
-	{"time": 540, "count": 30, "interval": 0.1},]
+	{"time": 420, "count": 15, "interval": 0.25, "enemies": ["slime2"]},
+	{"time": 480, "count": 20, "interval": 0.15, "enemies": ["slime2"]},
+	{"time": 540, "count": 30, "interval": 0.1, "enemies": ["slime2"]},]
 
 var current_spawn_config = spawn_table[0]
 

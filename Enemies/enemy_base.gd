@@ -6,6 +6,7 @@ class_name EnemyBase
 @export var speed: float = 150.0
 @export var damage_number_scene: PackedScene
 
+
 # Common variables
 var knockback_velocity := Vector2.ZERO
 var is_stunned := false
@@ -14,11 +15,12 @@ var player_ref
 var max_hp: int
 var current_hp: int
 var flash_timer := 0.0
+var is_dying := false
 
 # Constants
 const KNOCKBACK_STRENGTH := 300.0
 const KNOCKBACK_DECAY := 10.0
-const FLASH_DURATION := 0.15
+const FLASH_DURATION := 0.1
 
 func _ready() -> void:
 	current_scene = get_tree().root.get_child(0)
@@ -29,10 +31,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if player_ref == null:
 		return
-	
-	if flash_timer > 0:
-		flash_timer -= delta
-		apply_flash(flash_timer / FLASH_DURATION)
 	
 	# Handle knockback
 	if knockback_velocity.length() > 10:
@@ -64,7 +62,10 @@ func SetStats(level_num: int):
 func TakeDamage(damage: float) -> void:
 	_on_hurt(damage)
 
+
 func _on_hurt(damage: float):
+	if is_dying:
+		return
 	current_hp -= damage
 	flash_timer = FLASH_DURATION
 	spawn_damage_number(damage)
@@ -74,6 +75,8 @@ func _on_hurt(damage: float):
 		knockback_velocity = knockback_dir * KNOCKBACK_STRENGTH
 	
 	if current_hp <= 0:
+		is_dying = true
+		await get_tree().create_timer(FLASH_DURATION).timeout
 		on_death()
 
 func on_death() -> void:

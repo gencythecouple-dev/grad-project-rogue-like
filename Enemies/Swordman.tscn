@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://p7y3h1rt3bir"]
 
 [ext_resource type="Script" uid="uid://dxal77sr4yrxa" path="res://Enemies/swordman.gd" id="1_mfj8p"]
-[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/Swordman.gdshader" id="2_8uqdf"]
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="2_8uqdf"]
 [ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_8vjfr"]
 [ext_resource type="Texture2D" uid="uid://dvb7pe66dyxtt" path="res://Assets/Tiny Swords (Free Pack)/Tiny Swords (Free Pack)/Units/Red Units/Warrior/Warrior_Attack1.png" id="2_mfj8p"]
 

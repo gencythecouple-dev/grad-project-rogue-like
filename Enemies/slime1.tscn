@@ -1,49 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://fopxdyfn3tk5"]
+[gd_scene load_steps=16 format=3 uid="uid://fopxdyfn3tk5"]
 
-[ext_resource type="Texture2D" uid="uid://dhdfihr2yb2hp" path="res://Assets/Slime/Slime1_Attack_full.png" id="1_020c1"]
 [ext_resource type="Script" uid="uid://7ibhpy2wfq6g" path="res://Enemies/slime_1.gd" id="1_i2kp5"]
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="1_tgr6y"]
 [ext_resource type="Texture2D" uid="uid://b8bvodmsaxouo" path="res://Assets/Slime/Slime1_Run_full.png" id="2_i2kp5"]
 [ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_tgr6y"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ngesd"]
-atlas = ExtResource("1_020c1")
-region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yjgjh"]
-atlas = ExtResource("1_020c1")
-region = Rect2(64, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_amoe8"]
-atlas = ExtResource("1_020c1")
-region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_72k4v"]
-atlas = ExtResource("1_020c1")
-region = Rect2(192, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ho0l"]
-atlas = ExtResource("1_020c1")
-region = Rect2(256, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tbdyf"]
-atlas = ExtResource("1_020c1")
-region = Rect2(320, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbld4"]
-atlas = ExtResource("1_020c1")
-region = Rect2(384, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k5oc8"]
-atlas = ExtResource("1_020c1")
-region = Rect2(448, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n35j1"]
-atlas = ExtResource("1_020c1")
-region = Rect2(512, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rtl86"]
-atlas = ExtResource("1_020c1")
-region = Rect2(576, 192, 64, 64)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tgr6y"]
+shader = ExtResource("1_tgr6y")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vv2p3"]
 atlas = ExtResource("2_i2kp5")
@@ -81,41 +45,6 @@ region = Rect2(448, 192, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ngesd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yjgjh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_amoe8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_72k4v")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5ho0l")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_tbdyf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbld4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k5oc8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n35j1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rtl86")
-}],
-"loop": false,
-"name": &"attack",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_vv2p3")
 }, {
 "duration": 1.0,
@@ -145,10 +74,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jl1js"]
-radius = 18.110771
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_020c1"]
-radius = 30.066593
+radius = 12.0
 
 [node name="Slime1" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
@@ -158,25 +84,17 @@ script = ExtResource("1_i2kp5")
 damage_number_scene = ExtResource("2_tgr6y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_tgr6y")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cpi68")
 animation = &"run"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -3)
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_jl1js")
 
 [node name="AttackCooldown" type="Timer" parent="."]
 
-[node name="HurtBox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 9
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
-position = Vector2(3, -16)
-shape = SubResource("CircleShape2D_020c1")
-
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
-[connection signal="body_entered" from="HurtBox" to="." method="_on_hurt_box_body_entered"]

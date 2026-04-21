@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://d1s5srth3378k"]
+[gd_scene load_steps=10 format=4 uid="uid://d1s5srth3378k"]
 
 [ext_resource type="Script" uid="uid://cxosg3s3o0a6l" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_oi3di"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://fopxdyfn3tk5" path="res://Enemies/slime1.tscn" id="3_km5ld"]
 [ext_resource type="PackedScene" uid="uid://dwd10uw4xqpe4" path="res://prefabs/player_ui.tscn" id="5_f2txt"]
 [ext_resource type="PackedScene" uid="uid://b64lhd845uvnd" path="res://Enemies/Slime2.tscn" id="6_8cye3"]
-[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="7_2orkt"]
 [ext_resource type="PackedScene" uid="uid://xnhalk4oi04s" path="res://level_up_menu.tscn" id="7_n6hdu"]
 [ext_resource type="PackedScene" uid="uid://hqqy6drcwbdh" path="res://game_over.tscn" id="8_km5ld"]
 
@@ -41,8 +40,9 @@ position = Vector2(0, 2)
 
 [node name="Slime1" parent="EnemyHolder" instance=ExtResource("3_km5ld")]
 
-[node name="Slime2" parent="EnemyHolder" groups=["Enemy"] instance=ExtResource("6_8cye3")]
-damage_number_scene = ExtResource("7_2orkt")
+[node name="Slime2" parent="EnemyHolder" instance=ExtResource("6_8cye3")]
+exp_value = 5
+base_hp = 3
 
 [node name="SpawnTimer" type="Timer" parent="."]
 

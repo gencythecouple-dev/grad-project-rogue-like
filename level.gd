@@ -28,9 +28,9 @@ const POOL_SIZE := 100
 func _ready() -> void:
 	add_to_group("MainScene")
 	_create_pool()
+	spawn_wave(current_spawn_config["count"])
 	randomize()
 	enemy_died.connect(_on_enemy_died)
-	GetEnemies()
 	spawn_timer.start()
 	player_ui = get_tree().get_first_node_in_group("PlayerUI")
 
@@ -100,13 +100,7 @@ func _get_pooled_enemy():
 			return enemy
 	return null
 
-func GetEnemies() -> void:
-	enemy_list = []
-	for child in enemy_holder.get_children():
-		if child.visible:
-			enemy_list.append(child)
-
-func _on_enemy_died(enemy_that_died: CharacterBody2D):
+func _on_enemy_died(enemy_that_died: CharacterBody2D) -> void:
 	if enemy_list.has(enemy_that_died):
 		enemy_list.erase(enemy_that_died)
 	
@@ -114,15 +108,21 @@ func _on_enemy_died(enemy_that_died: CharacterBody2D):
 	if player:
 		player.total_kills += 1
 	
-	var exp_to_drop = 5
-	call_deferred("spawn_experience_gem", enemy_that_died.global_position, exp_to_drop)
+	var exp_to_drop = enemy_that_died.exp_value
+	var anim = "default"
+	if exp_to_drop >= 3:
+		anim = "tier2"
+	if exp_to_drop >=10:
+		anim = "tier3"
+	
+	call_deferred("spawn_experience_gem", enemy_that_died.global_position, exp_to_drop, anim)
 
-func spawn_experience_gem(position: Vector2, exp_amount: int):
+func spawn_experience_gem(position: Vector2, exp_amount: int, anim: String = "default") -> void:
 	if experience_gem_scene == null:
 		return
 	
 	var gem = experience_gem_scene.instantiate()
-	gem.setup(exp_amount, "default")
+	gem.setup(exp_amount, anim)
 	gem.global_position = position
 	gem_holder.add_child(gem)
 

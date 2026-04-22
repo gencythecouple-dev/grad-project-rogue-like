@@ -3,20 +3,19 @@ extends CanvasLayer
 @onready var exp_bar = $"VBoxContainer/ExpBar"
 @onready var level_label = $"VBoxContainer/HBoxContainer/LevelLabel"
 @onready var timer_label = $"VBoxContainer/HBoxContainer/Label"
-# Item display slots
 @onready var active_slots = [
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot1/TextureRect",
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot2/TextureRect",
-	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot3/TextureRect"
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot3/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot4/TextureRect"
 ]
-
 @onready var passive_slots = [
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot1/TextureRect",
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot2/TextureRect",
-	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot3/TextureRect"
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot3/TextureRect",
+	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/PassiveItemsRow/PassiveSlot4/TextureRect"
 ]
 
-# Track which slots are filled
 var active_count = 0
 var passive_count = 0
 
@@ -25,7 +24,6 @@ func _ready():
 	if exp_bar:
 		exp_bar.show_percentage = false
 	
-	# Dim all empty slots
 	for slot in active_slots + passive_slots:
 		if slot:
 			slot.modulate = Color(0.3, 0.3, 0.3, 0.5)
@@ -41,7 +39,6 @@ func update_level(level: int):
 		return
 	level_label.text = "Level " + str(level)
 
-# Add an active weapon/upgrade icon
 func add_active_item(icon_texture: Texture2D):
 	if active_count >= active_slots.size():
 		return
@@ -52,7 +49,6 @@ func add_active_item(icon_texture: Texture2D):
 		slot.modulate = Color.WHITE
 		active_count += 1
 
-# Add a passive upgrade icon
 func add_passive_item(icon_texture: Texture2D):
 	if passive_count >= passive_slots.size():
 		return

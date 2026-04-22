@@ -27,6 +27,7 @@ func _physics_process(delta: float) -> void:
 
 func chase_player():
 	var dir := global_position.direction_to(player_ref.global_position)
+	dir = dir.normalized()
 	velocity = dir * SPEED
 	if dir.x != 0:
 		sprite.flip_h = dir.x < 0

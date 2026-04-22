@@ -74,7 +74,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_evdwb"]
-radius = 7.0
+radius = 5.0249376
 
 [node name="Slime2" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
@@ -94,5 +94,6 @@ frame = 7
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_evdwb")

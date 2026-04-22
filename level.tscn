@@ -1,20 +1,112 @@
-[gd_scene load_steps=10 format=4 uid="uid://d1s5srth3378k"]
+[gd_scene load_steps=23 format=4 uid="uid://d1s5srth3378k"]
 
 [ext_resource type="Script" uid="uid://cxosg3s3o0a6l" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_oi3di"]
 [ext_resource type="PackedScene" uid="uid://djrepn2djvyae" path="res://characters/playa.tscn" id="3_0b4ue"]
-[ext_resource type="PackedScene" uid="uid://cvsqlp50vpldc" path="res://prefabs/exp_gem.tscn" id="3_1ainy"]
 [ext_resource type="PackedScene" uid="uid://fopxdyfn3tk5" path="res://Enemies/slime1.tscn" id="3_km5ld"]
+[ext_resource type="Script" uid="uid://baua5upkhbnrb" path="res://prefabs/exp_gem.gd" id="4_2orkt"]
+[ext_resource type="Texture2D" uid="uid://bto34l7ku3l1t" path="res://Coin_Gems/spr_coin_strip4.png" id="5_aicyk"]
 [ext_resource type="PackedScene" uid="uid://dwd10uw4xqpe4" path="res://prefabs/player_ui.tscn" id="5_f2txt"]
+[ext_resource type="Texture2D" uid="uid://l5flgoika4o7" path="res://Coin_Gems/spr_coin_azu.png" id="6_8b0r0"]
 [ext_resource type="PackedScene" uid="uid://b64lhd845uvnd" path="res://Enemies/Slime2.tscn" id="6_8cye3"]
 [ext_resource type="PackedScene" uid="uid://xnhalk4oi04s" path="res://level_up_menu.tscn" id="7_n6hdu"]
 [ext_resource type="PackedScene" uid="uid://hqqy6drcwbdh" path="res://game_over.tscn" id="8_km5ld"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amfjm"]
+atlas = ExtResource("5_aicyk")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osi2l"]
+atlas = ExtResource("5_aicyk")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1yrq3"]
+atlas = ExtResource("5_aicyk")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0sf2r"]
+atlas = ExtResource("5_aicyk")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gj3b"]
+atlas = ExtResource("6_8b0r0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbbjb"]
+atlas = ExtResource("6_8b0r0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_002fo"]
+atlas = ExtResource("6_8b0r0")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfahg"]
+atlas = ExtResource("6_8b0r0")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n4i0c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amfjm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osi2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1yrq3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0sf2r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gj3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbbjb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_002fo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfahg")
+}],
+"loop": true,
+"name": &"tier2",
+"speed": 4.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"tier3",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_amfjm"]
+radius = 8.062258
+
+[sub_resource type="PackedScene" id="PackedScene_h6smj"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(0, 0, 13, 12, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("ExpGem", "collision_layer", "script", "exp_value", "move_speed", "Area2D", "AnimatedSprite2D", "scale", "sprite_frames", "animation", "CollisionShape2D", "shape", "_on_body_entered", "body_entered"),
+"node_count": 3,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 5, 0, -1, 4, 1, 0, 2, 1, 3, 2, 4, 2, 0, 0, 0, 6, 6, -1, 3, 7, 3, 8, 4, 9, 5, 0, 0, 0, 10, 10, -1, 2, 7, 3, 11, 6, 0),
+"variants": [16, ExtResource("4_2orkt"), null, Vector2(2, 2), SubResource("SpriteFrames_n4i0c"), &"tier3", SubResource("CircleShape2D_amfjm")],
+"version": 3
+}
 
 [node name="Level" type="Node2D" groups=["MainScene"]]
 script = ExtResource("1_vonw3")
 slime_scene = ExtResource("3_km5ld")
 slime2_scene = ExtResource("6_8cye3")
-experience_gem_scene = ExtResource("3_1ainy")
+experience_gem_scene = SubResource("PackedScene_h6smj")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -37,12 +129,6 @@ position = Vector2(2, 2)
 
 [node name="EnemyHolder" type="Node2D" parent="."]
 position = Vector2(0, 2)
-
-[node name="Slime1" parent="EnemyHolder" instance=ExtResource("3_km5ld")]
-
-[node name="Slime2" parent="EnemyHolder" instance=ExtResource("6_8cye3")]
-exp_value = 5
-base_hp = 3
 
 [node name="SpawnTimer" type="Timer" parent="."]
 

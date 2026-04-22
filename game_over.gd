@@ -17,14 +17,14 @@ func setup(time: float, kills: int, damage: float, exp: int) -> void:
 	var minutes = int(time) / 60
 	var seconds = int(time) % 60
 	time_survived.text = "Time Survived: %02d:%02d" % [minutes, seconds]
-	total_kills.text = "Total Kills: " + str(kills)
+	total_kills.text = "Total Kill: " + str(kills)
 	total_damage.text = "Total Damage Dealt: " + str(damage)
-	total_exp.text = "Total Experience Collected: " + str(exp)
+	total_exp.text = "Total Exp Collected: " + str(exp)
 
 func _on_retry_pressed() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://Levels/level 1.tscn")
 
 func _on_menu_pressed() -> void:
 	get_tree().paused = false
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://prefabs/main_menu.tscn")

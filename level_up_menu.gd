@@ -102,7 +102,6 @@ var all_upgrades := [
 ]
 
 var upgrade_levels := {}
-
 var current_choices := []
 
 func _ready():
@@ -118,15 +117,28 @@ func _ready():
 
 func show_upgrades():
 	var available = []
+	var owned_upgrades = []
+	var new_upgrades = []
+	
 	for upgrade in all_upgrades:
 		if upgrade_levels[upgrade["stat"]] >= upgrade["max_level"]:
 			continue
-
 		if upgrade.has("requires") and upgrade["requires"] != "":
 			if upgrade_levels.get(upgrade["requires"], 0) < 1:
 				continue
-
-		available.append(upgrade)
+		if upgrade_levels[upgrade["stat"]] > 0:
+			owned_upgrades.append(upgrade)
+		else:
+			new_upgrades.append(upgrade)
+	
+	owned_upgrades.shuffle()
+	new_upgrades.shuffle()
+	available = owned_upgrades + new_upgrades
+	
+	current_choices = []
+	var num_choices = min(3, available.size())
+	for i in range(num_choices):
+		current_choices.append(available[i])
 	
 	if available.size() == 0:
 		get_tree().paused = false
@@ -136,7 +148,6 @@ func show_upgrades():
 	get_tree().paused = true
 	available.shuffle()
 	current_choices = []
-	var num_choices = min(3, available.size())
 	for i in range(num_choices):
 		current_choices.append(available[i])
 

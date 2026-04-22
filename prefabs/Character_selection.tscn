@@ -1,0 +1,100 @@
+[gd_scene load_steps=3 format=3 uid="uid://drqapjm448eli"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5jgl"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jc4ex"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Tittle" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "SELECT A CHARACTER"
+
+[node name="Back" type="Button" parent="CanvasLayer/Tittle"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -31.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "BACK"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Card1" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
+sprite_frames = SubResource("SpriteFrames_f5jgl")
+animation = &"new_animation"
+frame_progress = 0.64475447
+
+[node name="Name1" type="Label" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Weapon1" type="Label" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Select1" type="Button" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
+layout_mode = 2
+
+[node name="Card2" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
+sprite_frames = SubResource("SpriteFrames_jc4ex")
+
+[node name="Name2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Weapon2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Select2" type="Button" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
+layout_mode = 2
+
+[node name="Card3" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite3" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
+sprite_frames = SubResource("SpriteFrames_jc4ex")
+
+[node name="Name3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Weapon3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
+layout_mode = 2
+
+[node name="Select3" type="Button" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
+layout_mode = 2

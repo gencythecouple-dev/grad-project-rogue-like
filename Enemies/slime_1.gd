@@ -4,8 +4,7 @@ extends EnemyBase
 
 const SPEED := 135
 const ATTACK_DAMAGE: float = 0.5
-const ATTACK_RANGE := 75
-
+const ATTACK_RANGE := 30
 
 
 func _ready() -> void:
@@ -13,23 +12,23 @@ func _ready() -> void:
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	sprite.play("run")
+	
 
 func _physics_process(delta: float) -> void:
 	if player_ref == null:
 		return
-	
 	if flash_timer > 0:
 		flash_timer -= delta
 		apply_flash(flash_timer / FLASH_DURATION)
-	
 	chase_player()
 	move_and_slide()
-
+	print("dist: ", global_position.distance_to(player_ref.global_position), " range: ", ATTACK_RANGE)
 	if is_player_in_attack_range():
 		player_ref.TakeDamage(ATTACK_DAMAGE * delta)
 
 func chase_player():
 	var dir := global_position.direction_to(player_ref.global_position)
+	dir = dir.normalized()
 	velocity = dir * SPEED
 	if dir.x != 0:
 		sprite.flip_h = dir.x < 0

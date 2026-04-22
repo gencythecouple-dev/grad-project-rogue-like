@@ -1,13 +1,38 @@
-[gd_scene load_steps=16 format=3 uid="uid://fopxdyfn3tk5"]
+[gd_scene load_steps=23 format=3 uid="uid://fopxdyfn3tk5"]
 
 [ext_resource type="Script" uid="uid://7ibhpy2wfq6g" path="res://Enemies/slime_1.gd" id="1_i2kp5"]
 [ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="1_tgr6y"]
 [ext_resource type="Texture2D" uid="uid://b8bvodmsaxouo" path="res://Assets/Slime/Slime1_Run_full.png" id="2_i2kp5"]
 [ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_tgr6y"]
+[ext_resource type="Texture2D" uid="uid://sdrkt7ma412g" path="res://Assets/Slime/Idle/Slime1_Idle_full.png" id="4_qk4dt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tgr6y"]
 shader = ExtResource("1_tgr6y")
 shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e7n7"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vvol"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnr0i"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_us3yh"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cpi68"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rtog3"]
+atlas = ExtResource("4_qk4dt")
+region = Rect2(320, 192, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vv2p3"]
 atlas = ExtResource("2_i2kp5")
@@ -45,6 +70,29 @@ region = Rect2(448, 192, 64, 64)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1e7n7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vvol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnr0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_us3yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cpi68")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rtog3")
+}],
+"loop": false,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_vv2p3")
 }, {
 "duration": 1.0,
@@ -74,7 +122,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_jl1js"]
-radius = 12.0
+radius = 15.0
 
 [node name="Slime1" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
@@ -87,10 +135,12 @@ damage_number_scene = ExtResource("2_tgr6y")
 material = SubResource("ShaderMaterial_tgr6y")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cpi68")
-animation = &"run"
+animation = &"idle"
+frame = 5
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1)
+position = Vector2(1, 0)
 shape = SubResource("CircleShape2D_jl1js")
 
 [node name="AttackCooldown" type="Timer" parent="."]

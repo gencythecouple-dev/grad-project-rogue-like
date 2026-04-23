@@ -23,7 +23,7 @@ const KNOCKBACK_DECAY := 10.0
 const FLASH_DURATION := 0.1
 
 func _ready() -> void:
-	current_scene = get_tree().root.get_child(0)
+	current_scene = get_tree().root.get_node("Level")
 	player_ref = get_tree().get_first_node_in_group("Player")
 	SetStats(1)
 	setup_enemy()

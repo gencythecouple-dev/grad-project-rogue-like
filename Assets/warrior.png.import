@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d15bn3rw5f1cw"
-path="res://.godot/imported/gemini-2.5-flash-image_pixel_art_blue_hooded_mage_walking_animation_frames_side_view_same_character_as_-0.jpg-d9f86d5879b701604b918d757aca6c67.ctex"
+uid="uid://bke5dqr5ied1v"
+path="res://.godot/imported/warrior.png-cb48d3de03a93f32b30bf85bf2c93fdb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/gemini-2.5-flash-image_pixel_art_blue_hooded_mage_walking_animation_frames_side_view_same_character_as_-0.jpg"
-dest_files=["res://.godot/imported/gemini-2.5-flash-image_pixel_art_blue_hooded_mage_walking_animation_frames_side_view_same_character_as_-0.jpg-d9f86d5879b701604b918d757aca6c67.ctex"]
+source_file="res://Assets/warrior.png"
+dest_files=["res://.godot/imported/warrior.png-cb48d3de03a93f32b30bf85bf2c93fdb.ctex"]
 
 [params]
 

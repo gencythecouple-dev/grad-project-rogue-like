@@ -36,7 +36,6 @@ func is_player_in_attack_range() -> bool:
 	return global_position.distance_to(player_ref.global_position) <= ATTACK_RANGE
 
 func apply_flash(intensity: float):
-	print("flash intensity: ", intensity)
 	var material = sprite.material as ShaderMaterial
 	if material:
 		material.set_shader_parameter("flash_intensity", intensity)

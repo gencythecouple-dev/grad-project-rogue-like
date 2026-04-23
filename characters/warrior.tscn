@@ -1,0 +1,131 @@
+[gd_scene load_steps=19 format=3 uid="uid://dm675vwe5lvnt"]
+
+[ext_resource type="Texture2D" uid="uid://bke5dqr5ied1v" path="res://Assets/warrior.png" id="1_c56qh"]
+[ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_tnvvi"]
+[ext_resource type="PackedScene" uid="uid://cs13wkskfqj0c" path="res://prefabs/Arrow/Arrow.tscn" id="2_dfgih"]
+[ext_resource type="PackedScene" uid="uid://c175c04b6qn46" path="res://characters/IceHammer.tscn" id="3_em2o3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
+bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvswe"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(0, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tnvvi"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(768, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xw6re"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(1024, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dfgih"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(1280, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_em2o3"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(0, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k55hc"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(256, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgwhu"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(512, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqn6o"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(768, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5sj73"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(1024, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xrgor"]
+atlas = ExtResource("1_c56qh")
+region = Rect2(1280, 512, 256, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xvswe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvswe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tnvvi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xw6re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dfgih")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_em2o3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k55hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgwhu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pqn6o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5sj73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xrgor")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihkbl"]
+radius = 24.0
+height = 64.0
+
+[node name="Warrior" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_tnvvi")
+arrow_scene = ExtResource("2_dfgih")
+hammer_scene = ExtResource("3_em2o3")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -48.0
+offset_top = 96.0
+offset_right = 50.0
+offset_bottom = 107.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_xvswe")
+animation = &"idle"
+frame_progress = 0.7312284
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_ihkbl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

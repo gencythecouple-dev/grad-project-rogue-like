@@ -14,18 +14,24 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @onready var arrow_holder := $ArrowHolder
 @onready var enemy_holder := $EnemyHolder
 @onready var gem_holder := $GemHolder
+#@export var mage_scene: PackedScene
+#@export var rogue_scene: PackedScene
+@export var warrior_scene: PackedScene
 
 var horde_timer: float = 0.0
 var horde_interval: float = 30.0
 var game_time : float
 var base_interval: float = 2.0
 var player_ui
+var player: CharacterBody2D
 var enemy_list = []
 var enemy_pool: Array = []
 const POOL_SIZE := 100
 
 
+
 func _ready() -> void:
+	_spawn_player()
 	add_to_group("MainScene")
 	_create_pool()
 	spawn_wave(current_spawn_config["count"])
@@ -33,6 +39,20 @@ func _ready() -> void:
 	enemy_died.connect(_on_enemy_died)
 	spawn_timer.start()
 	player_ui = get_tree().get_first_node_in_group("PlayerUI")
+
+func _spawn_player() -> void:
+	var scene
+	match GameData.selected_character:
+		#"mage": scene = mage_scene
+		#"rogue": scene = rogue_scene
+		"warrior": scene = warrior_scene
+	
+	if scene == null:
+		return
+	
+	player = scene.instantiate()
+	player.global_position = Vector2(640, 360)
+	add_child(player)
 
 func get_camera_rect() -> Rect2:
 	var cam := get_viewport().get_camera_2d()
@@ -49,6 +69,9 @@ func _process(delta: float) -> void:
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
 		_spawn_horde()
+	print("arrows: ", arrow_holder.get_child_count())
+	print("gems: ", gem_holder.get_child_count())
+	print("enemies: ", enemy_holder.get_child_count())
 
 func _game_over() -> void:
 	get_tree().paused = true

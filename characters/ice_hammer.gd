@@ -53,7 +53,7 @@ func _spawn_shockwave() -> void:
 		var shockwave = shockwave_scene.instantiate()
 		var offset = direction * (shockwave_spacing * (i + 1))
 		shockwave.global_position = global_position + offset
-		get_tree().root.get_child(0).get_node("ShockwaveHolder").add_child(shockwave)
+		get_tree().root.get_node("Level").get_node("ShockwaveHolder")
 		shockwave.setup(damage * 0.5, shockwave_scale, sprite.flip_h)
 		
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale_mult: float) -> void:

@@ -10,7 +10,7 @@ var SPEED := 250
 @export var hammer_scene: PackedScene
 
 var target: CharacterBody2D
-var current_scene: Node2D
+var current_scene: Node
 var player_ui  
 var level_up_menu
 
@@ -19,7 +19,6 @@ var passive_buffs: Array = []
 
 var direction := Vector2.ZERO
 var facing_right := true
-var attacking := false
 var last_direction := Vector2.RIGHT
 
 var base_attack: float = 3.0
@@ -49,10 +48,7 @@ func _ready() -> void:
 	SetStats()
 	add_to_group("Player")
 	
-	if arrow_scene:
-		active_weapons.append(arrow_scene)
-	
-	current_scene = get_tree().root.get_child(0)
+	current_scene = get_tree().root.get_node("Level")
 	
 	player_ui = get_tree().get_first_node_in_group("PlayerUI")
 	if player_ui:
@@ -64,8 +60,28 @@ func _ready() -> void:
 		if level_up_menu:
 			level_up_menu.upgrade_selected.connect(_on_upgrade_selected)
 	
+		match GameData.selected_weapon:
+			"arrow": 
+				if arrow_scene:
+					active_weapons.append(arrow_scene)
+			#"magic_bullet":
+				#if magic_bullet_scene:
+					#active_weapons.append(magic_bullet_scene)
+			#"knife":
+				#if knife_scene:
+					#active_weapons.append(knife_scene)
+			#"sword":
+				#if sword_scene:
+					#active_weapons.append(sword_scene)
+			"ice_hammer":
+				if hammer_scene:
+					hammer_level = 1
+					active_weapons.append(hammer_scene)
+	
+	
 	attack_timer.one_shot = true
 	attack_timer.start()
+
 
 func _physics_process(delta: float) -> void:
 	direction = Vector2(
@@ -80,18 +96,18 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 	
+	update_animation()
 	update_facing()
 	move_and_slide()
-	update_animation()
 
 func update_facing() -> void:
 	if direction.x != 0:
 		facing_right = direction.x > 0
 	sprite.flip_h = !facing_right
 
+
 func update_animation() -> void:
-	if attacking:
-		return
+	print("direction: ", direction)
 	if direction == Vector2.ZERO:
 		if sprite.animation != "idle":
 			sprite.play("idle")
@@ -133,17 +149,13 @@ func _equip_passive(buff: String, icon: Texture2D) -> void:
 	if player_ui:
 		player_ui.add_passive_item(icon)
 
-func start_attack() -> void:
-	if attacking or not has_valid_enemy():
-		return
-	attacking = true
-	sprite.play("attack")
+
 
 func Attack() -> void:
-	var target_enemy: CharacterBody2D = _get_closest_enemy()
+	var target_enemy = _get_closest_enemy()
 	if target_enemy == null:
 		return
-
+	
 	for weapon in active_weapons:
 		if weapon == hammer_scene:
 			_spawn_hammer()
@@ -181,9 +193,6 @@ func _spawn_arrow_at_position(target_pos: Vector2, angle_offset: float) -> void:
 	new_arrow.set_meta("direction", dir)
 	current_scene.arrow_holder.add_child(new_arrow)
 
-func end_attack() -> void:
-	attacking = false
-	attack_timer.start()
 
 func SetStats() -> void:
 	current_attack = base_attack
@@ -290,12 +299,5 @@ func Die() -> void:
 	level.show_game_over(self)
 
 func _on_attack_timer_timeout() -> void:
-	start_attack()
-
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if sprite.animation == "attack":
-		end_attack()
-
-func _on_animated_sprite_2d_frame_changed() -> void:
-	if sprite.animation == "attack" and sprite.frame == 5:
-		Attack()
+	Attack()
+	attack_timer.start()

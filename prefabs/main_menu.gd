@@ -11,7 +11,7 @@ func _ready() -> void:
 	option_button.pressed.connect(_on_option_pressed)
 
 func _on_play_pressed() -> void:
-	get_tree().change_scene_to_file("res://level.tscn")
+	get_tree().change_scene_to_file("res://prefabs/Character_selection.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

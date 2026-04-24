@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://d1s5srth3378k"]
+[gd_scene load_steps=25 format=4 uid="uid://d1s5srth3378k"]
 
 [ext_resource type="Script" uid="uid://cxosg3s3o0a6l" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_oi3di"]
@@ -8,8 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://dwd10uw4xqpe4" path="res://prefabs/player_ui.tscn" id="5_f2txt"]
 [ext_resource type="Texture2D" uid="uid://l5flgoika4o7" path="res://Coin_Gems/spr_coin_azu.png" id="6_8b0r0"]
 [ext_resource type="PackedScene" uid="uid://b64lhd845uvnd" path="res://Enemies/Slime2.tscn" id="6_8cye3"]
+[ext_resource type="PackedScene" uid="uid://ni3pnyo6k8qj" path="res://characters/mage.tscn" id="7_8b0r0"]
 [ext_resource type="PackedScene" uid="uid://dm675vwe5lvnt" path="res://characters/warrior.tscn" id="7_aicyk"]
 [ext_resource type="PackedScene" uid="uid://xnhalk4oi04s" path="res://level_up_menu.tscn" id="7_n6hdu"]
+[ext_resource type="PackedScene" uid="uid://cdij3nl4hr8ap" path="res://characters/rogue.tscn" id="8_h6smj"]
 [ext_resource type="PackedScene" uid="uid://hqqy6drcwbdh" path="res://game_over.tscn" id="8_km5ld"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amfjm"]
@@ -107,6 +109,8 @@ script = ExtResource("1_vonw3")
 slime_scene = ExtResource("3_km5ld")
 slime2_scene = ExtResource("6_8cye3")
 experience_gem_scene = SubResource("PackedScene_h6smj")
+mage_scene = ExtResource("7_8b0r0")
+rogue_scene = ExtResource("8_h6smj")
 warrior_scene = ExtResource("7_aicyk")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]

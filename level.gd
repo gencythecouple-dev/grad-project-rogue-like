@@ -14,8 +14,8 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @onready var arrow_holder := $ArrowHolder
 @onready var enemy_holder := $EnemyHolder
 @onready var gem_holder := $GemHolder
-#@export var mage_scene: PackedScene
-#@export var rogue_scene: PackedScene
+@export var mage_scene: PackedScene
+@export var rogue_scene: PackedScene
 @export var warrior_scene: PackedScene
 
 var horde_timer: float = 0.0
@@ -43,8 +43,8 @@ func _ready() -> void:
 func _spawn_player() -> void:
 	var scene
 	match GameData.selected_character:
-		#"mage": scene = mage_scene
-		#"rogue": scene = rogue_scene
+		"mage": scene = mage_scene
+		"rogue": scene = rogue_scene
 		"warrior": scene = warrior_scene
 	
 	if scene == null:

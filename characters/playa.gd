@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var SPEED := 250
+var SPEED := 200
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
@@ -219,9 +219,6 @@ func _calculate_exp_to_next_level(level: int) -> int:
 		return 5 + (29 * 10) + (level - 30) * 13
 	else:
 		return 5 + (29 * 10) + (25 * 13) + (level - 55) * 16
-
-
-
 
 func level_up() -> void:
 	player_level += 1

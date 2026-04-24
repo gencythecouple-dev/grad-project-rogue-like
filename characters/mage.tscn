@@ -1,0 +1,138 @@
+[gd_scene load_steps=20 format=3 uid="uid://ni3pnyo6k8qj"]
+
+[ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_sxqqe"]
+[ext_resource type="PackedScene" uid="uid://cs13wkskfqj0c" path="res://prefabs/Arrow/Arrow.tscn" id="2_uf1r4"]
+[ext_resource type="PackedScene" uid="uid://c175c04b6qn46" path="res://characters/IceHammer.tscn" id="3_wmh5w"]
+[ext_resource type="Texture2D" uid="uid://badrbt51f1ksn" path="res://Assets/mage.png" id="4_koqs7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
+bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ydlgn"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(0, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r3lpf"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(512, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qombd"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(768, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hiopg"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(1024, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqccj"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(1280, 0, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kpgvb"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(0, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13xph"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(256, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmnng"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(512, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nabj3"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(768, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr23t"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(1024, 512, 256, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43vm0"]
+atlas = ExtResource("4_koqs7")
+region = Rect2(1280, 512, 256, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mno74"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ydlgn")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r3lpf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qombd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hiopg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqccj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kpgvb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13xph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmnng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nabj3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr23t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43vm0")
+}],
+"loop": true,
+"name": &"run",
+"speed": 12.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihkbl"]
+radius = 24.0
+height = 64.0
+
+[node name="Mage" type="CharacterBody2D" groups=["Player"]]
+motion_mode = 1
+script = ExtResource("1_sxqqe")
+arrow_scene = ExtResource("2_uf1r4")
+hammer_scene = ExtResource("3_wmh5w")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -48.0
+offset_top = 96.0
+offset_right = 50.0
+offset_bottom = 107.0
+theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
+show_percentage = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_mno74")
+animation = &"idle"
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 24)
+shape = SubResource("CapsuleShape2D_ihkbl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

@@ -5,22 +5,24 @@ var SPEED := 200
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
 @onready var health_bar: ProgressBar = $ProgressBar
-
-@export var arrow_scene: PackedScene
 @export var hammer_scene: PackedScene
+@export var magic_bullet_scene: PackedScene 
 
 var target: CharacterBody2D
 var current_scene: Node
 var player_ui  
 var level_up_menu
 
+#self-explainatory
 var active_weapons: Array = []
 var passive_buffs: Array = []
 
+#directional stuff
 var direction := Vector2.ZERO
 var facing_right := true
 var last_direction := Vector2.RIGHT
 
+#player stats
 var base_attack: float = 3.0
 var current_attack: float
 var base_armor: float = 5.0
@@ -33,11 +35,16 @@ var projectile_count: int = 1
 var hammer_scale: float = 1.0
 var hammer_level: int = 0
 
+#magic bullet
+var magic_bullet_level: int = 0
+var magic_bullet_pierce: int = 0
 
+#player exp and level
 var current_exp: int = 0
 var exp_to_next_level: int = 10
 var player_level: int = 1
 
+#end game summary
 var total_damage_dealt: float = 0.0
 var total_kills: int = 0
 var total_exp_collected: int = 0
@@ -60,24 +67,14 @@ func _ready() -> void:
 		if level_up_menu:
 			level_up_menu.upgrade_selected.connect(_on_upgrade_selected)
 	
-		match GameData.selected_weapon:
-			"arrow": 
-				if arrow_scene:
-					active_weapons.append(arrow_scene)
-			#"magic_bullet":
-				#if magic_bullet_scene:
-					#active_weapons.append(magic_bullet_scene)
-			#"knife":
-				#if knife_scene:
-					#active_weapons.append(knife_scene)
-			#"sword":
-				#if sword_scene:
-					#active_weapons.append(sword_scene)
-			"ice_hammer":
-				if hammer_scene:
-					hammer_level = 1
-					active_weapons.append(hammer_scene)
-	
+	match GameData.selected_weapon:
+		"magic_bullet":
+			if magic_bullet_scene:
+				active_weapons.append(magic_bullet_scene)
+		"ice_hammer":
+			if hammer_scene:
+				hammer_level = 1
+				active_weapons.append(hammer_scene)	
 	
 	attack_timer.one_shot = true
 	attack_timer.start()
@@ -107,7 +104,6 @@ func update_facing() -> void:
 
 
 func update_animation() -> void:
-	print("direction: ", direction)
 	if direction == Vector2.ZERO:
 		if sprite.animation != "idle":
 			sprite.play("idle")
@@ -159,8 +155,10 @@ func Attack() -> void:
 	for weapon in active_weapons:
 		if weapon == hammer_scene:
 			_spawn_hammer()
-		elif weapon == arrow_scene:
+		elif weapon == magic_bullet_scene:
 			_spawn_arrows(target_enemy)
+		elif weapon == magic_bullet_scene:
+			_spawn_arrows(target_enemy) 
 
 
 func _spawn_hammer() -> void:
@@ -179,19 +177,21 @@ func _spawn_arrows(target_enemy: CharacterBody2D) -> void:
 		var delay = i * 0.1
 		var current_angle = start_angle + (i * angle_spread)
 		get_tree().create_timer(delay).timeout.connect(
-			func(): _spawn_arrow_at_position(target_position, current_angle)
+			func(): _spawn_magic_bullet_at_position(target_position, current_angle)
 		)
 
-func _spawn_arrow_at_position(target_pos: Vector2, angle_offset: float) -> void:
-	if arrow_scene == null:
+func _spawn_magic_bullet_at_position(target_pos: Vector2, angle_offset: float) -> void:
+	if magic_bullet_scene == null:
 		return
-	var new_arrow: Arrow = arrow_scene.instantiate()
-	new_arrow.global_position = global_position
-	new_arrow.damage = current_attack
+	var new_bullet = magic_bullet_scene.instantiate()
+	new_bullet.global_position = global_position
+	new_bullet.damage = current_attack
+	new_bullet.pierce_count = magic_bullet_pierce
 	var dir = global_position.direction_to(target_pos)
 	dir = dir.rotated(deg_to_rad(angle_offset))
-	new_arrow.set_meta("direction", dir)
-	current_scene.arrow_holder.add_child(new_arrow)
+	new_bullet.set_meta("direction", dir)
+	new_bullet.set_meta("magic_level", magic_bullet_level)
+	current_scene.get_node("MagicBulletHolder").add_child(new_bullet)
 
 
 func SetStats() -> void:
@@ -249,8 +249,6 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					current_attack += 2.0
 					attack_timer.wait_time *= 0.80
 					hammer_scale += 0.3
-		"arrow":
-			_equip_weapon(arrow_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
 		"attack":
 			current_attack += 1.0
 			_equip_passive("attack", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
@@ -281,6 +279,22 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 		"armor":
 			current_armor += 1.0
 			_equip_passive("armor", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		"magic_bullet":
+			magic_bullet_level += 1
+			if magic_bullet_level == 1:
+				_equip_weapon(magic_bullet_scene, preload("res://Assets/magic_bullet.png"))
+			match magic_bullet_level:
+				2: 
+					projectile_count += 1
+				3: 
+					current_attack += 2.0
+					attack_timer.wait_time *= 0.85
+				4: 
+					projectile_count += 1
+				5: 
+					current_attack += 3.0
+					attack_timer.wait_time *= 0.80
+					magic_bullet_pierce += 1
 
 
 func TakeDamage(damage: float) -> void:
@@ -292,8 +306,11 @@ func TakeDamage(damage: float) -> void:
 		Die()
 
 func Die() -> void:
-	var level = get_tree().root.get_child(0)
-	level.show_game_over(self)
+	var level = get_tree().root.get_node("Level")
+	if level and level.has_method("show_game_over"):
+		level.show_game_over(self)
+	else:
+		get_tree().change_scene_to_file("res://game_over.tscn")
 
 func _on_attack_timer_timeout() -> void:
 	Attack()

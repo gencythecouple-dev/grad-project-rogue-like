@@ -11,7 +11,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 
 @onready var game_over_screen = $GameOver
 @onready var spawn_timer: Timer = $SpawnTimer
-@onready var arrow_holder := $ArrowHolder
+@onready var magic_bullet_holder := $MagicBulletHolder
 @onready var enemy_holder := $EnemyHolder
 @onready var gem_holder := $GemHolder
 @export var mage_scene: PackedScene
@@ -46,7 +46,6 @@ func _spawn_player() -> void:
 		"mage": scene = mage_scene
 		"rogue": scene = rogue_scene
 		"warrior": scene = warrior_scene
-	
 	if scene == null:
 		return
 	
@@ -69,9 +68,7 @@ func _process(delta: float) -> void:
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
 		_spawn_horde()
-	print("arrows: ", arrow_holder.get_child_count())
-	print("gems: ", gem_holder.get_child_count())
-	print("enemies: ", enemy_holder.get_child_count())
+
 
 func _game_over() -> void:
 	get_tree().paused = true

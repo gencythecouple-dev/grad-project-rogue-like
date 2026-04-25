@@ -15,90 +15,99 @@ signal upgrade_selected(upgrade_type: String)
 
 var active_upgrades_taken := 0
 var passive_upgrades_taken := 0
-const MAX_ACTIVE := 3
-const MAX_PASSIVE := 3
+const MAX_ACTIVE := 4
+const MAX_PASSIVE := 4
 
 var all_upgrades := [
+	#{
+		##"name": "Increase Attack", 
+		#"description": "+1 Attack Damage", 
+		#"stat": "attack", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "active"  
+	#},
+	#{
+		#"name": "Increase Max HP", 
+		#"description": "+10 Max Health", 
+		#"stat": "max_hp", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "passive"  
+	#},
+	#{
+		#"name": "Attack Speed", 
+		#"description": "+15% Faster Attacks", 
+		#"stat": "attack_speed", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "passive"  
+	#},
+	#{
+		#"name": "Movement Speed", 
+		#"description": "+15% Move Speed", 
+		#"stat": "move_speed", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "passive" 
+	#},
+	#{
+		#"name": "Max HP Up", 
+		#"description": "+20 Max Health + Full Heal", 
+		#"stat": "max_hp_big", 
+		#"max_level": 3,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "passive" 
+	#},
+	#{
+		#"name": "Damage Boost", 
+		#"description": "+2 Attack Damage", 
+		#"stat": "attack_big", 
+		#"max_level": 3,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "active" 
+	#},
+	#{
+		#"name": "More Arrows!", 
+		#"description": "+1 Arrow Projectile", 
+		#"stat": "more_projectile", 
+		#"max_level": 3,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "active"  
+	#},
+	#{
+		#"name": "Ice Hammer",
+		#"stat": "ice_hammer",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "active",
+		#"requires": "",
+		#"level_descriptions": {
+			#1: "Unlock the Ice Hammer!",
+			#2: "+2 Damage",
+			#3: "Bigger Spikes",
+			#4: "Faster Cooldown",
+			#5: "ALL: +Damage, Bigger, Faster + Ice Shockwave!"
+		#},
+		#},
+		#{
+		#"name": "Iron Skin",
+		#"description": "Reduce incoming damage",
+		#"stat": "armor",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		#"upgrade_type": "passive",
+		#"requires": ""
+	#},
 	{
-		"name": "Increase Attack", 
-		"description": "+1 Attack Damage", 
-		"stat": "attack", 
+		"name": "Magic Bullet",
+		"description": "Fire a magical bullet at the closest enemy",
+		"stat": "magic_bullet",
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "active"  
-	},
-	{
-		"name": "Increase Max HP", 
-		"description": "+10 Max Health", 
-		"stat": "max_hp", 
-		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "passive"  
-	},
-	{
-		"name": "Attack Speed", 
-		"description": "+15% Faster Attacks", 
-		"stat": "attack_speed", 
-		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "passive"  
-	},
-	{
-		"name": "Movement Speed", 
-		"description": "+15% Move Speed", 
-		"stat": "move_speed", 
-		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "passive" 
-	},
-	{
-		"name": "Max HP Up", 
-		"description": "+20 Max Health + Full Heal", 
-		"stat": "max_hp_big", 
-		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "passive" 
-	},
-	{
-		"name": "Damage Boost", 
-		"description": "+2 Attack Damage", 
-		"stat": "attack_big", 
-		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "active" 
-	},
-	{
-		"name": "More Arrows!", 
-		"description": "+1 Arrow Projectile", 
-		"stat": "more_projectile", 
-		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "active"  
-	},
-	{
-		"name": "Ice Hammer",
-		"stat": "ice_hammer",
-		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/magic_bullet.png"),
 		"upgrade_type": "active",
-		"requires": "",
-		"level_descriptions": {
-			1: "Unlock the Ice Hammer!",
-			2: "+2 Damage",
-			3: "Bigger Spikes",
-			4: "Faster Cooldown",
-			5: "ALL: +Damage, Bigger, Faster + Ice Shockwave!"
-		},
-		},
-		{
-		"name": "Iron Skin",
-		"description": "Reduce incoming damage",
-		"stat": "armor",
-		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "passive",
 		"requires": ""
-	},
+	}
 ]
 
 var upgrade_levels := {}

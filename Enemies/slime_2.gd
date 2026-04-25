@@ -4,7 +4,7 @@ extends EnemyBase
 
 const SPEED := 150
 const ATTACK_DAMAGE := 0.6
-const ATTACK_RANGE := 75
+const ATTACK_RANGE := 35
 
 func _ready() -> void:
 	super._ready()

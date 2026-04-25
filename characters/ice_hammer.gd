@@ -26,7 +26,6 @@ func _on_frame_changed() -> void:
 		monitoring = false
 		
 func _spawn_shockwave() -> void:
-	print("spawning shockwave at hammer_level: ", hammer_level)
 	var spike_count = 1
 	var shockwave_scale = 1.0
 	var shockwave_spacing = 100
@@ -53,8 +52,8 @@ func _spawn_shockwave() -> void:
 		var shockwave = shockwave_scene.instantiate()
 		var offset = direction * (shockwave_spacing * (i + 1))
 		shockwave.global_position = global_position + offset
-		get_tree().root.get_node("Level").get_node("ShockwaveHolder")
 		shockwave.setup(damage * 0.5, shockwave_scale, sprite.flip_h)
+		get_tree().root.get_node("Level").get_node("ShockwaveHolder").add_child(shockwave)
 		
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale_mult: float) -> void:
 	player = spawn_player

@@ -13,7 +13,7 @@ func _ready() -> void:
 
 func _on_select_mage_pressed() -> void:
 	GameData.selected_character = "mage"
-	GameData.selected_weapon = "arrow"
+	GameData.selected_weapon = "magic_bullet"
 	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_select_rogue_pressed() -> void:

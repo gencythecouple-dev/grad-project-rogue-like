@@ -1,8 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://cdij3nl4hr8ap"]
+[gd_scene load_steps=22 format=3 uid="uid://cdij3nl4hr8ap"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_ip2qp"]
 [ext_resource type="PackedScene" uid="uid://cs13wkskfqj0c" path="res://prefabs/Arrow/Arrow.tscn" id="2_baa7v"]
 [ext_resource type="PackedScene" uid="uid://c175c04b6qn46" path="res://characters/IceHammer.tscn" id="3_x8qse"]
+[ext_resource type="Texture2D" uid="uid://cbqsdqkul7fvd" path="res://Assets/Slime/Slime1_Run_shadow.png" id="4_baa7v"]
 [ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="4_cd2im"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
@@ -10,6 +11,21 @@ bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
+atlas = ExtResource("4_baa7v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd2im"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8qse")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ip2qp"]
 atlas = ExtResource("4_cd2im")
@@ -99,19 +115,25 @@ radius = 24.0
 height = 64.0
 
 [node name="Rogue" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_ip2qp")
 arrow_scene = ExtResource("2_baa7v")
 hammer_scene = ExtResource("3_x8qse")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -48.0
-offset_top = 96.0
-offset_right = 50.0
-offset_bottom = 107.0
+offset_left = -47.0
+offset_top = 67.0
+offset_right = 51.0
+offset_bottom = 78.0
 theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1, 38)
+scale = Vector2(3.15625, 2.671875)
+sprite_frames = SubResource("SpriteFrames_cd2im")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)

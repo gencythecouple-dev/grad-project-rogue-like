@@ -1,11 +1,9 @@
 extends EnemyBase
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-
 const SPEED := 100
 const ATTACK_DAMAGE: float = 0.5
 const ATTACK_RANGE := 35
-
 
 func _ready() -> void:
 	super._ready()
@@ -13,7 +11,6 @@ func _ready() -> void:
 		sprite.material = sprite.material.duplicate()
 	sprite.play("run")
 	
-
 func _physics_process(delta: float) -> void:
 	if player_ref == null:
 		return

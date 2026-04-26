@@ -68,12 +68,12 @@ var all_upgrades := [
 		#"upgrade_type": "active" 
 	#},
 	#{
-		#"name": "More Arrows!", 
-		#"description": "+1 Arrow Projectile", 
+		#"name": "Dupplicator", 
+		#"description": "+1 to ALL projectiles", 
 		#"stat": "more_projectile", 
 		#"max_level": 3,
 		#"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		#"upgrade_type": "active"  
+		#"upgrade_type": "passive"  
 	#},
 	#{
 		#"name": "Ice Hammer",
@@ -107,7 +107,16 @@ var all_upgrades := [
 		"icon": preload("res://Assets/magic_bullet.png"),
 		"upgrade_type": "active",
 		"requires": ""
-	}
+	},
+	{
+		"name": "Hidden Knife",
+		"description": "Allow your character to throw a not so hidden knife",
+		"stat": "knife",
+		"max_level": 5,
+		"icon": preload("res://Assets/knife_icon.png"),
+		"upgrade_type": "active",
+		"requires": ""
+	},
 ]
 
 var upgrade_levels := {}

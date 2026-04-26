@@ -60,12 +60,9 @@ func SetStats(level_num: int):
 	current_hp = max_hp
 	
 func TakeDamage(damage: float) -> void:
-	_on_hurt(damage)
-
-
-func _on_hurt(damage: float):
 	if is_dying:
 		return
+	
 	current_hp -= damage
 	flash_timer = FLASH_DURATION
 	spawn_damage_number(damage)

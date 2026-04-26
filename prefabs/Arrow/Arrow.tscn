@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://5fyb0fskr01n" path="res://prefabs/magic_bullet/magic_bullet.gd" id="1_mcjxc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcjxc"]
-size = Vector2(26, 5)
+size = Vector2(27, 5.5)
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 8

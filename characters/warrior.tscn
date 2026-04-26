@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://dm675vwe5lvnt"]
+[gd_scene load_steps=23 format=3 uid="uid://dm675vwe5lvnt"]
 
 [ext_resource type="Texture2D" uid="uid://bke5dqr5ied1v" path="res://Assets/warrior.png" id="1_c56qh"]
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_tnvvi"]
-[ext_resource type="PackedScene" uid="uid://cs13wkskfqj0c" path="res://prefabs/Arrow/Arrow.tscn" id="2_dfgih"]
 [ext_resource type="PackedScene" uid="uid://c175c04b6qn46" path="res://characters/IceHammer.tscn" id="3_em2o3"]
+[ext_resource type="PackedScene" uid="uid://cucuvib8sd2x5" path="res://prefabs/magic_bullet/magic_bullet.tscn" id="3_k55hc"]
+[ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_bgwhu"]
 [ext_resource type="Texture2D" uid="uid://cbqsdqkul7fvd" path="res://Assets/Slime/Slime1_Run_shadow.png" id="4_em2o3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
@@ -118,8 +119,9 @@ height = 64.0
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_tnvvi")
-arrow_scene = ExtResource("2_dfgih")
 hammer_scene = ExtResource("3_em2o3")
+magic_bullet_scene = ExtResource("3_k55hc")
+knife_scene = ExtResource("4_bgwhu")
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 73)

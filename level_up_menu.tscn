@@ -73,12 +73,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 97.0
-offset_top = 14.0
-offset_right = -11.0
-offset_bottom = -11.0
+offset_left = 105.0
+offset_top = 15.0
+offset_right = -3.0
+offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
+autowrap_mode = 2
+clip_text = true
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
 layout_mode = 0

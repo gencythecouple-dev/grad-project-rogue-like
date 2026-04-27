@@ -75,20 +75,29 @@ func _ready() -> void:
 		level_up_menu = current_scene.get_node_or_null("LevelUpMenu")
 		if level_up_menu:
 			level_up_menu.upgrade_selected.connect(_on_upgrade_selected)
-	
-	match GameData.selected_weapon:
-		"magic_bullet":
-			if magic_bullet_scene:
-				active_weapons.append(magic_bullet_scene)
-		"ice_hammer":
-			if hammer_scene:
-				hammer_level = 1
-				active_weapons.append(hammer_scene)	
-		"knife":
-			if knife_scene:
-				active_weapons.append(knife_scene)
-	attack_timer.one_shot = true
-	attack_timer.start()
+		
+		match GameData.selected_weapon:
+			"magic_bullet":
+				if magic_bullet_scene:
+					active_weapons.append(magic_bullet_scene)
+					magic_bullet_level = 1 
+					_equip_weapon(magic_bullet_scene, preload("res://Assets/magic_bullet.png")) 
+					if level_up_menu: 
+						level_up_menu.upgrade_levels["magic_bullet"] = 1
+			"knife":
+				if knife_scene:
+					active_weapons.append(knife_scene)
+					knife_level = 1 
+					_equip_weapon(knife_scene, preload("res://Assets/knife_icon.png"))
+					if level_up_menu:
+						level_up_menu.upgrade_levels["knife"] = 1
+			"ice_hammer":
+				if hammer_scene:
+					hammer_level = 1
+					active_weapons.append(hammer_scene)
+					_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png")) 
+					if level_up_menu: 
+						level_up_menu.upgrade_levels["ice_hammer"] = 1
 
 
 func _physics_process(delta: float) -> void:

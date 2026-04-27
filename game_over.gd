@@ -23,7 +23,7 @@ func setup(time: float, kills: int, damage: float, exp: int) -> void:
 
 func _on_retry_pressed() -> void:
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://Levels/level 1.tscn")
+	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_menu_pressed() -> void:
 	get_tree().paused = false

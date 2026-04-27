@@ -13,21 +13,6 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
-atlas = ExtResource("4_uf1r4")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_wmh5w"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x8qse")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydlgn"]
 atlas = ExtResource("4_koqs7")
 region = Rect2(0, 0, 256, 512)
@@ -118,9 +103,24 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihkbl"]
-radius = 24.0
-height = 64.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
+atlas = ExtResource("4_uf1r4")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wmh5w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8qse")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wmh5w"]
+radius = 14.0
+height = 114.0
 
 [node name="Mage" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 6
@@ -139,24 +139,23 @@ theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(-3.9999995, 68)
-scale = Vector2(3.15625, 2.671875)
-sprite_frames = SubResource("SpriteFrames_wmh5w")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_mno74")
-animation = &"idle"
-frame_progress = 1.0
+animation = &"run"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 24)
-shape = SubResource("CapsuleShape2D_ihkbl")
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 69)
+scale = Vector2(3.15625, 2.671875)
+sprite_frames = SubResource("SpriteFrames_wmh5w")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 2.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 25)
+shape = SubResource("CapsuleShape2D_wmh5w")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

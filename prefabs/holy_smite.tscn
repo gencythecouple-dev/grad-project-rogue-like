@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8lmvpxwar18e"]
+[gd_scene load_steps=17 format=3 uid="uid://c8lmvpxwar18e"]
 
+[ext_resource type="Script" uid="uid://cvoyrniykph28" path="res://prefabs/holy_smite.gd" id="1_82bpp"]
 [ext_resource type="Texture2D" uid="uid://db7wd6ono3pcr" path="res://Assets/Holy Smite/HeavensFury_spritesheet.png" id="1_myl8m"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_82bpp"]
@@ -94,7 +95,10 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_1e0wv"]
+
 [node name="HolySmite" type="Area2D"]
+script = ExtResource("1_82bpp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_1417w")
@@ -102,3 +106,4 @@ frame = 11
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1e0wv")

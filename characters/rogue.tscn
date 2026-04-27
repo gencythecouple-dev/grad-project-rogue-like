@@ -13,21 +13,6 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
-atlas = ExtResource("4_baa7v")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cd2im"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x8qse")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ip2qp"]
 atlas = ExtResource("4_cd2im")
 region = Rect2(0, 0, 256, 384)
@@ -111,9 +96,24 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihkbl"]
-radius = 24.0
-height = 64.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
+atlas = ExtResource("4_baa7v")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cd2im"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8qse")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x8qse"]
+radius = 17.0
+height = 80.0
 
 [node name="Rogue" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 6
@@ -132,23 +132,22 @@ theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_k82ri")
+animation = &"run"
+
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 38)
 scale = Vector2(3.15625, 2.671875)
 sprite_frames = SubResource("SpriteFrames_cd2im")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_k82ri")
-animation = &"idle"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 15)
-shape = SubResource("CapsuleShape2D_ihkbl")
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_x8qse")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

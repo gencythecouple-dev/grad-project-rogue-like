@@ -8,6 +8,8 @@ var SPEED := 200
 @export var hammer_scene: PackedScene
 @export var magic_bullet_scene: PackedScene
 @export var knife_scene: PackedScene
+@export var holy_smite_scene: PackedScene
+
 
 var target: CharacterBody2D
 var current_scene: Node
@@ -37,7 +39,7 @@ var current_hp: int
 var magic_bullet_projectile_count: int = 1
 var knife_projectile_count: int = 1
 var arrow_projectile_count: int = 1
-var global_projectile_bonus = 1
+var global_projectile_bonus = 0
 var hammer_scale: float = 1.0
 var hammer_level: int = 0
 
@@ -76,28 +78,27 @@ func _ready() -> void:
 		if level_up_menu:
 			level_up_menu.upgrade_selected.connect(_on_upgrade_selected)
 		
-		match GameData.selected_weapon:
-			"magic_bullet":
-				if magic_bullet_scene:
-					active_weapons.append(magic_bullet_scene)
-					magic_bullet_level = 1 
-					_equip_weapon(magic_bullet_scene, preload("res://Assets/magic_bullet.png")) 
-					if level_up_menu: 
-						level_up_menu.upgrade_levels["magic_bullet"] = 1
-			"knife":
-				if knife_scene:
-					active_weapons.append(knife_scene)
-					knife_level = 1 
-					_equip_weapon(knife_scene, preload("res://Assets/knife_icon.png"))
-					if level_up_menu:
-						level_up_menu.upgrade_levels["knife"] = 1
-			"ice_hammer":
-				if hammer_scene:
-					hammer_level = 1
-					active_weapons.append(hammer_scene)
-					_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png")) 
-					if level_up_menu: 
-						level_up_menu.upgrade_levels["ice_hammer"] = 1
+	match GameData.selected_weapon:
+		"magic_bullet":
+			if magic_bullet_scene:
+				magic_bullet_level = 1 
+				_equip_weapon(magic_bullet_scene, preload("res://Assets/magic_bullet.png")) 
+				if level_up_menu: 
+					level_up_menu.upgrade_levels["magic_bullet"] = 1
+		"knife":
+			if knife_scene:
+				knife_level = 1 
+				_equip_weapon(knife_scene, preload("res://Assets/knife_icon.png"))
+				if level_up_menu:
+					level_up_menu.upgrade_levels["knife"] = 1
+		"ice_hammer":
+			if hammer_scene:
+				hammer_level = 1
+				_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png")) 
+				if level_up_menu: 
+					level_up_menu.upgrade_levels["ice_hammer"] = 1
+					
+	attack_timer.start()
 
 
 func _physics_process(delta: float) -> void:
@@ -165,7 +166,45 @@ func _equip_passive(buff: String, icon: Texture2D) -> void:
 	if player_ui:
 		player_ui.add_passive_item(icon)
 
+func _get_n_closest_enemies_in_cone(count: int, cone_angle: float = 60.0) -> Array:
+	var first_enemy = _get_closest_enemy()
+	if first_enemy == null:
+		return []
+	
+	var first_direction = global_position.direction_to(first_enemy.global_position)
+	var result = [first_enemy]
+	
+	if count <= 1:
+		return result
+	
+	var enemies_with_distance = []
+	
+	for enemy in current_scene.enemy_list:
+		if enemy == null or !is_instance_valid(enemy):
+			continue
+		if enemy == first_enemy:
+			continue
+		
+		var dir_to_enemy = global_position.direction_to(enemy.global_position)
+		var angle_diff = rad_to_deg(first_direction.angle_to(dir_to_enemy))
+		
+		if abs(angle_diff) <= cone_angle / 2.0:
+			var dist = enemy.global_position.distance_to(global_position)
+			enemies_with_distance.append({"enemy": enemy, "distance": dist})
+	
+	enemies_with_distance.sort_custom(func(a, b): return a.distance < b.distance)
+	
+	for i in range(min(count - 1, enemies_with_distance.size())):
+		result.append(enemies_with_distance[i].enemy)
+	
+	return result
 
+
+
+
+
+
+#ATTACK AND WEAPONS
 
 func Attack() -> void:
 	var target_enemy = _get_closest_enemy()
@@ -181,15 +220,29 @@ func Attack() -> void:
 			_spawn_knives()
 
 func _spawn_knives() -> void:
-	var total_projectiles = magic_bullet_projectile_count + global_projectile_bonus
-	var angle_spread = 15
-	var start_angle = -(knife_projectile_count - 1) * angle_spread / 2.0
-	for i in range(knife_projectile_count):
-		var delay = i * 0.05
-		var current_angle = start_angle + (i * angle_spread)
+	var total_projectiles = knife_projectile_count + global_projectile_bonus
+	
+	for i in range(total_projectiles):
+		var delay = i * 0.2
+		var vertical_offset = 10 if i % 2 == 0 else -10
+		var horizontal_offset = i * 15
 		get_tree().create_timer(delay).timeout.connect(
-			func(): _spawn_knife_at_direction(current_angle)
+			func(): _spawn_single_knife(vertical_offset, horizontal_offset)
 		)
+
+func _spawn_single_knife(vertical_offset: float = 0, horizontal_offset: float = 0) -> void:
+	if knife_scene == null:
+		return
+	
+	var new_knife = knife_scene.instantiate()
+	var spawn_offset = Vector2(horizontal_offset, vertical_offset)
+	spawn_offset = spawn_offset.rotated(last_direction.angle())
+	new_knife.global_position = global_position + spawn_offset
+	new_knife.damage = current_attack
+	
+	new_knife.set_meta("direction", last_direction)
+	
+	current_scene.get_node("KnifeHolder").add_child(new_knife)
 
 func _spawn_knife_at_direction(angle_offset: float) -> void:
 	if knife_scene == null:
@@ -212,16 +265,32 @@ func _spawn_hammer() -> void:
 	hammer.setup(self, current_attack, hammer_level, hammer_scale)
 
 func _spawn_magic_bullets(target_enemy: CharacterBody2D) -> void:
-	var target_position = target_enemy.global_position
 	var total_projectiles = magic_bullet_projectile_count + global_projectile_bonus
-	var angle_spread = 15
-	var start_angle = -(magic_bullet_projectile_count - 1) * angle_spread / 2.0
-	for i in range(magic_bullet_projectile_count):
+	var targets = _get_n_closest_enemies_in_cone(total_projectiles, 50.0)
+	
+	for i in range(targets.size()):
 		var delay = i * 0.1
-		var current_angle = start_angle + (i * angle_spread)
+		var target = targets[i]
 		get_tree().create_timer(delay).timeout.connect(
-			func(): _spawn_magic_bullet_at_position(target_position, current_angle)
+			func(): _spawn_single_magic_bullet_at_target(target)
 		)
+
+func _spawn_single_magic_bullet_at_target(target: CharacterBody2D) -> void:
+	if magic_bullet_scene == null:
+		return
+	if target == null or !is_instance_valid(target):
+		return
+	
+	var new_bullet = magic_bullet_scene.instantiate()
+	new_bullet.global_position = global_position
+	new_bullet.damage = current_attack
+	new_bullet.pierce_count = magic_bullet_pierce
+	
+	var dir = global_position.direction_to(target.global_position)
+	new_bullet.set_meta("direction", dir)
+	new_bullet.set_meta("magic_level", magic_bullet_level)
+	
+	current_scene.get_node("MagicBulletHolder").add_child(new_bullet)
 
 
 func _spawn_magic_bullet_at_position(target_pos: Vector2, angle_offset: float) -> void:
@@ -237,7 +306,32 @@ func _spawn_magic_bullet_at_position(target_pos: Vector2, angle_offset: float) -
 	new_bullet.set_meta("magic_level", magic_bullet_level)
 	current_scene.get_node("MagicBulletHolder").add_child(new_bullet)
 
+func _spawn_holy_smite() -> void:
+	if holy_smite_scene == null:
+		return
+	
+	var random_enemy = _get_random_enemy()
+	if random_enemy == null:
+		return
+	
+	var smite = holy_smite_scene.instantiate()
+	smite.global_position = random_enemy.global_position
+	smite.damage = current_attack
+	current_scene.add_child(smite)
+	
+func _get_random_enemy() -> CharacterBody2D:
+	var valid_enemies = []
+	for enemy in current_scene.enemy_list:
+		if enemy != null and is_instance_valid(enemy):
+			valid_enemies.append(enemy)
+	
+	if valid_enemies.size() == 0:
+		return null
+	
+	return valid_enemies[randi() % valid_enemies.size()]
 
+
+#STATS AND LEVELING
 func SetStats() -> void:
 	current_attack = base_attack
 	current_armor = base_armor
@@ -348,12 +442,14 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					knife_projectile_count += 1
 				3: 
 					current_attack += 2.0
-					attack_timer.wait_time *= 0.85
+					attack_timer.wait_time *= 1.8
+					knife_projectile_count += 1
 				4: 
 					knife_projectile_count += 1
 				5: 
 					current_attack += 3.0
-					attack_timer.wait_time *= 0.80
+					attack_timer.wait_time *= 1
+					knife_projectile_count += 1
 
 
 func TakeDamage(damage: float) -> void:

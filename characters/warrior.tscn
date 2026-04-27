@@ -7,21 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_bgwhu"]
 [ext_resource type="Texture2D" uid="uid://cbqsdqkul7fvd" path="res://Assets/Slime/Slime1_Run_shadow.png" id="4_em2o3"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
-atlas = ExtResource("4_em2o3")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_k55hc"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x8qse")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -111,9 +96,24 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ihkbl"]
-radius = 24.0
-height = 64.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8qse"]
+atlas = ExtResource("4_em2o3")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k55hc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x8qse")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k55hc"]
+radius = 20.0
+height = 58.0
 
 [node name="Warrior" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 6
@@ -122,11 +122,6 @@ script = ExtResource("1_tnvvi")
 hammer_scene = ExtResource("3_em2o3")
 magic_bullet_scene = ExtResource("3_k55hc")
 knife_scene = ExtResource("4_bgwhu")
-
-[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(-2, 73)
-scale = Vector2(3.15625, 2.671875)
-sprite_frames = SubResource("SpriteFrames_k55hc")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0
@@ -143,13 +138,18 @@ sprite_frames = SubResource("SpriteFrames_xvswe")
 animation = &"idle"
 frame_progress = 0.7312284
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 24)
-shape = SubResource("CapsuleShape2D_ihkbl")
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
+position = Vector2(-2, 73)
+scale = Vector2(3.15625, 2.671875)
+sprite_frames = SubResource("SpriteFrames_k55hc")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
 wait_time = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 24)
+shape = SubResource("CapsuleShape2D_k55hc")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

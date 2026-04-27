@@ -1,12 +1,19 @@
 extends EnemyBase
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-const SPEED := 100
+@onready var attack_area: Area2D = $Area2D
+
+const SPEED := 80
 const ATTACK_DAMAGE: float = 0.5
 const ATTACK_RANGE := 35
 
+var is_touching_player := false
+
+
 func _ready() -> void:
 	super._ready()
+	attack_area.body_entered.connect(_on_attack_area_entered)
+	attack_area.body_exited.connect(_on_attack_area_exited)
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	sprite.play("run")
@@ -20,6 +27,8 @@ func _physics_process(delta: float) -> void:
 	chase_player()
 	move_and_slide()
 	if is_player_in_attack_range():
+		player_ref.TakeDamage(ATTACK_DAMAGE * delta)
+	if is_touching_player:
 		player_ref.TakeDamage(ATTACK_DAMAGE * delta)
 
 func chase_player():
@@ -36,3 +45,11 @@ func apply_flash(intensity: float):
 	var material = sprite.material as ShaderMaterial
 	if material:
 		material.set_shader_parameter("flash_intensity", intensity)
+
+func _on_attack_area_entered(body):
+	if body.is_in_group("Player"):
+		is_touching_player = true
+
+func _on_attack_area_exited(body):
+	if body.is_in_group("Player"):
+		is_touching_player = false

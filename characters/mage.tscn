@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ni3pnyo6k8qj"]
+[gd_scene load_steps=25 format=3 uid="uid://ni3pnyo6k8qj"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_sxqqe"]
 [ext_resource type="PackedScene" uid="uid://cucuvib8sd2x5" path="res://prefabs/magic_bullet/magic_bullet.tscn" id="3_uf1r4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://badrbt51f1ksn" path="res://Assets/mage.png" id="4_koqs7"]
 [ext_resource type="Texture2D" uid="uid://cbqsdqkul7fvd" path="res://Assets/Slime/Slime1_Run_shadow.png" id="4_uf1r4"]
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_wmh5w"]
+[ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_koqs7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -120,7 +121,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wmh5w"]
 radius = 14.0
-height = 114.0
+height = 52.0
 
 [node name="Mage" type="CharacterBody2D" groups=["Player"]]
 collision_mask = 6
@@ -129,6 +130,7 @@ script = ExtResource("1_sxqqe")
 hammer_scene = ExtResource("3_wmh5w")
 magic_bullet_scene = ExtResource("3_uf1r4")
 knife_scene = ExtResource("4_wmh5w")
+holy_smite_scene = ExtResource("5_koqs7")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0

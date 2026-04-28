@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cdij3nl4hr8ap"]
+[gd_scene load_steps=24 format=3 uid="uid://cdij3nl4hr8ap"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_ip2qp"]
 [ext_resource type="PackedScene" uid="uid://cucuvib8sd2x5" path="res://prefabs/magic_bullet/magic_bullet.tscn" id="3_cd2im"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_1tvs0"]
 [ext_resource type="Texture2D" uid="uid://cbqsdqkul7fvd" path="res://Assets/Slime/Slime1_Run_shadow.png" id="4_baa7v"]
 [ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="4_cd2im"]
+[ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_cd2im"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -122,6 +123,7 @@ script = ExtResource("1_ip2qp")
 hammer_scene = ExtResource("3_x8qse")
 magic_bullet_scene = ExtResource("3_cd2im")
 knife_scene = ExtResource("4_1tvs0")
+holy_smite_scene = ExtResource("5_cd2im")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -47.0

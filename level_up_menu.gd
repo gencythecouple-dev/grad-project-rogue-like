@@ -117,6 +117,24 @@ var all_upgrades := [
 		"upgrade_type": "active",
 		"requires": ""
 	},
+	{
+		"name": "Holy Smite",
+		"description": "Call upon the power of the Lord above to smite your enemies",
+		"stat": "holy_smite",
+		"max_level": 5,
+		"icon": preload("res://Assets/Holy Smite/holysmite.png"),
+		"upgrade_type": "active",
+		"requires" : ""
+	},
+	{
+		"name": "Sword",
+		"description": "The forbidden art of Blood Sword",
+		"stat": "sword",
+		"max_level": 5,
+		"icon": preload("res://Assets/Sword/sword.png"),
+		"upgrade_type": "active",
+		"requires" : ""
+	},
 ]
 
 var upgrade_levels := {}

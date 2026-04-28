@@ -5,18 +5,16 @@ var damage: float = 15.0
 var has_hit: bool = false
 
 func _ready() -> void:
-	monitoring = false
+	monitoring = true
 	body_entered.connect(_on_body_entered)
 	
 	$AnimatedSprite2D.play("strike")
+	$AnimatedSprite2D.frame_changed.connect(_on_frame_changed)
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)
-	
-	await get_tree().create_timer(0.2).timeout
-	monitoring = true
-	_strike()
-	
-	await get_tree().create_timer(0.1).timeout
-	monitoring = false
+
+func _on_frame_changed() -> void:
+	if $AnimatedSprite2D.frame == 3 and not has_hit:
+		_strike()
 
 func _strike() -> void:
 	var overlapping = get_overlapping_bodies()

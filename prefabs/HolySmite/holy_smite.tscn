@@ -98,14 +98,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_1e0wv"]
 
 [node name="HolySmite" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_82bpp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -51)
+position = Vector2(4.7683716e-07, -975)
+scale = Vector2(2.0403125, 15.719375)
 sprite_frames = SubResource("SpriteFrames_1417w")
 animation = &"strike"
+frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_1e0wv")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 5.0

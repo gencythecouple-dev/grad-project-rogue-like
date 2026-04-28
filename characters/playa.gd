@@ -9,6 +9,8 @@ var SPEED := 200
 @export var magic_bullet_scene: PackedScene
 @export var knife_scene: PackedScene
 @export var holy_smite_scene: PackedScene
+@export var sword_scene: PackedScene
+
 
 
 var target: CharacterBody2D
@@ -49,6 +51,17 @@ var magic_bullet_pierce: int = 0
 
 #knife
 var knife_level: int = 0
+
+#Holy Smite
+var holy_smite_level: int = 0
+var holy_smite_count: int = 1
+var holy_smite_aoe: float = 1.0
+var holy_smite_ready: bool = true
+
+
+#Sword
+var sword_level: int = 0
+
 
 #player exp and level
 var current_exp: int = 0
@@ -97,6 +110,12 @@ func _ready() -> void:
 				_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png")) 
 				if level_up_menu: 
 					level_up_menu.upgrade_levels["ice_hammer"] = 1
+		"sword":
+			if sword_scene:
+				sword_level = 1
+				_equip_weapon(sword_scene, preload("res://Assets/Sword/sword.png"))
+				if level_up_menu:
+					level_up_menu.upgrade_levels["sword"] = 1
 					
 	attack_timer.start()
 
@@ -218,6 +237,13 @@ func Attack() -> void:
 			_spawn_magic_bullets(target_enemy)
 		elif weapon == knife_scene:
 			_spawn_knives()
+		elif weapon == holy_smite_scene:
+			if holy_smite_ready:
+				_spawn_holy_smites()
+				holy_smite_ready = false
+				get_tree().create_timer(5.0).timeout.connect(func(): holy_smite_ready = true)
+		elif weapon == sword_scene:
+			_spawn_sword()
 
 func _spawn_knives() -> void:
 	var total_projectiles = knife_projectile_count + global_projectile_bonus
@@ -306,6 +332,13 @@ func _spawn_magic_bullet_at_position(target_pos: Vector2, angle_offset: float) -
 	new_bullet.set_meta("magic_level", magic_bullet_level)
 	current_scene.get_node("MagicBulletHolder").add_child(new_bullet)
 
+func _spawn_holy_smites() -> void:
+	for i in range(holy_smite_count):
+		var delay = i * 0.3
+		get_tree().create_timer(delay).timeout.connect(
+			func(): _spawn_holy_smite()
+		)
+
 func _spawn_holy_smite() -> void:
 	if holy_smite_scene == null:
 		return
@@ -317,8 +350,9 @@ func _spawn_holy_smite() -> void:
 	var smite = holy_smite_scene.instantiate()
 	smite.global_position = random_enemy.global_position
 	smite.damage = current_attack
+	smite.scale = Vector2(holy_smite_aoe, holy_smite_aoe)
 	current_scene.add_child(smite)
-	
+
 func _get_random_enemy() -> CharacterBody2D:
 	var valid_enemies = []
 	for enemy in current_scene.enemy_list:
@@ -330,6 +364,13 @@ func _get_random_enemy() -> CharacterBody2D:
 	
 	return valid_enemies[randi() % valid_enemies.size()]
 
+func _spawn_sword() -> void:
+	if sword_scene == null:
+		return
+	var sword = sword_scene.instantiate()
+	add_child(sword)
+	sword.position = Vector2.ZERO
+	sword.setup(self, current_attack, sword_level)
 
 #STATS AND LEVELING
 func SetStats() -> void:
@@ -450,6 +491,34 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					current_attack += 3.0
 					attack_timer.wait_time *= 1
 					knife_projectile_count += 1
+		"holy_smite":
+			holy_smite_level += 1
+			if holy_smite_level == 1:
+				_equip_weapon(holy_smite_scene, preload("res://Assets/Holy Smite/holysmite.png"))
+			match holy_smite_level:
+				2:
+					holy_smite_count += 1
+				3:
+					current_attack += 3.0
+				4:
+					holy_smite_count += 1
+				5:
+					current_attack += 5.0
+					holy_smite_aoe += 0.5
+					holy_smite_count += 1
+		"sword":
+			sword_level += 1
+			if sword_level == 1:
+				_equip_weapon(sword_scene, preload("res://Assets/Sword/sword.png"))
+			match sword_level:
+				2:
+					current_attack += 2.0
+				3:
+					attack_timer.wait_time *= 0.85
+				4:
+					current_attack += 3.0
+				5:
+					current_attack += 5.0
 
 
 func TakeDamage(damage: float) -> void:

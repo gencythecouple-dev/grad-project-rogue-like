@@ -23,7 +23,7 @@ func _on_select_rogue_pressed() -> void:
 
 func _on_select_warrior_pressed() -> void:
 	GameData.selected_character = "warrior"
-	GameData.selected_weapon = "arrow"
+	GameData.selected_weapon = "sword"
 	get_tree().change_scene_to_file("res://level.tscn")
 
 func _on_back_pressed() -> void:

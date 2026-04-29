@@ -1,0 +1,87 @@
+[gd_scene load_steps=19 format=3 uid="uid://cu5y0ryqk6o1s"]
+
+[ext_resource type="Script" uid="uid://d2gby2dy7ofd4" path="res://prefabs/Sword/sword_aura.gd" id="1_ccnbl"]
+[ext_resource type="Texture2D" uid="uid://dtcbiw3x87pxl" path="res://Assets/Sword/FX000/FX001.png" id="1_si1a5"]
+[ext_resource type="Texture2D" uid="uid://4xlc7rnv4x3v" path="res://Assets/Sword/FX000/FX002.png" id="2_ccnbl"]
+[ext_resource type="Texture2D" uid="uid://c7i01iiqp5fh2" path="res://Assets/Sword/FX000/FX003.png" id="3_323gt"]
+[ext_resource type="Texture2D" uid="uid://eksb4qlswce3" path="res://Assets/Sword/FX000/FX004.png" id="4_1btva"]
+[ext_resource type="Texture2D" uid="uid://cvt674uiuymxf" path="res://Assets/Sword/FX000/FX005.png" id="5_6663n"]
+[ext_resource type="Texture2D" uid="uid://dfmhhtbcstxrx" path="res://Assets/Sword/FX000/FX006.png" id="6_60q4h"]
+[ext_resource type="Texture2D" uid="uid://bei8g0sw6xxut" path="res://Assets/Sword/FX000/FX007.png" id="7_nubse"]
+[ext_resource type="Texture2D" uid="uid://cgjvv8vmlytp2" path="res://Assets/Sword/FX000/FX008.png" id="8_kudv4"]
+[ext_resource type="Texture2D" uid="uid://dokfvgtwdv1w4" path="res://Assets/Sword/FX000/FX009.png" id="9_hjtmq"]
+[ext_resource type="Texture2D" uid="uid://b43grkv3a3mms" path="res://Assets/Sword/FX000/FX010.png" id="10_t37i2"]
+[ext_resource type="Texture2D" uid="uid://b4fas50a3e6hh" path="res://Assets/Sword/FX000/FX011.png" id="11_1tvnv"]
+[ext_resource type="Texture2D" uid="uid://cdc0oan7jj3q0" path="res://Assets/Sword/FX000/FX012.png" id="12_m0m2c"]
+[ext_resource type="Texture2D" uid="uid://chwc0ufdkpole" path="res://Assets/Sword/FX000/FX013.png" id="13_w4wti"]
+[ext_resource type="Texture2D" uid="uid://b5edxsnm4llwq" path="res://Assets/Sword/FX000/FX014.png" id="14_nnnbu"]
+[ext_resource type="Texture2D" uid="uid://dn07jf8pqdw4k" path="res://Assets/Sword/FX000/FX015.png" id="15_fqjkt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qbquc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_si1a5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ccnbl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_323gt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_1btva")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_6663n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_60q4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_nubse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_kudv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hjtmq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_t37i2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_1tvnv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_m0m2c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_w4wti")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_nnnbu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_fqjkt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qo13x"]
+radius = 132.01515
+
+[node name="SwordAura" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_ccnbl")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_qbquc")
+frame_progress = 0.92473865
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5, 5)
+shape = SubResource("CircleShape2D_qo13x")

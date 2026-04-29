@@ -1,7 +1,8 @@
 extends Area2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var lifetime_timer: Timer = $Timer
+@onready var horizontal_slash: CollisionShape2D = $Attack1
+@onready var vertical_slash: CollisionShape2D = $Attack2
 
 var damage: float = 10.0
 var player: CharacterBody2D
@@ -9,23 +10,30 @@ var sword_level: int = 1
 var hit_enemies: Array = []
 
 func _ready() -> void:
-	monitoring = false
-	lifetime_timer.wait_time = 1.0
-	lifetime_timer.one_shot = true
-	lifetime_timer.timeout.connect(_on_timer_timeout)
+	monitoring = true
+	horizontal_slash.disabled = true
+	vertical_slash.disabled = true
 	body_entered.connect(_on_body_entered)
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.frame_changed.connect(_on_frame_changed)
-	lifetime_timer.start()
 
 func _on_frame_changed() -> void:
-	if sword_level < 5:
+	if sword_level >= 2:
 		if sprite.frame >= 2 and sprite.frame <= 5:
-			monitoring = true
+			horizontal_slash.disabled = false
+			vertical_slash.disabled = true
+		elif sprite.frame >= 6 and sprite.frame <= 9:
+			horizontal_slash.disabled = true
+			vertical_slash.disabled = false
 		else:
-			monitoring = false
+			horizontal_slash.disabled = true
+			vertical_slash.disabled = true
 	else:
-		monitoring = true
+		vertical_slash.disabled = true
+		if sprite.frame >= 2 and sprite.frame <= 5:
+			horizontal_slash.disabled = false
+		else:
+			horizontal_slash.disabled = true
 
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int) -> void:
 	player = spawn_player
@@ -33,12 +41,10 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int) -> vo
 	sword_level = level
 	sprite.flip_h = !spawn_player.facing_right
 	
-	if level >= 5:
-		sprite.play("circular")
-	elif level >= 2:
-		sprite.play("cross_slash")
+	if level >= 2:
+		sprite.play("attack2")
 	else:
-		sprite.play("horizontal_slash")
+		sprite.play("attack1")
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy"):
@@ -54,10 +60,3 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_animation_finished() -> void:
 	hide()
 	queue_free()
-
-func _on_timer_timeout() -> void:
-	queue_free()
-
-
-func _on_animated_sprite_2d_frame_changed() -> void:
-	pass # Replace with function body.

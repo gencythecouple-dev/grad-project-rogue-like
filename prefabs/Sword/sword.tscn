@@ -1,22 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://c7fvb75evjr61"]
+[gd_scene load_steps=21 format=3 uid="uid://c7fvb75evjr61"]
 
 [ext_resource type="Script" uid="uid://8vkk68maue4i" path="res://prefabs/Sword/sword.gd" id="1_5j2i7"]
 [ext_resource type="Texture2D" uid="uid://s55ss0fv0wm3" path="res://Assets/Sword/sprite-sheet.png" id="1_e266l"]
-[ext_resource type="Texture2D" uid="uid://dtcbiw3x87pxl" path="res://Assets/Sword/FX000/FX001.png" id="2_5j2i7"]
-[ext_resource type="Texture2D" uid="uid://4xlc7rnv4x3v" path="res://Assets/Sword/FX000/FX002.png" id="3_abpsi"]
-[ext_resource type="Texture2D" uid="uid://c7i01iiqp5fh2" path="res://Assets/Sword/FX000/FX003.png" id="4_rw831"]
-[ext_resource type="Texture2D" uid="uid://eksb4qlswce3" path="res://Assets/Sword/FX000/FX004.png" id="5_hesbf"]
-[ext_resource type="Texture2D" uid="uid://cvt674uiuymxf" path="res://Assets/Sword/FX000/FX005.png" id="6_buu26"]
-[ext_resource type="Texture2D" uid="uid://dfmhhtbcstxrx" path="res://Assets/Sword/FX000/FX006.png" id="7_ameo0"]
-[ext_resource type="Texture2D" uid="uid://bei8g0sw6xxut" path="res://Assets/Sword/FX000/FX007.png" id="8_xe57b"]
-[ext_resource type="Texture2D" uid="uid://cgjvv8vmlytp2" path="res://Assets/Sword/FX000/FX008.png" id="9_1ycin"]
-[ext_resource type="Texture2D" uid="uid://dokfvgtwdv1w4" path="res://Assets/Sword/FX000/FX009.png" id="10_bk1fy"]
-[ext_resource type="Texture2D" uid="uid://b43grkv3a3mms" path="res://Assets/Sword/FX000/FX010.png" id="11_lank8"]
-[ext_resource type="Texture2D" uid="uid://b4fas50a3e6hh" path="res://Assets/Sword/FX000/FX011.png" id="12_ol00l"]
-[ext_resource type="Texture2D" uid="uid://cdc0oan7jj3q0" path="res://Assets/Sword/FX000/FX012.png" id="13_3he87"]
-[ext_resource type="Texture2D" uid="uid://chwc0ufdkpole" path="res://Assets/Sword/FX000/FX013.png" id="14_l0sjk"]
-[ext_resource type="Texture2D" uid="uid://b5edxsnm4llwq" path="res://Assets/Sword/FX000/FX014.png" id="15_7j13d"]
-[ext_resource type="Texture2D" uid="uid://dn07jf8pqdw4k" path="res://Assets/Sword/FX000/FX015.png" id="16_3fv4h"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nh4ij"]
 atlas = ExtResource("1_e266l")
@@ -134,60 +119,13 @@ animations = [{
 "loop": false,
 "name": &"attack2",
 "speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_5j2i7")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_abpsi")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_rw831")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_hesbf")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_buu26")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_ameo0")
-}, {
-"duration": 1.0,
-"texture": ExtResource("8_xe57b")
-}, {
-"duration": 1.0,
-"texture": ExtResource("9_1ycin")
-}, {
-"duration": 1.0,
-"texture": ExtResource("10_bk1fy")
-}, {
-"duration": 1.0,
-"texture": ExtResource("11_lank8")
-}, {
-"duration": 1.0,
-"texture": ExtResource("12_ol00l")
-}, {
-"duration": 1.0,
-"texture": ExtResource("13_3he87")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_l0sjk")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_7j13d")
-}, {
-"duration": 1.0,
-"texture": ExtResource("16_3fv4h")
-}],
-"loop": true,
-"name": &"attack3",
-"speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e266l"]
-radius = 28.044607
+radius = 35.032127
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4d2wn"]
+radius = 101.00495
 
 [node name="Sword" type="Area2D"]
 collision_mask = 2
@@ -196,13 +134,15 @@ script = ExtResource("1_5j2i7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_j2vld")
-animation = &"attack3"
-frame_progress = 0.9421002
+animation = &"attack1"
+frame = 4
+frame_progress = 1.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(38, 10)
+[node name="Attack1" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_e266l")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
+[node name="Attack2" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4d2wn")
+
+[node name="Timer" type="Timer" parent="."]

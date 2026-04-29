@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://cdij3nl4hr8ap"]
+[gd_scene load_steps=27 format=3 uid="uid://cdij3nl4hr8ap"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_ip2qp"]
+[ext_resource type="Shader" uid="uid://conkg5wtibima" path="res://Enemies/player_flash.gdshader" id="1_qdg01"]
 [ext_resource type="PackedScene" uid="uid://cucuvib8sd2x5" path="res://prefabs/magic_bullet/magic_bullet.tscn" id="3_cd2im"]
 [ext_resource type="PackedScene" uid="uid://c175c04b6qn46" path="res://characters/IceHammer.tscn" id="3_x8qse"]
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_1tvs0"]
@@ -8,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="4_cd2im"]
 [ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_cd2im"]
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_1tvs0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vptib"]
+shader = ExtResource("1_qdg01")
+shader_parameter/flash_intensity = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -118,6 +123,7 @@ radius = 17.0
 height = 80.0
 
 [node name="Rogue" type="CharacterBody2D" groups=["Player"]]
+material = SubResource("ShaderMaterial_vptib")
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_ip2qp")

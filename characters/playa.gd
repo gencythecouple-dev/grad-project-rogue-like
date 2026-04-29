@@ -10,9 +10,11 @@ var SPEED := 200
 @export var knife_scene: PackedScene
 @export var holy_smite_scene: PackedScene
 @export var sword_scene: PackedScene
+@export var sword_aura_scene: PackedScene
 
 
-
+var flash_timer: float = 0.0
+const FLASH_DURATION: float = 0.1
 var target: CharacterBody2D
 var current_scene: Node
 var player_ui  
@@ -132,10 +134,20 @@ func _physics_process(delta: float) -> void:
 		velocity = direction * SPEED
 	else:
 		velocity = Vector2.ZERO
+		
+	if flash_timer > 0:
+		flash_timer -= delta
+		apply_flash(flash_timer / FLASH_DURATION)
 	
 	update_animation()
 	update_facing()
 	move_and_slide()
+	
+func apply_flash(intensity: float):
+	var material = sprite.material as ShaderMaterial
+	if material:
+		material.set_shader_parameter("flash_intensity", intensity)
+
 
 func update_facing() -> void:
 	if direction.x != 0:
@@ -365,12 +377,20 @@ func _get_random_enemy() -> CharacterBody2D:
 	return valid_enemies[randi() % valid_enemies.size()]
 
 func _spawn_sword() -> void:
-	if sword_scene == null:
-		return
-	var sword = sword_scene.instantiate()
-	add_child(sword)
-	sword.position = Vector2.ZERO
-	sword.setup(self, current_attack, sword_level)
+	if sword_level >= 5:
+		if sword_aura_scene == null:
+			return
+		var sword_aura = sword_aura_scene.instantiate()
+		add_child(sword_aura)
+		sword_aura.position = Vector2.ZERO
+		sword_aura.setup(self, current_attack)
+	else:
+		if sword_scene == null:
+			return
+		var sword = sword_scene.instantiate()
+		add_child(sword)
+		sword.position = Vector2(60 if facing_right else -60, 0)
+		sword.setup(self, current_attack, sword_level)
 
 #STATS AND LEVELING
 func SetStats() -> void:
@@ -523,11 +543,15 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 
 func TakeDamage(damage: float) -> void:
 	var actual_damage = max(0.05, damage - current_armor)
-	current_hp -= damage
+	current_hp -= actual_damage
 	current_hp = max(0, current_hp)
 	health_bar.value = current_hp
+	
+	flash_timer = FLASH_DURATION
+	
 	if current_hp <= 0:
 		Die()
+
 
 func Die() -> void:
 	var level = get_tree().root.get_node("Level")

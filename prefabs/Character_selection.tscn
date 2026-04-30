@@ -1,267 +1,126 @@
-[gd_scene load_steps=36 format=3 uid="uid://drqapjm448eli"]
+[gd_scene load_steps=18 format=3 uid="uid://drqapjm448eli"]
 
 [ext_resource type="Script" uid="uid://c4l7ju5icuk43" path="res://prefabs/character_selection.gd" id="1_7kkj2"]
 [ext_resource type="Texture2D" uid="uid://badrbt51f1ksn" path="res://Assets/mage.png" id="2_7kkj2"]
+[ext_resource type="Texture2D" uid="uid://cmxa5a1dwucoe" path="res://Assets/UIBundleFree/UIBundleFree/UI books & more.png" id="2_iljqm"]
+[ext_resource type="Texture2D" uid="uid://b07oqac0lfymr" path="res://Assets/Border All 6.png" id="2_owrom"]
 [ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="3_owrom"]
 [ext_resource type="Texture2D" uid="uid://bke5dqr5ied1v" path="res://Assets/warrior.png" id="4_7kkj2"]
+[ext_resource type="Texture2D" uid="uid://b4r63v67tj8c5" path="res://Assets/UIBundleFree/UIBundleFree/FreeDemo.png" id="5_bpeam"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48b54"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_iljqm")
+expand_margin_left = 14.0
+expand_margin_top = 14.0
+expand_margin_right = 14.0
+expand_margin_bottom = 14.0
+region_rect = Rect2(352.03235, 272.3212, 32.04074, 16.243652)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pxgfv"]
 atlas = ExtResource("2_7kkj2")
-region = Rect2(768, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_iljqm"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(1024, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bpeam"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(1280, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_48b54"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(0, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ui0k4"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(256, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k2fxx"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(512, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_glx1p"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(768, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jykbw"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(1024, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bkmt4"]
-atlas = ExtResource("2_7kkj2")
-region = Rect2(1280, 512, 256, 512)
+region = Rect2(0, 0, 256, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_f5jgl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_pxgfv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_iljqm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bpeam")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_48b54")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ui0k4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k2fxx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_glx1p")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jykbw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bkmt4")
 }],
 "loop": true,
 "name": &"default",
 "speed": 12.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_m1sbm"]
-atlas = ExtResource("3_owrom")
-region = Rect2(512, 0, 256, 384)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ui0k4"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 10.0
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.9178, 150.9464, 48.131256, 16.094604)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_n5hwn"]
-atlas = ExtResource("3_owrom")
-region = Rect2(768, 0, 256, 384)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpeam"]
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.95921, 150.91563, 48.131332, 16.121307)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nuhms"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iljqm"]
 atlas = ExtResource("3_owrom")
-region = Rect2(0, 384, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hnauq"]
-atlas = ExtResource("3_owrom")
-region = Rect2(256, 384, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0lrp6"]
-atlas = ExtResource("3_owrom")
-region = Rect2(512, 384, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cvy1e"]
-atlas = ExtResource("3_owrom")
-region = Rect2(768, 384, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1j0y8"]
-atlas = ExtResource("3_owrom")
-region = Rect2(0, 768, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_41yyl"]
-atlas = ExtResource("3_owrom")
-region = Rect2(256, 768, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kag50"]
-atlas = ExtResource("3_owrom")
-region = Rect2(512, 768, 256, 384)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgsqx"]
-atlas = ExtResource("3_owrom")
-region = Rect2(768, 768, 256, 384)
+region = Rect2(0, 0, 256, 384)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jc4ex"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_m1sbm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n5hwn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nuhms")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hnauq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0lrp6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cvy1e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1j0y8")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_41yyl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kag50")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lgsqx")
+"texture": SubResource("AtlasTexture_iljqm")
 }],
 "loop": true,
 "name": &"default",
 "speed": 12.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_owrom"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_bpeam"]
 atlas = ExtResource("4_7kkj2")
-region = Rect2(768, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s8h43"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(1024, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8g042"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(1280, 0, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x43pi"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(0, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k16yf"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(256, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6b6kn"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(512, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5i3q4"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(768, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2shqf"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(1024, 512, 256, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_njl7x"]
-atlas = ExtResource("4_7kkj2")
-region = Rect2(1280, 512, 256, 512)
+region = Rect2(0, 0, 256, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lgsqx"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_owrom")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s8h43")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8g042")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x43pi")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k16yf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6b6kn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5i3q4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2shqf")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_njl7x")
+"texture": SubResource("AtlasTexture_bpeam")
 }],
 "loop": true,
 "name": &"default",
 "speed": 12.0
 }]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iljqm"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.90773, 150.86946, 48.131317, 16.234344)
 
 [node name="CharacterSelect" type="Node2D"]
 script = ExtResource("1_7kkj2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1919.0
+offset_bottom = 1076.0
+color = Color(0.42745098, 0.8235294, 0.8352941, 0.57254905)
+
 [node name="Tittle" type="Label" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -144.0
+offset_left = -272.0
 offset_top = 112.0
-offset_right = 22.0
-offset_bottom = 135.0
+offset_right = 208.0
+offset_bottom = 240.0
 grow_horizontal = 2
+theme_override_colors/font_color = Color(0.99999994, 0.18407416, 0.21886703, 1)
 theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxTexture_48b54")
 text = "SELECT A CHARACTER"
-
-[node name="Back" type="Button" parent="CanvasLayer/Tittle"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -123.0
-offset_top = 714.0
-offset_right = 125.0
-offset_bottom = 794.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 custom_minimum_size = Vector2(1920, 1080)
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = -1
+anchor_left = -0.004166667
+anchor_right = 0.99583334
 anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
@@ -271,87 +130,147 @@ metadata/_edit_use_anchors_ = true
 [node name="Card1" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card1"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card1"]
 layout_mode = 0
-offset_left = 384.0
-offset_top = 576.0
-offset_right = 479.0
-offset_bottom = 661.0
+offset_left = 352.0
+offset_top = 336.0
+offset_right = 496.0
+offset_bottom = 576.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="Sprite1" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
-position = Vector2(40, -128)
+[node name="Sprite1" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card1"]
+position = Vector2(424, 448)
 scale = Vector2(0.504, 0.5)
 sprite_frames = SubResource("SpriteFrames_f5jgl")
-frame_progress = 0.6809471
+frame_progress = 0.95057124
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card1"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 584.0
+offset_right = 480.0
+offset_bottom = 672.0
 
 [node name="Name1" type="Label" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
 layout_mode = 2
 text = "Mage"
+horizontal_alignment = 1
 
 [node name="Weapon1" type="Label" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
 layout_mode = 2
 text = "Magic Bullet"
+horizontal_alignment = 1
 
 [node name="Select1" type="Button" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
 
 [node name="Card2" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card2"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card2"]
 layout_mode = 0
-offset_left = 900.0
-offset_top = 576.0
-offset_right = 963.0
-offset_bottom = 661.0
+offset_left = 852.0
+offset_top = 336.0
+offset_right = 996.0
+offset_bottom = 576.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="Sprite2" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
-position = Vector2(24, -96)
+[node name="Sprite2" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card2"]
+position = Vector2(924, 480)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_jc4ex")
 frame_progress = 0.1456231
 
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card2"]
+layout_mode = 0
+offset_left = 868.0
+offset_top = 584.0
+offset_right = 980.0
+offset_bottom = 669.0
+
 [node name="Name2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
 layout_mode = 2
 text = "Rogue"
+horizontal_alignment = 1
 
 [node name="Weapon2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
 layout_mode = 2
-text = "Knife"
+text = "Phantom Edge"
+horizontal_alignment = 1
 
 [node name="Select2" type="Button" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
 
 [node name="Card3" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card3"]
-layout_mode = 1
-anchors_preset = -1
-anchor_bottom = 1.0
-offset_left = 1400.0
-offset_top = 576.0
-offset_right = 1460.0
-offset_bottom = -419.0
-grow_horizontal = 0
-grow_vertical = 2
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card3"]
+layout_mode = 0
+offset_left = 1352.0
+offset_top = 336.0
+offset_right = 1496.0
+offset_bottom = 576.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
 
-[node name="Sprite3" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
-position = Vector2(32, -112)
+[node name="Sprite3" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card3"]
+position = Vector2(1424, 440)
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_lgsqx")
 frame_progress = 0.8476256
 
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card3"]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 1368.0
+offset_top = 584.0
+offset_right = 1488.0
+offset_bottom = -411.0
+grow_horizontal = 0
+grow_vertical = 2
+
 [node name="Name3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
 layout_mode = 2
 text = "Warrior"
+horizontal_alignment = 1
 
 [node name="Weapon3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
 layout_mode = 2
-text = "Sword"
+text = "Crimson Edge"
+horizontal_alignment = 1
 
 [node name="Select3" type="Button" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_left = 800.0
+offset_top = 920.0
+offset_right = 1048.0
+offset_bottom = 992.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_iljqm")
+text = "Return to main menu"

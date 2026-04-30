@@ -11,15 +11,15 @@
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_pqn6o"]
 [ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="7_5sj73"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xvswe"]
-shader = ExtResource("1_xrgor")
-shader_parameter/flash_intensity = 1.0
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xrgor"]
+shader = ExtResource("1_xrgor")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xvswe"]
 atlas = ExtResource("1_c56qh")
@@ -124,7 +124,6 @@ radius = 20.0
 height = 84.0
 
 [node name="Warrior" type="CharacterBody2D" groups=["Player"]]
-material = SubResource("ShaderMaterial_xvswe")
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_tnvvi")
@@ -145,6 +144,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_xrgor")
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_xvswe")
 animation = &"idle"

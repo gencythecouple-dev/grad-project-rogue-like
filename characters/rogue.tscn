@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cdij3nl4hr8ap"]
+[gd_scene load_steps=28 format=3 uid="uid://cdij3nl4hr8ap"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_ip2qp"]
 [ext_resource type="Shader" uid="uid://conkg5wtibima" path="res://Enemies/player_flash.gdshader" id="1_qdg01"]
@@ -9,16 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="4_cd2im"]
 [ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_cd2im"]
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_1tvs0"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vptib"]
-shader = ExtResource("1_qdg01")
-shader_parameter/flash_intensity = 1.0
+[ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="8_vptib"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vptib"]
+shader = ExtResource("1_qdg01")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ip2qp"]
 atlas = ExtResource("4_cd2im")
@@ -123,7 +124,6 @@ radius = 17.0
 height = 80.0
 
 [node name="Rogue" type="CharacterBody2D" groups=["Player"]]
-material = SubResource("ShaderMaterial_vptib")
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_ip2qp")
@@ -132,6 +132,7 @@ magic_bullet_scene = ExtResource("3_cd2im")
 knife_scene = ExtResource("4_1tvs0")
 holy_smite_scene = ExtResource("5_cd2im")
 sword_scene = ExtResource("6_1tvs0")
+sword_aura_scene = ExtResource("8_vptib")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -47.0
@@ -143,6 +144,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_vptib")
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_k82ri")
 animation = &"run"

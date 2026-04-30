@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://bshp1buoht5gd"]
+
+[ext_resource type="Script" uid="uid://c724b3vobs5rd" path="res://wind_shuriken.gd" id="1_ng5tb"]
+[ext_resource type="Texture2D" uid="uid://bm8avi66p5gd2" path="res://Assets/wind_shuriken.png" id="1_pp4ql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng5tb"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po6w4"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qm33a"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68ifm"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upupq"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm2t5"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_47jk8"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(384, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8hqv"]
+atlas = ExtResource("1_pp4ql")
+region = Rect2(448, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1jnfa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng5tb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po6w4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qm33a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68ifm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upupq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm2t5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_47jk8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8hqv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_furls"]
+radius = 32.0
+
+[node name="wind_shuriken" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_ng5tb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(1.6, 1.6)
+sprite_frames = SubResource("SpriteFrames_1jnfa")
+frame_progress = 0.6077457
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_furls")

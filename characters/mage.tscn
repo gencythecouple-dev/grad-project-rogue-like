@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ni3pnyo6k8qj"]
+[gd_scene load_steps=29 format=3 uid="uid://ni3pnyo6k8qj"]
 
 [ext_resource type="Shader" uid="uid://conkg5wtibima" path="res://Enemies/player_flash.gdshader" id="1_r3lpf"]
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_sxqqe"]
@@ -9,16 +9,17 @@
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_wmh5w"]
 [ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_koqs7"]
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_ydlgn"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qombd"]
-shader = ExtResource("1_r3lpf")
-shader_parameter/flash_intensity = 1.0
+[ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="8_qombd"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xw6re"]
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qombd"]
+shader = ExtResource("1_r3lpf")
+shader_parameter/flash_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ydlgn"]
 atlas = ExtResource("4_koqs7")
@@ -130,7 +131,6 @@ radius = 14.0
 height = 94.0
 
 [node name="Mage" type="CharacterBody2D" groups=["Player"]]
-material = SubResource("ShaderMaterial_qombd")
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_sxqqe")
@@ -139,6 +139,7 @@ magic_bullet_scene = ExtResource("3_uf1r4")
 knife_scene = ExtResource("4_wmh5w")
 holy_smite_scene = ExtResource("5_koqs7")
 sword_scene = ExtResource("6_ydlgn")
+sword_aura_scene = ExtResource("8_qombd")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0
@@ -150,6 +151,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_qombd")
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_mno74")
 animation = &"run"

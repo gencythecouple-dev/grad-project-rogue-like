@@ -11,6 +11,8 @@ var SPEED := 200
 @export var holy_smite_scene: PackedScene
 @export var sword_scene: PackedScene
 @export var sword_aura_scene: PackedScene
+@export var wind_shuriken_scene: PackedScene
+
 
 
 var flash_timer: float = 0.0
@@ -65,6 +67,11 @@ var holy_smite_ready: bool = true
 var sword_level: int = 0
 
 
+#Wind Shuriken
+var wind_shuriken_level: int = 0
+var wind_shuriken_count: int = 1
+
+
 #player exp and level
 var current_exp: int = 0
 var exp_to_next_level: int = 10
@@ -80,6 +87,7 @@ var total_exp_collected: int = 0
 func _ready() -> void:
 	SetStats()
 	add_to_group("Player")
+	
 	
 	current_scene = get_tree().root.get_node("Level")
 	
@@ -144,9 +152,13 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func apply_flash(intensity: float):
+	print("Applying flash with intensity: ", intensity)
 	var material = sprite.material as ShaderMaterial
 	if material:
 		material.set_shader_parameter("flash_intensity", intensity)
+		print("Flash applied!")
+	else:
+		print("ERROR: No material found!")
 
 
 func update_facing() -> void:
@@ -256,6 +268,27 @@ func Attack() -> void:
 				get_tree().create_timer(5.0).timeout.connect(func(): holy_smite_ready = true)
 		elif weapon == sword_scene:
 			_spawn_sword()
+		elif weapon == wind_shuriken_scene:
+			_spawn_wind_shurikens()
+
+func _spawn_wind_shurikens() -> void:
+	for i in range(wind_shuriken_count):
+		var delay = i * 0.2
+		get_tree().create_timer(delay).timeout.connect(
+			func(): _spawn_single_wind_shuriken()
+		)
+
+func _spawn_single_wind_shuriken() -> void:
+	if wind_shuriken_scene == null:
+		return
+	
+	var random_angle = randf() * TAU
+	var random_direction = Vector2(cos(random_angle), sin(random_angle))
+	
+	var shuriken = wind_shuriken_scene.instantiate()
+	shuriken.global_position = global_position
+	shuriken.setup(self, current_attack, random_direction)
+	current_scene.add_child(shuriken)
 
 func _spawn_knives() -> void:
 	var total_projectiles = knife_projectile_count + global_projectile_bonus
@@ -539,6 +572,19 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					current_attack += 3.0
 				5:
 					current_attack += 5.0
+		"wind_shuriken":
+			wind_shuriken_level += 1
+			if wind_shuriken_level == 1:
+				_equip_weapon(wind_shuriken_scene, preload("res://Assets/Wind Shuriken/wind_shuriken.png"))
+			match wind_shuriken_level:
+				2:
+					wind_shuriken_count += 1
+				3:
+					current_attack += 2.0
+				4:
+					wind_shuriken_count += 1
+				5:
+					current_attack += 3.0
 
 
 func TakeDamage(damage: float) -> void:
@@ -547,6 +593,7 @@ func TakeDamage(damage: float) -> void:
 	current_hp = max(0, current_hp)
 	health_bar.value = current_hp
 	
+	print("Player taking damage! Flash timer set to: ", FLASH_DURATION)
 	flash_timer = FLASH_DURATION
 	
 	if current_hp <= 0:

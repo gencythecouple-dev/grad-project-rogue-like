@@ -24,15 +24,15 @@ var all_upgrades := [
 		"description": "+1 Attack Damage", 
 		"stat": "attack", 
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "active"  
+		"icon": preload("res://Assets/Upgrades/attk_up.png"),
+		"upgrade_type": "passive"  
 	},
 	{
 		"name": "Increase Max HP", 
 		"description": "+10 Max Health", 
 		"stat": "max_hp", 
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/HP_up.png"),
 		"upgrade_type": "passive"  
 	},
 	{
@@ -40,7 +40,7 @@ var all_upgrades := [
 		"description": "+15% Faster Attacks", 
 		"stat": "attack_speed", 
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/attk_spd.png"),
 		"upgrade_type": "passive"  
 	},
 	{
@@ -48,7 +48,7 @@ var all_upgrades := [
 		"description": "+15% Move Speed", 
 		"stat": "move_speed", 
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/move_spd.png"),
 		"upgrade_type": "passive" 
 	},
 	{
@@ -58,14 +58,6 @@ var all_upgrades := [
 		"max_level": 3,
 		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
 		"upgrade_type": "passive" 
-	},
-	{
-		"name": "Damage Boost", 
-		"description": "+2 Attack Damage", 
-		"stat": "attack_big", 
-		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
-		"upgrade_type": "active" 
 	},
 	{
 		"name": "Dupplicator", 
@@ -91,11 +83,11 @@ var all_upgrades := [
 		},
 		},
 		{
-		"name": "Iron Skin",
+		"name": "Iron Shield",
 		"description": "Reduce incoming damage",
 		"stat": "armor",
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/26.png"),
 		"upgrade_type": "passive",
 		"requires": ""
 	},
@@ -134,6 +126,56 @@ var all_upgrades := [
 		"icon": preload("res://Assets/Sword/sword.png"),
 		"upgrade_type": "active",
 		"requires" : ""
+	},
+	{
+		"name": "Wind Shuriken",
+		"description": "Throw spinning blades that return to you",
+		"stat": "wind_shuriken",
+		"max_level": 5,
+		"icon": preload("res://Assets/Wind Shuriken/wind_shuriken.png"),
+		"upgrade_type": "active",
+		"requires": ""
+	},
+	{
+		"name": "Starfall",
+		"description": "Bouncing stars that ricochet across the screen",
+		"stat": "star",
+		"max_level": 5,
+		"icon": preload("res://Assets/Bouncy thing/Star.png"),
+		"upgrade_type": "active",
+		"requires": ""
+	},
+	{
+		"name": "Magnet",
+		"description": "+20% Pickup Range",
+		"stat": "magnet",
+		"max_level": 5,
+		"icon": preload("res://Assets/magnet_icon.png"),
+		"upgrade_type": "passive"
+	},
+	{
+		"name": "Cursed book of knowledge			",
+		"description": "+10% Experience Gain",
+		"stat": "greed",
+		"max_level": 5,
+		"icon": preload("res://Assets/Upgrades/greed.png"),
+		"upgrade_type": "passive"
+	},
+	{
+		"name": "Critical Strike",
+		"description": "+5% Crit Chance (2x Damage)",
+		"stat": "crit",
+		"max_level": 5,
+		"icon": preload("res://Assets/crit_icon.png"),
+		"upgrade_type": "passive"
+	},
+	{
+		"name": "Vampirism",
+		"description": "Heal 1 HP per kill",
+		"stat": "vampirism",
+		"max_level": 3,
+		"icon": preload("res://Assets/vampirism_icon.png"),
+		"upgrade_type": "passive"
 	},
 ]
 

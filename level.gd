@@ -127,6 +127,10 @@ func _on_enemy_died(enemy_that_died: CharacterBody2D) -> void:
 	var player = get_tree().get_first_node_in_group("Player")
 	if player:
 		player.total_kills += 1
+		
+		if player.vampirism > 0:
+			player.current_hp = min(player.current_hp + player.vampirism, player.max_hp)
+			player.health_bar.value = player.current_hp
 	
 	var exp_to_drop = enemy_that_died.exp_value
 	var anim = "default"

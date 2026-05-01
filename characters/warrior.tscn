@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dm675vwe5lvnt"]
+[gd_scene load_steps=30 format=3 uid="uid://dm675vwe5lvnt"]
 
 [ext_resource type="Texture2D" uid="uid://bke5dqr5ied1v" path="res://Assets/warrior.png" id="1_c56qh"]
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_tnvvi"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_bgwhu"]
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_pqn6o"]
 [ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="7_5sj73"]
+[ext_resource type="PackedScene" uid="uid://bshp1buoht5gd" path="res://wind_shuriken.tscn" id="8_xvswe"]
+[ext_resource type="PackedScene" uid="uid://ybxiwfgop782" path="res://prefabs/StarProjectile/star_projectile.tscn" id="9_ihkbl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -133,6 +135,8 @@ knife_scene = ExtResource("4_bgwhu")
 holy_smite_scene = ExtResource("5_bgwhu")
 sword_scene = ExtResource("6_pqn6o")
 sword_aura_scene = ExtResource("7_5sj73")
+wind_shuriken_scene = ExtResource("8_xvswe")
+star_projectile_scene = ExtResource("9_ihkbl")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0

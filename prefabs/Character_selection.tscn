@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://drqapjm448eli"]
+[gd_scene load_steps=19 format=3 uid="uid://drqapjm448eli"]
 
 [ext_resource type="Script" uid="uid://c4l7ju5icuk43" path="res://prefabs/character_selection.gd" id="1_7kkj2"]
 [ext_resource type="Texture2D" uid="uid://badrbt51f1ksn" path="res://Assets/mage.png" id="2_7kkj2"]
@@ -42,6 +42,10 @@ content_margin_right = 1.0
 content_margin_bottom = 10.0
 texture = ExtResource("5_bpeam")
 region_rect = Rect2(138.9178, 150.9464, 48.131256, 16.094604)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k2fxx"]
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.91777, 151.18889, 47.836197, 12.837402)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpeam"]
 texture = ExtResource("5_bpeam")
@@ -169,6 +173,7 @@ horizontal_alignment = 1
 [node name="Select1" type="Button" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
 
@@ -214,6 +219,7 @@ horizontal_alignment = 1
 [node name="Select2" type="Button" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
 
@@ -263,6 +269,7 @@ horizontal_alignment = 1
 [node name="Select3" type="Button" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
 layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
 theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
 text = "SELECT"
 

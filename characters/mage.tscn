@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ni3pnyo6k8qj"]
+[gd_scene load_steps=31 format=3 uid="uid://ni3pnyo6k8qj"]
 
 [ext_resource type="Shader" uid="uid://conkg5wtibima" path="res://Enemies/player_flash.gdshader" id="1_r3lpf"]
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_sxqqe"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://bi25qtrqjvbrr" path="res://prefabs/Knife/knife.tscn" id="4_wmh5w"]
 [ext_resource type="PackedScene" uid="uid://c8lmvpxwar18e" path="res://prefabs/HolySmite/holy_smite.tscn" id="5_koqs7"]
 [ext_resource type="PackedScene" uid="uid://c7fvb75evjr61" path="res://prefabs/Sword/sword.tscn" id="6_ydlgn"]
+[ext_resource type="PackedScene" uid="uid://bshp1buoht5gd" path="res://wind_shuriken.tscn" id="8_hiopg"]
 [ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="8_qombd"]
+[ext_resource type="PackedScene" uid="uid://ybxiwfgop782" path="res://prefabs/StarProjectile/star_projectile.tscn" id="9_hqccj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -140,6 +142,8 @@ knife_scene = ExtResource("4_wmh5w")
 holy_smite_scene = ExtResource("5_koqs7")
 sword_scene = ExtResource("6_ydlgn")
 sword_aura_scene = ExtResource("8_qombd")
+wind_shuriken_scene = ExtResource("8_hiopg")
+star_projectile_scene = ExtResource("9_hqccj")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0

@@ -12,6 +12,7 @@ var SPEED := 200
 @export var sword_scene: PackedScene
 @export var sword_aura_scene: PackedScene
 @export var wind_shuriken_scene: PackedScene
+@export var star_projectile_scene: PackedScene
 
 
 
@@ -71,6 +72,12 @@ var sword_level: int = 0
 var wind_shuriken_level: int = 0
 var wind_shuriken_count: int = 1
 
+#Star Projetile
+var star_level: int = 0
+var star_count: int = 1
+var star_speed: float = 300
+var star_ready: bool = true
+
 
 #player exp and level
 var current_exp: int = 0
@@ -81,6 +88,12 @@ var player_level: int = 1
 var total_damage_dealt: float = 0.0
 var total_kills: int = 0
 var total_exp_collected: int = 0
+
+#Passives
+var magnet_range: float = 50.0
+var exp_multiplier: float = 1.0
+var crit_chance: float = 0.0
+var vampirism: int = 0
 
 
 
@@ -270,6 +283,29 @@ func Attack() -> void:
 			_spawn_sword()
 		elif weapon == wind_shuriken_scene:
 			_spawn_wind_shurikens()
+		elif weapon == star_projectile_scene:
+			if star_ready:
+				_spawn_stars()
+				star_ready = false
+				get_tree().create_timer(5.0).timeout.connect(func(): star_ready = true)
+
+
+func _spawn_stars() -> void:
+	for i in range(star_count):
+		var delay = i * 0.3
+		get_tree().create_timer(delay).timeout.connect(
+			func(): _spawn_single_star()
+		)
+
+func _spawn_single_star() -> void:
+	if star_projectile_scene == null:
+		return
+	
+	var star = star_projectile_scene.instantiate()
+	star.global_position = global_position
+	star.damage = get_crit_damage(current_attack)
+	star.speed = star_speed
+	current_scene.add_child(star)
 
 func _spawn_wind_shurikens() -> void:
 	for i in range(wind_shuriken_count):
@@ -287,6 +323,7 @@ func _spawn_single_wind_shuriken() -> void:
 	
 	var shuriken = wind_shuriken_scene.instantiate()
 	shuriken.global_position = global_position
+	shuriken.damage = get_crit_damage(current_attack)
 	shuriken.setup(self, current_attack, random_direction)
 	current_scene.add_child(shuriken)
 
@@ -309,7 +346,7 @@ func _spawn_single_knife(vertical_offset: float = 0, horizontal_offset: float = 
 	var spawn_offset = Vector2(horizontal_offset, vertical_offset)
 	spawn_offset = spawn_offset.rotated(last_direction.angle())
 	new_knife.global_position = global_position + spawn_offset
-	new_knife.damage = current_attack
+	new_knife.damage = get_crit_damage(current_attack)
 	
 	new_knife.set_meta("direction", last_direction)
 	
@@ -320,7 +357,7 @@ func _spawn_knife_at_direction(angle_offset: float) -> void:
 		return
 	var new_knife = knife_scene.instantiate()
 	new_knife.global_position = global_position
-	new_knife.damage = current_attack
+	new_knife.damage = get_crit_damage(current_attack)
 	
 	var dir = last_direction.rotated(deg_to_rad(angle_offset))
 	new_knife.set_meta("direction", dir)
@@ -354,7 +391,7 @@ func _spawn_single_magic_bullet_at_target(target: CharacterBody2D) -> void:
 	
 	var new_bullet = magic_bullet_scene.instantiate()
 	new_bullet.global_position = global_position
-	new_bullet.damage = current_attack
+	new_bullet.damage = get_crit_damage(current_attack)
 	new_bullet.pierce_count = magic_bullet_pierce
 	
 	var dir = global_position.direction_to(target.global_position)
@@ -369,7 +406,7 @@ func _spawn_magic_bullet_at_position(target_pos: Vector2, angle_offset: float) -
 		return
 	var new_bullet = magic_bullet_scene.instantiate()
 	new_bullet.global_position = global_position
-	new_bullet.damage = current_attack
+	new_bullet.damage = get_crit_damage(current_attack)
 	new_bullet.pierce_count = magic_bullet_pierce
 	var dir = global_position.direction_to(target_pos)
 	dir = dir.rotated(deg_to_rad(angle_offset))
@@ -394,7 +431,7 @@ func _spawn_holy_smite() -> void:
 	
 	var smite = holy_smite_scene.instantiate()
 	smite.global_position = random_enemy.global_position
-	smite.damage = current_attack
+	smite.damage = get_crit_damage(current_attack)
 	smite.scale = Vector2(holy_smite_aoe, holy_smite_aoe)
 	current_scene.add_child(smite)
 
@@ -435,8 +472,9 @@ func SetStats() -> void:
 	health_bar.value = current_hp
 
 func CollectExperience(amount: int) -> void:
-	current_exp += amount
-	total_exp_collected += amount
+	var actual_exp = int(amount * exp_multiplier)
+	current_exp += actual_exp
+	total_exp_collected += actual_exp
 	if player_ui:
 		player_ui.update_exp(current_exp, exp_to_next_level)
 	while current_exp >= exp_to_next_level:
@@ -585,6 +623,39 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					wind_shuriken_count += 1
 				5:
 					current_attack += 3.0
+		"star":
+			star_level += 1
+			if star_level == 1:
+				_equip_weapon(star_projectile_scene, preload("res://Assets/Bouncy thing/Star.png"))
+			match star_level:
+				2:
+					star_count += 1
+				3:
+					current_attack += 2.0
+					star_speed +=100.0
+				4:
+					star_count += 1
+				5:
+					current_attack += 5.0
+					star_speed +=150.0
+		"magnet":
+			magnet_range += 20.0
+			_equip_passive("magnet", preload("res://Assets/magnet_icon.png"))
+		"greed":
+			exp_multiplier += 0.1
+			_equip_passive("greed", preload("res://Assets/greed_icon.png"))
+		"crit":
+			crit_chance += 0.05
+			_equip_passive("crit", preload("res://Assets/crit_icon.png"))
+		"vampirism":
+			vampirism += 1
+			_equip_passive("vampirism", preload("res://Assets/vampirism_icon.png"))
+
+#Passive
+func get_crit_damage(base_damage: float) -> float:
+	if randf() < crit_chance:
+		return base_damage * 2.0
+	return base_damage
 
 
 func TakeDamage(damage: float) -> void:

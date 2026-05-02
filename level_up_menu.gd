@@ -150,7 +150,7 @@ var all_upgrades := [
 		"description": "+20% Pickup Range",
 		"stat": "magnet",
 		"max_level": 5,
-		"icon": preload("res://Assets/magnet_icon.png"),
+		"icon": preload("res://Assets/Upgrades/magnet.jpg"),
 		"upgrade_type": "passive"
 	},
 	{
@@ -166,7 +166,7 @@ var all_upgrades := [
 		"description": "+5% Crit Chance (2x Damage)",
 		"stat": "crit",
 		"max_level": 5,
-		"icon": preload("res://Assets/crit_icon.png"),
+		"icon": preload("res://Assets/Upgrades/crit.png"),
 		"upgrade_type": "passive"
 	},
 	{
@@ -174,7 +174,7 @@ var all_upgrades := [
 		"description": "Heal 1 HP per kill",
 		"stat": "vampirism",
 		"max_level": 3,
-		"icon": preload("res://Assets/vampirism_icon.png"),
+		"icon": preload("res://Assets/Upgrades/vampirism.png"),
 		"upgrade_type": "passive"
 	},
 ]

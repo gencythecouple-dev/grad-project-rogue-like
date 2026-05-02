@@ -125,8 +125,7 @@ shockwave_scene = ExtResource("2_f0bre")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qd0l2")
 animation = &"swing"
-frame = 14
-frame_progress = 1.0
+frame = 5
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true

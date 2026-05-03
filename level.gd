@@ -17,6 +17,8 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @export var mage_scene: PackedScene
 @export var rogue_scene: PackedScene
 @export var warrior_scene: PackedScene
+@export var plant_scene: PackedScene
+
 
 var horde_timer: float = 0.0
 var horde_interval: float = 30.0
@@ -159,9 +161,12 @@ func spawn_enemy() -> void:
 	match chosen:
 		"slime": enemy = slime_scene.instantiate()
 		"slime2": enemy = slime2_scene.instantiate()
+		"plant": enemy = plant_scene.instantiate()
 	
 	enemy.global_position = get_offscreen_spawn_position()
 	enemy_holder.add_child(enemy)
+	var enemy_level = get_enemy_level()
+	enemy.SetStats(enemy_level)
 	enemy_list.append(enemy)
 
 func return_to_pool(enemy) -> void:
@@ -173,7 +178,7 @@ func return_to_pool(enemy) -> void:
 		enemy_list.erase(enemy)
 
 var spawn_table = [
-	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["slime"]},
+	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["plant"]},
 	{"time": 60,  "count": 3,  "interval": 1.5, "enemies": ["slime"]},
 	{"time": 120, "count": 4,  "interval": 1.2, "enemies": ["slime"]},
 	{"time": 180, "count": 5,  "interval": 1.0, "enemies": ["slime", "slime2"]},
@@ -185,6 +190,18 @@ var spawn_table = [
 	{"time": 540, "count": 30, "interval": 0.1, "enemies": ["slime2"]},]
 
 var current_spawn_config = spawn_table[0]
+
+func get_enemy_level() -> int:
+	if game_time < 120:
+		return 1
+	elif game_time < 240:
+		return 2
+	elif game_time < 360:
+		return 3
+	elif game_time < 480:
+		return 4
+	else:
+		return 5
 
 
 func _update_spawn_config() -> void:

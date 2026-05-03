@@ -1,0 +1,103 @@
+[gd_scene load_steps=16 format=3 uid="uid://ef04fkxj2osm"]
+
+[ext_resource type="Texture2D" uid="uid://7t2mnevqfp75" path="res://Assets/LevelUp/Level Up Effect Spritesheet.png" id="1_npoxj"]
+[ext_resource type="Script" uid="uid://dx3h2fce0gx0w" path="res://prefabs/LevelUp/level_up.gd" id="2_5dskv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t58g3"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q13vp"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuod6"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g68vt"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0a0tt"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhc4y"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_plmi6"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_biudl"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6obrr"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_taaqd"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(1152, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tfnm"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(1280, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cngbc"]
+atlas = ExtResource("1_npoxj")
+region = Rect2(1408, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_56y0j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t58g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q13vp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuod6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g68vt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0a0tt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhc4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_plmi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_biudl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6obrr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_taaqd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tfnm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cngbc")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[node name="LevelUp" type="AnimatedSprite2D"]
+scale = Vector2(5, 5)
+sprite_frames = SubResource("SpriteFrames_56y0j")
+frame = 7
+offset = Vector2(0, -38.735)
+script = ExtResource("2_5dskv")

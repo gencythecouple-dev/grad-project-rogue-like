@@ -66,7 +66,7 @@ var all_upgrades := [
 		"max_level": 3,
 		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
 		"upgrade_type": "passive"  
-	},
+	},			
 	{
 		"name": "Glacial Maul",
 		"stat": "ice_hammer",

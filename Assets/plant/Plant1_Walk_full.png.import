@@ -2,12 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8n6cwk0f7irm"
-valid=false
+uid="uid://b7s3btiogqmlt"
+path="res://.godot/imported/Plant1_Walk_full.png-5c7714e1a19de8197994aa774133fe6f.ctex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
-source_file="res://Assets/Upgrades/magnet.png"
+source_file="res://Assets/plant/Plant1_Walk_full.png"
+dest_files=["res://.godot/imported/Plant1_Walk_full.png-5c7714e1a19de8197994aa774133fe6f.ctex"]
 
 [params]
 

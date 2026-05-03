@@ -1,0 +1,88 @@
+[gd_scene load_steps=15 format=3 uid="uid://cmxqqfkp81tk0"]
+
+[ext_resource type="Texture2D" uid="uid://b7s3btiogqmlt" path="res://Assets/plant/Plant1_Walk_full.png" id="1_1wvmx"]
+[ext_resource type="Script" uid="uid://bdlmq14dbuawi" path="res://prefabs/Plant/plant.gd" id="1_lr75d"]
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="2_aerc7"]
+[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamageNumber.tscn" id="2_evxmu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evxmu"]
+shader = ExtResource("2_aerc7")
+shader_parameter/flash_intensity = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lr75d"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aerc7"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evxmu"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5k1j"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r032"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xyx65"]
+atlas = ExtResource("1_1wvmx")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u4l7e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lr75d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aerc7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evxmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5k1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r032")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xyx65")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4pr78"]
+radius = 34.058773
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lr75d"]
+radius = 27.0
+
+[node name="plant" type="CharacterBody2D" groups=["Enemy"]]
+collision_layer = 2
+script = ExtResource("1_lr75d")
+base_hp = 6
+damage_number_scene = ExtResource("2_evxmu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_evxmu")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_u4l7e")
+frame_progress = 0.6930783
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 0)
+shape = SubResource("CircleShape2D_4pr78")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(5, 5)
+shape = SubResource("CircleShape2D_lr75d")

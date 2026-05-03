@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://7ibhpy2wfq6g" path="res://Enemies/slime_1.gd" id="1_i2kp5"]
 [ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="1_tgr6y"]
 [ext_resource type="Texture2D" uid="uid://b8bvodmsaxouo" path="res://Assets/Slime/Slime1_Run_full.png" id="2_i2kp5"]
-[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_tgr6y"]
+[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamageNumber.tscn" id="2_tgr6y"]
 [ext_resource type="Texture2D" uid="uid://sdrkt7ma412g" path="res://Assets/Slime/Idle/Slime1_Idle_full.png" id="4_qk4dt"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tgr6y"]

@@ -13,6 +13,8 @@ var SPEED := 200
 @export var sword_aura_scene: PackedScene
 @export var wind_shuriken_scene: PackedScene
 @export var star_projectile_scene: PackedScene
+@export var level_up_effect_scene: PackedScene
+
 
 
 
@@ -482,18 +484,24 @@ func CollectExperience(amount: int) -> void:
 
 func _calculate_exp_to_next_level(level: int) -> int:
 	if level == 1:
-		return 5
+		return 8
 	elif level <= 30:
-		return 5 + (level - 1) * 10
+		return 8 + (level - 1) * 10
 	elif level <= 55:
-		return 5 + (29 * 10) + (level - 30) * 13
+		return 8 + (29 * 10) + (level - 30) * 13
 	else:
-		return 5 + (29 * 10) + (25 * 13) + (level - 55) * 16
+		return 8 + (29 * 10) + (25 * 13) + (level - 55) * 16
 
 func level_up() -> void:
 	player_level += 1
 	current_exp -= exp_to_next_level
 	exp_to_next_level = _calculate_exp_to_next_level(player_level)
+	
+	if level_up_effect_scene:
+		var effect = level_up_effect_scene.instantiate()
+		effect.position = Vector2.ZERO
+		add_child(effect)
+	
 	if player_ui:
 		player_ui.update_exp(current_exp, exp_to_next_level)
 		player_ui.update_level(player_level)
@@ -521,34 +529,25 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					hammer_scale += 0.3
 		"attack":
 			current_attack += 1.0
-			_equip_passive("attack", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
-		"attack_big":
-			current_attack += 2.0
-			_equip_passive("attack_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			_equip_passive("attack", preload("res://Assets/Upgrades/attk_up.png"))
 		"attack_speed":
 			attack_timer.wait_time *= 0.85
-			_equip_passive("attack_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			_equip_passive("attack_speed", preload("res://Assets/Upgrades/attk_spd.png"))
 		"move_speed":
 			SPEED *= 1.15
-			_equip_passive("move_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			_equip_passive("move_speed", preload("res://Assets/Upgrades/move_spd.png"))
 		"max_hp":
 			max_hp += 10
 			current_hp += 10
 			health_bar.max_value = max_hp
 			health_bar.value = current_hp
-			_equip_passive("max_hp", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
-		"max_hp_big":
-			max_hp += 20
-			current_hp = max_hp
-			health_bar.max_value = max_hp
-			health_bar.value = current_hp
-			_equip_passive("max_hp_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			_equip_passive("max_hp", preload("res://Assets/Upgrades/HP_up.png"))
 		"more_projectile":
 			global_projectile_bonus += 1
 			_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
 		"armor":
 			current_armor += 1.0
-			_equip_passive("armor", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+			_equip_passive("armor", preload("res://Assets/Upgrades/26.png"))
 		"magic_bullet":
 			magic_bullet_level += 1
 			if magic_bullet_level == 1:
@@ -639,17 +638,17 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					current_attack += 5.0
 					star_speed +=150.0
 		"magnet":
-			magnet_range += 20.0
-			_equip_passive("magnet", preload("res://Assets/magnet_icon.png"))
+			magnet_range += 50.0
+			_equip_passive("magnet", preload("res://Assets/Upgrades/magnet.jpg"))
 		"greed":
 			exp_multiplier += 0.1
-			_equip_passive("greed", preload("res://Assets/greed_icon.png"))
+			_equip_passive("greed", preload("res://Assets/Upgrades/greed.png"))
 		"crit":
 			crit_chance += 0.05
-			_equip_passive("crit", preload("res://Assets/crit_icon.png"))
+			_equip_passive("crit", preload("res://Assets/Upgrades/crit.png"))
 		"vampirism":
 			vampirism += 1
-			_equip_passive("vampirism", preload("res://Assets/vampirism_icon.png"))
+			_equip_passive("vampirism", preload("res://Assets/Upgrades/vampirism.png"))
 
 #Passive
 func get_crit_damage(base_damage: float) -> float:

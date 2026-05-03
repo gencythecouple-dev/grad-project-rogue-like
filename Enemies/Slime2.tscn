@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="1_2gapv"]
 [ext_resource type="Texture2D" uid="uid://c3p7c17ryxf8g" path="res://Assets/Slime2/Run/Slime2_Run_full.png" id="1_8twnp"]
 [ext_resource type="Script" uid="uid://dagwlvlmu8d6" path="res://Enemies/slime_2.gd" id="1_ey5l8"]
-[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamangeNumber.tscn" id="2_n0hi4"]
+[ext_resource type="PackedScene" uid="uid://dlf583fmyqcdp" path="res://prefabs/DamageNumber.tscn" id="2_n0hi4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2gapv"]
 shader = ExtResource("1_2gapv")

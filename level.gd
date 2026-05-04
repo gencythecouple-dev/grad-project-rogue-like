@@ -18,6 +18,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @export var rogue_scene: PackedScene
 @export var warrior_scene: PackedScene
 @export var plant_scene: PackedScene
+@export var fire_totem_scene: PackedScene
 
 
 var horde_timer: float = 0.0
@@ -70,6 +71,11 @@ func _process(delta: float) -> void:
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
 		_spawn_horde()
+		
+	if Input.is_action_just_pressed("ui_accept"):
+		var totem = fire_totem_scene.instantiate()
+		totem.global_position = player.global_position + Vector2(200, 0)
+		enemy_holder.add_child(totem)
 
 
 func _game_over() -> void:
@@ -178,11 +184,11 @@ func return_to_pool(enemy) -> void:
 		enemy_list.erase(enemy)
 
 var spawn_table = [
-	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["plant"]},
+	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["slime"]},
 	{"time": 60,  "count": 3,  "interval": 1.5, "enemies": ["slime"]},
 	{"time": 120, "count": 4,  "interval": 1.2, "enemies": ["slime"]},
-	{"time": 180, "count": 5,  "interval": 1.0, "enemies": ["slime", "slime2"]},
-	{"time": 240, "count": 6,  "interval": 0.8, "enemies": ["slime", "slime2"]},
+	{"time": 180, "count": 5,  "interval": 1.0, "enemies": ["slime", "plant"]},
+	{"time": 240, "count": 6,  "interval": 0.8, "enemies": ["slime", "plant"]},
 	{"time": 300, "count": 8,  "interval": 0.6, "enemies": ["slime2"]},
 	{"time": 360, "count": 10, "interval": 0.4, "enemies": ["slime2"]},
 	{"time": 420, "count": 15, "interval": 0.25, "enemies": ["slime2"]},

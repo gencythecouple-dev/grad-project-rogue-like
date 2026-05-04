@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=4 uid="uid://d1s5srth3378k"]
+[gd_scene load_steps=27 format=4 uid="uid://d1s5srth3378k"]
 
 [ext_resource type="Script" uid="uid://cxosg3s3o0a6l" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_oi3di"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cdij3nl4hr8ap" path="res://characters/rogue.tscn" id="8_h6smj"]
 [ext_resource type="PackedScene" uid="uid://hqqy6drcwbdh" path="res://game_over.tscn" id="8_km5ld"]
 [ext_resource type="PackedScene" uid="uid://cmxqqfkp81tk0" path="res://prefabs/Plant/plant.tscn" id="10_h6smj"]
+[ext_resource type="PackedScene" uid="uid://bhnap5lnsjmn4" path="res://prefabs/Necromancer/fire_totem.tscn" id="11_v5j5c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amfjm"]
 atlas = ExtResource("5_aicyk")
@@ -114,6 +115,7 @@ mage_scene = ExtResource("7_8b0r0")
 rogue_scene = ExtResource("8_h6smj")
 warrior_scene = ExtResource("7_aicyk")
 plant_scene = ExtResource("10_h6smj")
+fire_totem_scene = ExtResource("11_v5j5c")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 

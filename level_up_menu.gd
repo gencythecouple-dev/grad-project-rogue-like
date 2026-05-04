@@ -45,18 +45,10 @@ var all_upgrades := [
 	},
 	{
 		"name": "Movement Speed", 
-		"description": "+15% Move Speed", 
+		"description": "+5% Move Speed", 
 		"stat": "move_speed", 
 		"max_level": 5,
 		"icon": preload("res://Assets/Upgrades/move_spd.png"),
-		"upgrade_type": "passive" 
-	},
-	{
-		"name": "Max HP Up", 
-		"description": "+20 Max Health + Full Heal", 
-		"stat": "max_hp_big", 
-		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
 		"upgrade_type": "passive" 
 	},
 	{
@@ -71,7 +63,7 @@ var all_upgrades := [
 		"name": "Glacial Maul",
 		"stat": "ice_hammer",
 		"max_level": 5,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/ice_hammer.png"),
 		"upgrade_type": "active",
 		"requires": "",
 		"level_descriptions": {
@@ -213,22 +205,18 @@ func show_upgrades():
 	new_upgrades.shuffle()
 	available = owned_upgrades + new_upgrades
 	
+	if available.size() == 0:
+		get_tree().paused = false
+		return
+	
+	show()
+	get_tree().paused = true
+	
 	current_choices = []
 	var num_choices = min(3, available.size())
 	for i in range(num_choices):
 		current_choices.append(available[i])
 	
-	if available.size() == 0:
-		get_tree().paused = false
-		return
-
-	show()
-	get_tree().paused = true
-	available.shuffle()
-	current_choices = []
-	for i in range(num_choices):
-		current_choices.append(available[i])
-
 	_update_button(choice1, choice1_label, choice1_icon, 0)
 	_update_button(choice2, choice2_label, choice2_icon, 1)
 	_update_button(choice3, choice3_label, choice3_icon, 2)

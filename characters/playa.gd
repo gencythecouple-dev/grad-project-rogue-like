@@ -167,13 +167,10 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 func apply_flash(intensity: float):
-	print("Applying flash with intensity: ", intensity)
 	var material = sprite.material as ShaderMaterial
 	if material:
 		material.set_shader_parameter("flash_intensity", intensity)
-		print("Flash applied!")
-	else:
-		print("ERROR: No material found!")
+
 
 
 func update_facing() -> void:
@@ -211,14 +208,14 @@ func _get_closest_enemy() -> CharacterBody2D:
 	return target_enemy
 
 func _equip_weapon(weapon_scene: PackedScene, icon: Texture2D) -> void:
-	if active_weapons.size() >= 3:
+	if active_weapons.size() >= 4:
 		return
 	active_weapons.append(weapon_scene)
 	if player_ui:
 		player_ui.add_active_item(icon)
 
 func _equip_passive(buff: String, icon: Texture2D) -> void:
-	if passive_buffs.size() >= 3:
+	if passive_buffs.size() >= 4:
 		return
 	passive_buffs.append(buff)
 	if player_ui:
@@ -522,133 +519,152 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 			match hammer_level:
 				2: current_attack += 2.0
 				3: hammer_scale += 0.3
-				4: attack_timer.wait_time *= 0.80
+				4: attack_timer.wait_time *= 0.95
 				5:
 					current_attack += 2.0
-					attack_timer.wait_time *= 0.80
+					attack_timer.wait_time *= 0.90
 					hammer_scale += 0.3
-		"attack":
-			current_attack += 1.0
-			_equip_passive("attack", preload("res://Assets/Upgrades/attk_up.png"))
-		"attack_speed":
-			attack_timer.wait_time *= 0.85
-			_equip_passive("attack_speed", preload("res://Assets/Upgrades/attk_spd.png"))
-		"move_speed":
-			SPEED *= 1.15
-			_equip_passive("move_speed", preload("res://Assets/Upgrades/move_spd.png"))
-		"max_hp":
-			max_hp += 10
-			current_hp += 10
-			health_bar.max_value = max_hp
-			health_bar.value = current_hp
-			_equip_passive("max_hp", preload("res://Assets/Upgrades/HP_up.png"))
-		"more_projectile":
-			global_projectile_bonus += 1
-			_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
-		"armor":
-			current_armor += 1.0
-			_equip_passive("armor", preload("res://Assets/Upgrades/26.png"))
+		
 		"magic_bullet":
 			magic_bullet_level += 1
 			if magic_bullet_level == 1:
 				_equip_weapon(magic_bullet_scene, preload("res://Assets/magic_bullet.png"))
 			match magic_bullet_level:
-				2: 
-					magic_bullet_projectile_count += 1
-				3: 
+				2: magic_bullet_projectile_count += 1
+				3:
 					current_attack += 2.0
-					attack_timer.wait_time *= 0.85
-				4: 
-					magic_bullet_projectile_count += 1
-				5: 
+					attack_timer.wait_time *= 0.90
+				4: magic_bullet_projectile_count += 1
+				5:
 					current_attack += 3.0
-					attack_timer.wait_time *= 0.80
-					magic_bullet_pierce += 1
+					attack_timer.wait_time *= 0.85
+					magic_bullet_pierce = 1
+		
 		"knife":
 			knife_level += 1
 			if knife_level == 1:
 				_equip_weapon(knife_scene, preload("res://Assets/knife_icon.png"))
 			match knife_level:
-				2: 
-					knife_projectile_count += 1
-				3: 
+				2: knife_projectile_count += 1
+				3:
 					current_attack += 2.0
-					attack_timer.wait_time *= 1.8
-					knife_projectile_count += 1
-				4: 
-					knife_projectile_count += 1
-				5: 
+					attack_timer.wait_time *= 0.85
+				4: knife_projectile_count += 1
+				5:
 					current_attack += 3.0
-					attack_timer.wait_time *= 1
-					knife_projectile_count += 1
+					attack_timer.wait_time *= 0.80
+		
 		"holy_smite":
 			holy_smite_level += 1
 			if holy_smite_level == 1:
 				_equip_weapon(holy_smite_scene, preload("res://Assets/Holy Smite/holysmite.png"))
 			match holy_smite_level:
-				2:
-					holy_smite_count += 1
-				3:
-					current_attack += 3.0
-				4:
-					holy_smite_count += 1
+				2: holy_smite_count += 1
+				3: current_attack += 3.0
+				4: holy_smite_count += 1
 				5:
 					current_attack += 5.0
 					holy_smite_aoe += 0.5
-					holy_smite_count += 1
+		
 		"sword":
 			sword_level += 1
 			if sword_level == 1:
 				_equip_weapon(sword_scene, preload("res://Assets/Sword/sword.png"))
 			match sword_level:
-				2:
-					current_attack += 2.0
-				3:
-					attack_timer.wait_time *= 0.85
-				4:
-					current_attack += 3.0
-				5:
-					current_attack += 5.0
+				2: current_attack += 2.0
+				3: attack_timer.wait_time *= 0.85
+				4: current_attack += 3.0
+				5: current_attack += 5.0
+		
 		"wind_shuriken":
 			wind_shuriken_level += 1
 			if wind_shuriken_level == 1:
 				_equip_weapon(wind_shuriken_scene, preload("res://Assets/Wind Shuriken/wind_shuriken.png"))
 			match wind_shuriken_level:
-				2:
-					wind_shuriken_count += 1
-				3:
-					current_attack += 2.0
-				4:
-					wind_shuriken_count += 1
-				5:
-					current_attack += 3.0
+				2: wind_shuriken_count += 1
+				3: current_attack += 2.0
+				4: wind_shuriken_count += 1
+				5: current_attack += 3.0
+		
 		"star":
 			star_level += 1
 			if star_level == 1:
 				_equip_weapon(star_projectile_scene, preload("res://Assets/Bouncy thing/Star.png"))
 			match star_level:
-				2:
-					star_count += 1
+				2: star_count += 1
 				3:
 					current_attack += 2.0
-					star_speed +=100.0
-				4:
-					star_count += 1
+					star_speed += 150.0
+				4: star_count += 1
 				5:
 					current_attack += 5.0
-					star_speed +=150.0
+					star_speed += 250.0
+		
+		"attack":
+			current_attack += 1.0
+			if not passive_buffs.has("attack"):
+				_equip_passive("attack", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"attack_big":
+			current_attack += 2.0
+			if not passive_buffs.has("attack_big"):
+				_equip_passive("attack_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"attack_speed":
+			attack_timer.wait_time *= 0.95
+			if not passive_buffs.has("attack_speed"):
+				_equip_passive("attack_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"move_speed":
+			SPEED *= 1.05
+			if not passive_buffs.has("move_speed"):
+				_equip_passive("move_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"max_hp":
+			max_hp += 10
+			current_hp += 10
+			health_bar.max_value = max_hp
+			health_bar.value = current_hp
+			if not passive_buffs.has("max_hp"):
+				_equip_passive("max_hp", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"max_hp_big":
+			max_hp += 20
+			current_hp = max_hp
+			health_bar.max_value = max_hp
+			health_bar.value = current_hp
+			if not passive_buffs.has("max_hp_big"):
+				_equip_passive("max_hp_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"more_projectile":
+			global_projectile_bonus += 1
+			if not passive_buffs.has("more_projectile"):
+				_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
+		"armor":
+			current_armor += 1.0
+			if not passive_buffs.has("armor"):
+				_equip_passive("armor", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+		
 		"magnet":
 			magnet_range += 50.0
-			_equip_passive("magnet", preload("res://Assets/Upgrades/magnet.jpg"))
+			if not passive_buffs.has("magnet"):
+				_equip_passive("magnet", preload("res://Assets/Upgrades/magnet.jpg"))
+		
 		"greed":
 			exp_multiplier += 0.1
-			_equip_passive("greed", preload("res://Assets/Upgrades/greed.png"))
+			if not passive_buffs.has("greed"):
+				_equip_passive("greed", preload("res://Assets/Upgrades/greed.png"))
+		
 		"crit":
 			crit_chance += 0.05
-			_equip_passive("crit", preload("res://Assets/Upgrades/crit.png"))
+			if not passive_buffs.has("crit"):
+				_equip_passive("crit", preload("res://Assets/Upgrades/crit.png"))
+		
 		"vampirism":
 			vampirism += 1
-			_equip_passive("vampirism", preload("res://Assets/Upgrades/vampirism.png"))
+			if not passive_buffs.has("vampirism"):
+				_equip_passive("vampirism", preload("res://Assets/Upgrades/vampirism.png"))
 
 #Passive
 func get_crit_damage(base_damage: float) -> float:
@@ -663,7 +679,6 @@ func TakeDamage(damage: float) -> void:
 	current_hp = max(0, current_hp)
 	health_bar.value = current_hp
 	
-	print("Player taking damage! Flash timer set to: ", FLASH_DURATION)
 	flash_timer = FLASH_DURATION
 	
 	if current_hp <= 0:

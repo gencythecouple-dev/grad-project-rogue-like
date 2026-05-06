@@ -56,7 +56,7 @@ var all_upgrades := [
 		"description": "+1 to ALL projectiles", 
 		"stat": "more_projectile", 
 		"max_level": 3,
-		"icon": preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"),
+		"icon": preload("res://Assets/Upgrades/duplicator.png"),
 		"upgrade_type": "passive"  
 	},			
 	{
@@ -146,7 +146,7 @@ var all_upgrades := [
 		"upgrade_type": "passive"
 	},
 	{
-		"name": "Cursed book of knowledge			",
+		"name": "Cursed book of knowledge",
 		"description": "+10% Experience Gain",
 		"stat": "greed",
 		"max_level": 5,
@@ -186,7 +186,6 @@ func _ready():
 	choice3.pressed.connect(_on_choice3_pressed)
 
 func show_upgrades():
-	var available = []
 	var owned_upgrades = []
 	var new_upgrades = []
 	
@@ -201,21 +200,34 @@ func show_upgrades():
 		else:
 			new_upgrades.append(upgrade)
 	
-	owned_upgrades.shuffle()
-	new_upgrades.shuffle()
-	available = owned_upgrades + new_upgrades
+	var weighted_pool = []
 	
-	if available.size() == 0:
+	for upgrade in owned_upgrades:
+		weighted_pool.append(upgrade)
+		weighted_pool.append(upgrade)
+	
+	for upgrade in new_upgrades:
+		weighted_pool.append(upgrade)
+	
+	weighted_pool.shuffle()
+	
+	current_choices = []
+	var seen = []
+	
+	for upgrade in weighted_pool:
+		if seen.has(upgrade["stat"]):
+			continue
+		current_choices.append(upgrade)
+		seen.append(upgrade["stat"])
+		if current_choices.size() >= 3:
+			break
+	
+	if current_choices.size() == 0:
 		get_tree().paused = false
 		return
 	
 	show()
 	get_tree().paused = true
-	
-	current_choices = []
-	var num_choices = min(3, available.size())
-	for i in range(num_choices):
-		current_choices.append(available[i])
 	
 	_update_button(choice1, choice1_label, choice1_icon, 0)
 	_update_button(choice2, choice2_label, choice2_icon, 1)

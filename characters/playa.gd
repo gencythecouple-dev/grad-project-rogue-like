@@ -515,7 +515,7 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 		"ice_hammer":
 			hammer_level += 1
 			if hammer_level == 1:
-				_equip_weapon(hammer_scene, preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_weapon(hammer_scene, preload("res://Assets/Upgrades/ice_hammer.png"))
 			match hammer_level:
 				2: current_attack += 2.0
 				3: hammer_scale += 0.3
@@ -603,22 +603,19 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 		"attack":
 			current_attack += 1.0
 			if not passive_buffs.has("attack"):
-				_equip_passive("attack", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("attack", preload("res://Assets/Upgrades/attk_up.png"))
 		
-		"attack_big":
-			current_attack += 2.0
-			if not passive_buffs.has("attack_big"):
-				_equip_passive("attack_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+
 		
 		"attack_speed":
 			attack_timer.wait_time *= 0.95
 			if not passive_buffs.has("attack_speed"):
-				_equip_passive("attack_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("attack_speed", preload("res://Assets/Upgrades/attk_spd.png"))
 		
 		"move_speed":
 			SPEED *= 1.05
 			if not passive_buffs.has("move_speed"):
-				_equip_passive("move_speed", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("move_speed", preload("res://Assets/Upgrades/move_spd.png"))
 		
 		"max_hp":
 			max_hp += 10
@@ -626,25 +623,18 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 			health_bar.max_value = max_hp
 			health_bar.value = current_hp
 			if not passive_buffs.has("max_hp"):
-				_equip_passive("max_hp", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("max_hp", preload("res://Assets/Upgrades/HP_up.png"))
 		
-		"max_hp_big":
-			max_hp += 20
-			current_hp = max_hp
-			health_bar.max_value = max_hp
-			health_bar.value = current_hp
-			if not passive_buffs.has("max_hp_big"):
-				_equip_passive("max_hp_big", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
 		
 		"more_projectile":
 			global_projectile_bonus += 1
 			if not passive_buffs.has("more_projectile"):
-				_equip_passive("more_projectile", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("more_projectile", preload("res://Assets/Upgrades/duplicator.png"))
 		
 		"armor":
 			current_armor += 1.0
 			if not passive_buffs.has("armor"):
-				_equip_passive("armor", preload("res://Assets/UIBundleFree/UIBundleFree/move_speed.png"))
+				_equip_passive("armor", preload("res://Assets/Upgrades/26.png"))
 		
 		"magnet":
 			magnet_range += 50.0

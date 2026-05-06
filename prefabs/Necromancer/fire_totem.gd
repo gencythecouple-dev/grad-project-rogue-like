@@ -12,6 +12,7 @@ var current_hp: int = 30
 var flash_timer: float = 0.0
 var is_dying: bool = false
 var exp_value: int = 15
+var lifetime: float = 0.0
 
 const BUFF_INTERVAL: float = 3.0
 const BUFF_RADIUS: float = 200.0
@@ -19,6 +20,8 @@ const DAMAGE_MULTIPLIER: float = 1.5
 const SPEED_MULTIPLIER: float = 1.3
 const ARMOR_BONUS: float = 2.0
 const FLASH_DURATION: float = 0.1
+const TOTEM_LIFETIME: float = 20.0
+
 
 var buff_timer: float = 0.0
 var is_buffing: bool = false
@@ -45,7 +48,10 @@ func _ready() -> void:
 	collision.shape = circle_shape
 
 func _physics_process(delta: float) -> void:
-	if is_dying:
+	lifetime += delta
+	
+	if lifetime >= TOTEM_LIFETIME:
+		on_death()
 		return
 	
 	if flash_timer > 0:
@@ -69,28 +75,31 @@ func _on_frame_changed() -> void:
 		has_applied_buff = true
 
 func apply_buffs() -> void:
+	print("🔥 apply_buffs called. Buffed enemies: ", buffed_enemies.size())
 	for enemy in buffed_enemies:
 		if enemy == null or not is_instance_valid(enemy):
+			print("   Enemy is null/invalid")
 			continue
-		if enemy.is_dying:
-			continue
-		
-	for enemy in buffed_enemies:
-		if enemy == null or not is_instance_valid(enemy):
+		if "is_dying" in enemy and enemy.is_dying:
+			print("   Enemy is dying")
 			continue
 		
-		if not enemy.has_meta("totem_buffed"):
-			enemy.modulate = Color(1.5, 0.5, 0.5)
+		print("   Checking enemy: ", enemy.name, " | Has meta 'totem_buffed': ", enemy.has_meta("totem_buffed"))
 		
 		if not enemy.has_meta("totem_buffed"):
 			enemy.set_meta("totem_buffed", true)
 			enemy.set_meta("original_speed", enemy.speed)
-			enemy.set_meta("damage_multiplier", DAMAGE_MULTIPLIER)
-			enemy.set_meta("original_armor", enemy.get("current_armor") if enemy.has("current_armor") else 0.0)
 			
 			enemy.speed *= SPEED_MULTIPLIER
-			if enemy.has("current_armor"):
+			
+			if "current_armor" in enemy:
+				var original_armor = enemy.current_armor
+				enemy.set_meta("original_armor", original_armor)
 				enemy.current_armor += ARMOR_BONUS
+			
+			if enemy.has_node("AnimatedSprite2D"):
+				var sprite = enemy.get_node("AnimatedSprite2D")
+				sprite.modulate = Color(1.5, 0.5, 0.3)
 
 func _on_animation_finished() -> void:
 	if sprite.animation == "summon":
@@ -100,7 +109,7 @@ func _on_animation_finished() -> void:
 		sprite.play("idle")
 
 func _on_buff_area_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy") and body != self:
+	if body.is_in_group("Enemy") and not body is FireTotem:
 		if not buffed_enemies.has(body):
 			buffed_enemies.append(body)
 
@@ -110,9 +119,6 @@ func _on_buff_area_exited(body: Node2D) -> void:
 		buffed_enemies.erase(body)
 
 func remove_buff_from_enemy(enemy: Node2D) -> void:
-	if enemy == null or not is_instance_valid(enemy):
-		return
-	
 	if enemy.has_meta("totem_buffed"):
 		enemy.remove_meta("totem_buffed")
 		
@@ -120,12 +126,16 @@ func remove_buff_from_enemy(enemy: Node2D) -> void:
 			enemy.speed = enemy.get_meta("original_speed")
 			enemy.remove_meta("original_speed")
 		
-		if enemy.has_meta("original_armor") and enemy.has("current_armor"):
+		if enemy.has_meta("original_armor") and "current_armor" in enemy:
 			enemy.current_armor = enemy.get_meta("original_armor")
 			enemy.remove_meta("original_armor")
 		
 		if enemy.has_meta("damage_multiplier"):
 			enemy.remove_meta("damage_multiplier")
+		
+		if enemy.has_node("AnimatedSprite2D"):
+			var sprite = enemy.get_node("AnimatedSprite2D")
+			sprite.modulate = Color(1.0, 1.0, 1.0)
 
 func TakeDamage(damage: float) -> void:
 	if is_dying:

@@ -7,8 +7,8 @@ class_name FireTotem
 
 var current_scene
 var player_ref
-var max_hp: int = 30
-var current_hp: int = 30
+var max_hp: int = 70
+var current_hp: int = 70
 var flash_timer: float = 0.0
 var is_dying: bool = false
 var exp_value: int = 15
@@ -75,16 +75,12 @@ func _on_frame_changed() -> void:
 		has_applied_buff = true
 
 func apply_buffs() -> void:
-	print("🔥 apply_buffs called. Buffed enemies: ", buffed_enemies.size())
 	for enemy in buffed_enemies:
 		if enemy == null or not is_instance_valid(enemy):
-			print("   Enemy is null/invalid")
 			continue
 		if "is_dying" in enemy and enemy.is_dying:
-			print("   Enemy is dying")
 			continue
 		
-		print("   Checking enemy: ", enemy.name, " | Has meta 'totem_buffed': ", enemy.has_meta("totem_buffed"))
 		
 		if not enemy.has_meta("totem_buffed"):
 			enemy.set_meta("totem_buffed", true)
@@ -99,7 +95,8 @@ func apply_buffs() -> void:
 			
 			if enemy.has_node("AnimatedSprite2D"):
 				var sprite = enemy.get_node("AnimatedSprite2D")
-				sprite.modulate = Color(1.5, 0.5, 0.3)
+				if sprite.material is ShaderMaterial:
+					sprite.material.set_shader_parameter("buff_tint", Vector3(1.3, 0.6, 0.5))
 
 func _on_animation_finished() -> void:
 	if sprite.animation == "summon":
@@ -109,7 +106,7 @@ func _on_animation_finished() -> void:
 		sprite.play("idle")
 
 func _on_buff_area_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy") and not body is FireTotem:
+	if body.is_in_group("Enemy") and not body is FireTotem and not body is Necromancer:
 		if not buffed_enemies.has(body):
 			buffed_enemies.append(body)
 
@@ -135,7 +132,8 @@ func remove_buff_from_enemy(enemy: Node2D) -> void:
 		
 		if enemy.has_node("AnimatedSprite2D"):
 			var sprite = enemy.get_node("AnimatedSprite2D")
-			sprite.modulate = Color(1.0, 1.0, 1.0)
+			if sprite.material is ShaderMaterial:
+				sprite.material.set_shader_parameter("buff_tint", Vector3(1.0, 1.0, 1.0))
 
 func TakeDamage(damage: float) -> void:
 	if is_dying:

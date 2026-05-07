@@ -3,27 +3,36 @@ class_name Necromancer
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var damage_number_scene: PackedScene
-@export var magic_circle_scene: PackedScene
+@export var summoncircle_scene: PackedScene
 
 var current_scene
 var player_ref
-var max_hp: int = 100
-var current_hp: int = 100
+var max_hp: int = 300
+var current_hp: int = 300
 var flash_timer: float = 0.0
 var is_dying: bool = false
 var exp_value: int = 50
+var active_totems: int = 0
 
-const SPEED: float = 120.0
-const MIN_DISTANCE: float = 300.0
-const MAX_DISTANCE: float = 400.0
+const MAX_TOTEMS: int = 3
+const INITIAL_SPEED: float = 200.0
+const CHASE_SPEED: float = 100.0
+var SPEED: float = INITIAL_SPEED
+const MIN_DISTANCE: float = 500.0
+const MAX_DISTANCE: float = 600.0
 const SUMMON_COOLDOWN: float = 5.0
 const FLASH_DURATION: float = 0.1
+const HEALTH_REGEN_PER_SECOND: float = 2.0
 
 var summon_timer: float = 0.0
 var is_summoning: bool = false
 var has_spawned_circle: bool = false
+var has_summoned_once: bool = false
+var regen_timer: float = 0.0
 
 func _ready() -> void:
+	add_to_group("Necromancer")
+	add_to_group("Boss")
 	current_scene = get_tree().root.get_node("Level")
 	player_ref = get_tree().get_first_node_in_group("Player")
 	
@@ -44,6 +53,11 @@ func _physics_process(delta: float) -> void:
 		flash_timer -= delta
 		apply_flash(flash_timer / FLASH_DURATION)
 	
+	regen_timer += delta
+	if regen_timer >= 1.0:
+		heal(HEALTH_REGEN_PER_SECOND)
+		regen_timer = 0.0
+	
 	if is_summoning:
 		velocity = Vector2.ZERO
 	else:
@@ -60,26 +74,35 @@ func maintain_distance() -> void:
 	var distance = global_position.distance_to(player_ref.global_position)
 	var dir = global_position.direction_to(player_ref.global_position)
 	
-	if distance < MIN_DISTANCE:
+	if distance < MIN_DISTANCE - 50:
 		velocity = -dir * SPEED
 		if sprite.animation != "run":
 			sprite.play("run")
-	elif distance > MAX_DISTANCE:
+	elif distance > MAX_DISTANCE + 50:
 		velocity = dir * SPEED
 		if sprite.animation != "run":
 			sprite.play("run")
 	else:
-		velocity = Vector2.ZERO
-		if sprite.animation != "default":
-			sprite.play("default")
+		velocity = velocity.lerp(Vector2.ZERO, 0.1)
+		if velocity.length() < 10:
+			if sprite.animation != "default":
+				sprite.play("default")
 	
-	if dir.x != 0:
-		sprite.flip_h = dir.x > 0
+	if velocity.x != 0:
+		sprite.flip_h = velocity.x < 0
 
 func start_summon() -> void:
+	if active_totems >= MAX_TOTEMS:
+		summon_timer = SUMMON_COOLDOWN
+		return
+	
 	is_summoning = true
 	has_spawned_circle = false
 	sprite.play("summon")
+	
+	if not has_summoned_once:
+		has_summoned_once = true
+		SPEED = CHASE_SPEED
 
 func _on_frame_changed() -> void:
 	if sprite.animation == "summon" and sprite.frame == 8 and not has_spawned_circle:
@@ -87,10 +110,10 @@ func _on_frame_changed() -> void:
 		has_spawned_circle = true
 
 func spawn_magic_circle() -> void:
-	if magic_circle_scene == null:
+	if summoncircle_scene == null:
 		return
 	
-	var circle = magic_circle_scene.instantiate()
+	var circle = summoncircle_scene.instantiate()
 	circle.global_position = global_position + Vector2(0, 50)
 	current_scene.add_child(circle)
 
@@ -101,6 +124,9 @@ func _on_animation_finished() -> void:
 		sprite.play("default")
 	elif sprite.animation == "death":
 		on_death()
+
+func heal(amount: float) -> void:
+	current_hp = min(current_hp + amount, max_hp)
 
 func TakeDamage(damage: float) -> void:
 	if is_dying:

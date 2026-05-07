@@ -8,6 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gvsl7"]
 shader = ExtResource("3_sn4vd")
 shader_parameter/flash_intensity = 0.0
+shader_parameter/buff_tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jb0s4"]
 atlas = ExtResource("1_a5cu7")
@@ -170,7 +171,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_swaws")
 }],
-"loop": true,
+"loop": false,
 "name": &"buff",
 "speed": 12.0
 }, {

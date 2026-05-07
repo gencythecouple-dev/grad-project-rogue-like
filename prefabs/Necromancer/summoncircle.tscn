@@ -558,7 +558,8 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="summoncircle" type="AnimatedSprite2D"]
+[node name="summoncircle" type="AnimatedSprite2D" groups=["Boss", "Necromancer"]]
+scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_ex65p")
 animation = &"summon"
 script = ExtResource("2_ex65p")

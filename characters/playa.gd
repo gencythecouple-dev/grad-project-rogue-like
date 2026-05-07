@@ -83,7 +83,7 @@ var star_ready: bool = true
 
 #player exp and level
 var current_exp: int = 0
-var exp_to_next_level: int = 10
+var exp_to_next_level: int = 20
 var player_level: int = 1
 
 #end game summary
@@ -307,7 +307,9 @@ func _spawn_single_star() -> void:
 	current_scene.add_child(star)
 
 func _spawn_wind_shurikens() -> void:
-	for i in range(wind_shuriken_count):
+	var total_projectiles = wind_shuriken_count + global_projectile_bonus
+	
+	for i in range(total_projectiles):
 		var delay = i * 0.2
 		get_tree().create_timer(delay).timeout.connect(
 			func(): _spawn_single_wind_shuriken()
@@ -481,13 +483,13 @@ func CollectExperience(amount: int) -> void:
 
 func _calculate_exp_to_next_level(level: int) -> int:
 	if level == 1:
-		return 8
+		return 10
 	elif level <= 30:
-		return 8 + (level - 1) * 10
+		return 10 + (level - 1) * 10
 	elif level <= 55:
-		return 8 + (29 * 10) + (level - 30) * 13
+		return 10 + (29 * 10) + (level - 30) * 13
 	else:
-		return 8 + (29 * 10) + (25 * 13) + (level - 55) * 16
+		return 10 + (29 * 10) + (25 * 13) + (level - 55) * 16
 
 func level_up() -> void:
 	player_level += 1
@@ -637,7 +639,7 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 				_equip_passive("armor", preload("res://Assets/Upgrades/26.png"))
 		
 		"magnet":
-			magnet_range += 50.0
+			magnet_range += 200.0
 			if not passive_buffs.has("magnet"):
 				_equip_passive("magnet", preload("res://Assets/Upgrades/magnet.jpg"))
 		

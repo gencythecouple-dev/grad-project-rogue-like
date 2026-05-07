@@ -19,6 +19,7 @@ signal enemy_died(dead_enemy : CharacterBody2D)
 @export var warrior_scene: PackedScene
 @export var plant_scene: PackedScene
 @export var fire_totem_scene: PackedScene
+@export var necromancer_scene: PackedScene
 
 
 var horde_timer: float = 0.0
@@ -73,9 +74,10 @@ func _process(delta: float) -> void:
 		_spawn_horde()
 		
 	if Input.is_action_just_pressed("ui_accept"):
-		var totem = fire_totem_scene.instantiate()
-		totem.global_position = player.global_position + Vector2(200, 0)
-		enemy_holder.add_child(totem)
+		var necro = necromancer_scene.instantiate()
+		necro.global_position = player.global_position + Vector2(300, 0)
+		enemy_holder.add_child(necro)
+		enemy_list.append(necro)
 
 
 func _game_over() -> void:

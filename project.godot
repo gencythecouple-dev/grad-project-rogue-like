@@ -32,6 +32,8 @@ MainScene=""
 Player=""
 Enemy=""
 PlayerUI=""
+Necromancer=""
+Boss=""
 
 [input]
 

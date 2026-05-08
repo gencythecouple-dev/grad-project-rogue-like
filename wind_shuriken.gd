@@ -10,6 +10,7 @@ var throw_direction: Vector2
 var lifetime: float = 0.0
 var max_lifetime: float = 2.0
 var curve_strength: float = 200.0
+var is_crit: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -48,7 +49,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		
 		hit_enemies.append(body)
-		body.TakeDamage(damage)
+		body.TakeDamage(damage,is_crit)
 		
 		if player:
 			player.total_damage_dealt += damage

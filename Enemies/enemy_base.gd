@@ -59,14 +59,14 @@ func SetStats(level_num: int):
 	max_hp = base_hp * level_num
 	current_hp = max_hp
 	
-func TakeDamage(damage: float) -> void:
+func TakeDamage(damage: float, is_crit: bool = false) -> void:
 	if is_dying:
 		return
 	
 	current_hp -= damage
 	flash_timer = FLASH_DURATION
-	spawn_damage_number(damage)
-	
+	spawn_damage_number(damage, is_crit)
+
 	if player_ref:
 		var knockback_dir = (global_position - player_ref.global_position).normalized()
 		knockback_velocity = knockback_dir * KNOCKBACK_STRENGTH
@@ -80,14 +80,14 @@ func on_death() -> void:
 	current_scene.enemy_died.emit(self)
 	current_scene.return_to_pool(self)
 
-func spawn_damage_number(damage: float):
+func spawn_damage_number(damage: float, is_crit: bool = false):
 	if damage_number_scene == null:
 		return
 	
 	var dmg_num = damage_number_scene.instantiate()
 	var spawn_pos = global_position + Vector2(randf_range(-10, 10), -20)
 	current_scene.add_child(dmg_num)
-	dmg_num.setup(damage, spawn_pos)
+	dmg_num.setup(damage, spawn_pos, is_crit)
 
 func chase_player():
 	var dir := global_position.direction_to(player_ref.global_position)

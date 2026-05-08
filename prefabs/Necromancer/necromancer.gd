@@ -128,13 +128,13 @@ func _on_animation_finished() -> void:
 func heal(amount: float) -> void:
 	current_hp = min(current_hp + amount, max_hp)
 
-func TakeDamage(damage: float) -> void:
+func TakeDamage(damage: float, is_crit: bool = false) -> void:
 	if is_dying:
 		return
 	
 	current_hp -= damage
 	flash_timer = FLASH_DURATION
-	spawn_damage_number(damage)
+	spawn_damage_number(damage, is_crit)
 	
 	if current_hp <= 0:
 		is_dying = true
@@ -145,14 +145,14 @@ func apply_flash(intensity: float):
 	if material:
 		material.set_shader_parameter("flash_intensity", intensity)
 
-func spawn_damage_number(damage: float):
+func spawn_damage_number(damage: float, is_crit: bool = false):
 	if damage_number_scene == null:
 		return
 	
 	var dmg_num = damage_number_scene.instantiate()
 	var spawn_pos = global_position + Vector2(randf_range(-10, 10), -20)
 	current_scene.add_child(dmg_num)
-	dmg_num.setup(damage, spawn_pos)
+	dmg_num.setup(damage, spawn_pos, is_crit)
 
 func on_death() -> void:
 	current_scene.enemy_died.emit(self)

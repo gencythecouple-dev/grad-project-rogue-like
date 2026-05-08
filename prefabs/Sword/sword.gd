@@ -8,6 +8,7 @@ var damage: float = 10.0
 var player: CharacterBody2D
 var sword_level: int = 1
 var hit_enemies: Array = []
+var is_crit: bool = false
 
 func _ready() -> void:
 	monitoring = true
@@ -54,7 +55,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		
 		hit_enemies.append(body)
-		body.TakeDamage(damage)
+		body.TakeDamage(damage, is_crit)
 		player.total_damage_dealt += damage
 
 func _on_animation_finished() -> void:

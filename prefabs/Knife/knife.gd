@@ -4,6 +4,7 @@ class_name Knife
 @export var flight_speed := 350
 var flight_direction: Vector2
 var damage: float
+var is_crit: bool = false
 
 func _ready() -> void:
 	if has_meta("direction"):
@@ -18,7 +19,7 @@ func _on_body_entered(body: Node2D) -> void:
 		if "is_dying" in body and body.is_dying:
 			return
 		
-		body.TakeDamage(damage)
+		body.TakeDamage(damage, is_crit)
 		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:

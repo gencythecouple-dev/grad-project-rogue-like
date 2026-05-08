@@ -290,7 +290,8 @@ func Attack() -> void:
 
 
 func _spawn_stars() -> void:
-	for i in range(star_count):
+	var total_count = star_count + global_projectile_bonus
+	for i in range(total_count):
 		var delay = i * 0.3
 		get_tree().create_timer(delay).timeout.connect(
 			func(): _spawn_single_star()
@@ -300,9 +301,12 @@ func _spawn_single_star() -> void:
 	if star_projectile_scene == null:
 		return
 	
+	var crit_result = get_crit_damage(current_attack)
+	
 	var star = star_projectile_scene.instantiate()
 	star.global_position = global_position
-	star.damage = get_crit_damage(current_attack)
+	star.damage = crit_result["damage"]
+	star.is_crit = crit_result["is_crit"]
 	star.speed = star_speed
 	current_scene.add_child(star)
 
@@ -322,10 +326,12 @@ func _spawn_single_wind_shuriken() -> void:
 	var random_angle = randf() * TAU
 	var random_direction = Vector2(cos(random_angle), sin(random_angle))
 	
+	var crit_result = get_crit_damage(current_attack)
+	
 	var shuriken = wind_shuriken_scene.instantiate()
 	shuriken.global_position = global_position
-	shuriken.damage = get_crit_damage(current_attack)
-	shuriken.setup(self, current_attack, random_direction)
+	shuriken.setup(self, crit_result["damage"], random_direction)
+	shuriken.is_crit = crit_result["is_crit"]
 	current_scene.add_child(shuriken)
 
 func _spawn_knives() -> void:
@@ -343,13 +349,15 @@ func _spawn_single_knife(vertical_offset: float = 0, horizontal_offset: float = 
 	if knife_scene == null:
 		return
 	
-	var new_knife = knife_scene.instantiate()
-	var spawn_offset = Vector2(horizontal_offset, vertical_offset)
-	spawn_offset = spawn_offset.rotated(last_direction.angle())
-	new_knife.global_position = global_position + spawn_offset
-	new_knife.damage = get_crit_damage(current_attack)
+	var crit_result = get_crit_damage(current_attack)
 	
-	new_knife.set_meta("direction", last_direction)
+	var new_knife = knife_scene.instantiate()
+	new_knife.global_position = global_position
+	new_knife.damage = crit_result["damage"]
+	new_knife.is_crit = crit_result["is_crit"]
+	
+	var dir = last_direction if last_direction != Vector2.ZERO else Vector2.RIGHT
+	new_knife.set_meta("direction", dir)
 	
 	current_scene.get_node("KnifeHolder").add_child(new_knife)
 
@@ -368,10 +376,11 @@ func _spawn_knife_at_direction(angle_offset: float) -> void:
 func _spawn_hammer() -> void:
 	if hammer_scene == null:
 		return
-	var hammer = hammer_scene.instantiate()
-	add_child(hammer)
-	hammer.position = Vector2(80 if facing_right else -80, 0)
-	hammer.setup(self, current_attack, hammer_level, hammer_scale)
+	
+	var hammer_instance = hammer_scene.instantiate()
+	hammer_instance.position = Vector2(80 if facing_right else -80, 0)
+	hammer_instance.setup(self, current_attack, hammer_level, hammer_scale)
+	add_child(hammer_instance)
 
 func _spawn_magic_bullets(target_enemy: CharacterBody2D) -> void:
 	var total_projectiles = magic_bullet_projectile_count + global_projectile_bonus
@@ -390,9 +399,12 @@ func _spawn_single_magic_bullet_at_target(target: CharacterBody2D) -> void:
 	if target == null or !is_instance_valid(target):
 		return
 	
+	var crit_result = get_crit_damage(current_attack)
+	
 	var new_bullet = magic_bullet_scene.instantiate()
 	new_bullet.global_position = global_position
-	new_bullet.damage = get_crit_damage(current_attack)
+	new_bullet.damage = crit_result["damage"]
+	new_bullet.is_crit = crit_result["is_crit"]
 	new_bullet.pierce_count = magic_bullet_pierce
 	
 	var dir = global_position.direction_to(target.global_position)
@@ -426,15 +438,31 @@ func _spawn_holy_smite() -> void:
 	if holy_smite_scene == null:
 		return
 	
-	var random_enemy = _get_random_enemy()
-	if random_enemy == null:
+	var enemies_in_range = get_tree().get_nodes_in_group("Enemy")
+	if enemies_in_range.is_empty():
 		return
 	
-	var smite = holy_smite_scene.instantiate()
-	smite.global_position = random_enemy.global_position
-	smite.damage = get_crit_damage(current_attack)
-	smite.scale = Vector2(holy_smite_aoe, holy_smite_aoe)
-	current_scene.add_child(smite)
+	var valid_targets = []
+	for enemy in enemies_in_range:
+		if enemy != null and is_instance_valid(enemy):
+			if "is_dying" in enemy and not enemy.is_dying:
+				valid_targets.append(enemy)
+	
+	if valid_targets.is_empty():
+		return
+	
+	for i in range(holy_smite_count):
+		if valid_targets.is_empty():
+			break
+		
+		var target = valid_targets.pick_random()
+		var crit_result = get_crit_damage(current_attack)
+		
+		var smite = holy_smite_scene.instantiate()
+		smite.global_position = target.global_position
+		smite.damage = crit_result["damage"]
+		smite.is_crit = crit_result["is_crit"]
+		current_scene.add_child(smite)
 
 func _get_random_enemy() -> CharacterBody2D:
 	var valid_enemies = []
@@ -451,17 +479,25 @@ func _spawn_sword() -> void:
 	if sword_level >= 5:
 		if sword_aura_scene == null:
 			return
+		
+		var crit_result = get_crit_damage(current_attack)
+		
 		var sword_aura = sword_aura_scene.instantiate()
 		add_child(sword_aura)
 		sword_aura.position = Vector2.ZERO
-		sword_aura.setup(self, current_attack)
+		sword_aura.setup(self, crit_result["damage"])
+		sword_aura.is_crit = crit_result["is_crit"]
 	else:
 		if sword_scene == null:
 			return
+		
+		var crit_result = get_crit_damage(current_attack)
+		
 		var sword = sword_scene.instantiate()
 		add_child(sword)
 		sword.position = Vector2(60 if facing_right else -60, 0)
-		sword.setup(self, current_attack, sword_level)
+		sword.setup(self, crit_result["damage"], sword_level)
+		sword.is_crit = crit_result["is_crit"]
 
 #STATS AND LEVELING
 func SetStats() -> void:
@@ -659,10 +695,10 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 				_equip_passive("vampirism", preload("res://Assets/Upgrades/vampirism.png"))
 
 #Passive
-func get_crit_damage(base_damage: float) -> float:
-	if randf() < crit_chance:
-		return base_damage * 2.0
-	return base_damage
+func get_crit_damage(base_damage: float) -> Dictionary:
+	var is_crit = randf() < crit_chance
+	var damage = base_damage * 2.0 if is_crit else base_damage
+	return {"damage": damage, "is_crit": is_crit}
 
 
 func TakeDamage(damage: float) -> void:

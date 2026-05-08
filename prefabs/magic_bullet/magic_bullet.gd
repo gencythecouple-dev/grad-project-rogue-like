@@ -7,6 +7,7 @@ var flight_direction: Vector2
 var damage : float
 var pierce_count: int = 0
 var enemies_hit: Array = []
+var is_crit: bool = false
 
 const ENEMY_LAYER := 1 << 1
 const ENV_LAYER   := 1 << 2
@@ -47,7 +48,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		
 		enemies_hit.append(body)
-		body.TakeDamage(damage)
+		body.TakeDamage(damage, is_crit)
 		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:

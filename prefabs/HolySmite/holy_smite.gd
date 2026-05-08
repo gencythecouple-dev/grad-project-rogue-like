@@ -3,6 +3,8 @@ class_name HolySmite
 
 var damage: float = 15.0
 var has_hit: bool = false
+var is_crit: bool = false
+
 
 func _ready() -> void:
 	monitoring = true
@@ -33,7 +35,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemy") and not has_hit:
 		if "is_dying" in body and body.is_dying:
 			return
-		body.TakeDamage(damage)
+		body.TakeDamage(damage,is_crit)
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:
 			player.total_damage_dealt += damage

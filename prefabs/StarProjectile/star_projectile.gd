@@ -10,6 +10,7 @@ var max_lifetime: float = 10.0
 
 var trail_points: Array = []
 var max_trail_length: int = 60
+var is_crit: bool = false
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -63,7 +64,7 @@ func _on_body_entered(body: Node2D) -> void:
 			return
 		
 		hit_enemies.append(body)
-		body.TakeDamage(damage)
+		body.TakeDamage(damage,is_crit)
 		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:

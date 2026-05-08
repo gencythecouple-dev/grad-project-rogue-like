@@ -31,10 +31,14 @@ var player: CharacterBody2D
 var enemy_list = []
 var enemy_pool: Array = []
 const POOL_SIZE := 100
+var necromancer_spawned: bool = false
+
 
 
 
 func _ready() -> void:
+	print("FPS: ", Engine.get_frames_per_second())
+	print("Physics iterations: ", Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS))
 	_spawn_player()
 	add_to_group("MainScene")
 	_create_pool()
@@ -69,15 +73,22 @@ func _process(delta: float) -> void:
 	player_ui.update_timer(game_time)
 	_update_spawn_config()
 	
+	if game_time >= 540 and not necromancer_spawned:
+		spawn_necromancer()
+		necromancer_spawned = true
+	
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
 		_spawn_horde()
-		
-	if Input.is_action_just_pressed("ui_accept"):
-		var necro = necromancer_scene.instantiate()
-		necro.global_position = player.global_position + Vector2(300, 0)
-		enemy_holder.add_child(necro)
-		enemy_list.append(necro)
+
+func spawn_necromancer() -> void:
+	if necromancer_scene == null:
+		return
+	
+	var necro = necromancer_scene.instantiate()
+	necro.global_position = get_offscreen_spawn_position()
+	enemy_holder.add_child(necro)
+	enemy_list.append(necro)
 
 
 func _game_over() -> void:

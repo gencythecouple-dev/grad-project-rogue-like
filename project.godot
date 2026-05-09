@@ -79,6 +79,13 @@ ui_down={
 2d_physics/layer_5="Exp"
 2d_physics/layer_6="PushBox"
 
+[physics]
+
+2d/run_on_separate_thread=true
+common/physics_jitter_fix=0.0
+2d/physics_ticks_per_second=30
+2d/physics_jitter_fix=0.5
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

@@ -37,8 +37,6 @@ var necromancer_spawned: bool = false
 
 
 func _ready() -> void:
-	print("FPS: ", Engine.get_frames_per_second())
-	print("Physics iterations: ", Performance.get_monitor(Performance.TIME_PHYSICS_PROCESS))
 	_spawn_player()
 	add_to_group("MainScene")
 	_create_pool()
@@ -69,6 +67,9 @@ func get_camera_rect() -> Rect2:
 	
 func _process(delta: float) -> void:
 	game_time += delta
+	print("Active enemies: ", enemy_list.size())
+	print("Total scene nodes: ", get_tree().get_node_count())
+	print("FPS: ", Engine.get_frames_per_second())
 	horde_timer += delta
 	player_ui.update_timer(game_time)
 	_update_spawn_config()

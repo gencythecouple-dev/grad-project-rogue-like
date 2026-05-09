@@ -149,21 +149,22 @@ level_up_effect_scene = ExtResource("10_kpgvb")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -48.0
-offset_top = 96.0
+offset_top = 73.0
 offset_right = 50.0
-offset_bottom = 107.0
+offset_bottom = 84.0
 theme_override_styles/background = SubResource("StyleBoxFlat_tnvvi")
 theme_override_styles/fill = SubResource("StyleBoxFlat_xw6re")
 show_percentage = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_qombd")
+position = Vector2(0, -26.999998)
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_mno74")
 animation = &"run"
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 69)
+position = Vector2(-1, 44)
 scale = Vector2(3.15625, 2.671875)
 sprite_frames = SubResource("SpriteFrames_wmh5w")
 
@@ -173,7 +174,6 @@ sprite_frames = SubResource("SpriteFrames_wmh5w")
 wait_time = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 25)
 shape = SubResource("CapsuleShape2D_wmh5w")
 
 [connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]

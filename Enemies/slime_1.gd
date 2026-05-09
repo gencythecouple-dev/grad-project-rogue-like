@@ -1,7 +1,6 @@
 extends EnemyBase
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var attack_area: Area2D = $Area2D
 
 const SPEED := 80
 const ATTACK_DAMAGE: float = 0.5
@@ -12,8 +11,6 @@ var is_touching_player := false
 
 func _ready() -> void:
 	super._ready()
-	attack_area.body_entered.connect(_on_attack_area_entered)
-	attack_area.body_exited.connect(_on_attack_area_exited)
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	sprite.play("run")

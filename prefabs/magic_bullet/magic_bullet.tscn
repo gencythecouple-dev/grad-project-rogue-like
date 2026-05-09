@@ -260,8 +260,9 @@ length = 19.0
 
 [node name="magic_bullet" type="Area2D"]
 scale = Vector2(2, 2)
-collision_layer = 8
-collision_mask = 6
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 script = ExtResource("1_o5lq0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

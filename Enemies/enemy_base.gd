@@ -16,6 +16,10 @@ var max_hp: int
 var current_hp: int
 var flash_timer := 0.0
 var is_dying := false
+var update_offset: float = 0.0
+var update_interval: float = 0.1
+var separation_force: float = 100.0
+
 
 # Constants
 const KNOCKBACK_STRENGTH := 300.0
@@ -32,9 +36,8 @@ func _physics_process(delta: float) -> void:
 	if player_ref == null:
 		return
 	
-	# Handle knockback
 	if knockback_velocity.length() > 10:
-		velocity = knockback_velocity
+		global_position += knockback_velocity * delta
 		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, KNOCKBACK_DECAY * delta)
 		is_stunned = true
 	else:
@@ -42,9 +45,29 @@ func _physics_process(delta: float) -> void:
 		knockback_velocity = Vector2.ZERO
 		
 		if not is_stunned:
-			enemy_behavior(delta)
+			update_offset += delta
+			if update_offset >= update_interval:
+				update_offset = 0.0
+				enemy_behavior(delta)
 	
-	move_and_slide()
+	apply_soft_collision(delta)
+	global_position += velocity * delta
+
+
+func apply_soft_collision(delta: float):
+	var push = Vector2.ZERO
+	var nearby = get_tree().get_nodes_in_group("Enemy")
+	
+	for other in nearby:
+		if other == self or other == null:
+			continue
+		
+		var distance = global_position.distance_to(other.global_position)
+		if distance < 40 and distance > 0:
+			var direction = (global_position - other.global_position).normalized()
+			push += direction * (40 - distance) * separation_force
+	
+	global_position += push * delta
 
 func setup_enemy():
 	pass

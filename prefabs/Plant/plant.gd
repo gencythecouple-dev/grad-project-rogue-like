@@ -4,7 +4,6 @@ extends EnemyBase
 @onready var attack_area: Area2D = $AttackArea
 
 const SPEED := 60
-const ATTACK_DAMAGE: float = 0.75
 var is_touching_player := false
 
 func _ready() -> void:

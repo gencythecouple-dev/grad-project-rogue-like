@@ -3,7 +3,6 @@ extends EnemyBase
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 const SPEED := 150
-const ATTACK_DAMAGE := 0.6
 const ATTACK_RANGE := 35
 
 func _ready() -> void:

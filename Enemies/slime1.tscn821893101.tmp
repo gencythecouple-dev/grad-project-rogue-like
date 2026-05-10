@@ -127,10 +127,20 @@ radius = 17.029387
 
 [node name="Slime1" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 2
-collision_mask = 4
 motion_mode = 1
 script = ExtResource("1_i2kp5")
+exp_value = null
+base_hp = null
+speed = null
 damage_number_scene = ExtResource("2_tgr6y")
+separation_radius = null
+separation_weight = null
+player_separation_weight = null
+target_weight = null
+maximum_speed = null
+jitter_fix = null
+skip_frames = null
+max_intersect_results = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_tgr6y")

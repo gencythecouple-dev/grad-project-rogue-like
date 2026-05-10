@@ -30,8 +30,13 @@ var player_ui
 var player: CharacterBody2D
 var enemy_list = []
 var enemy_pool: Array = []
-const POOL_SIZE := 100
+var slime_pool: Array = []
+var slime2_pool: Array = []
+var plant_pool: Array = []
+const POOL_SIZE := 150
 var necromancer_spawned: bool = false
+var last_config_check: float = 0.0
+
 
 
 
@@ -67,12 +72,13 @@ func get_camera_rect() -> Rect2:
 	
 func _process(delta: float) -> void:
 	game_time += delta
-	print("Active enemies: ", enemy_list.size())
-	print("Total scene nodes: ", get_tree().get_node_count())
-	print("FPS: ", Engine.get_frames_per_second())
 	horde_timer += delta
 	player_ui.update_timer(game_time)
 	_update_spawn_config()
+	
+	if game_time - last_config_check >= 5.0:
+		last_config_check = game_time
+		_update_spawn_config()
 	
 	if game_time >= 540 and not necromancer_spawned:
 		spawn_necromancer()
@@ -129,15 +135,22 @@ func get_offscreen_spawn_position() -> Vector2:
 
 
 func _create_pool() -> void:
-	for i in range(POOL_SIZE):
-		var enemy = slime_scene.instantiate()
+	_fill_pool(slime_scene, slime_pool, POOL_SIZE)
+	_fill_pool(slime2_scene, slime2_pool, 50)
+	_fill_pool(plant_scene, plant_pool, 50)
+
+func _fill_pool(scene: PackedScene, pool: Array, size: int) -> void:
+	if scene == null:
+		return
+	for i in range(size):
+		var enemy = scene.instantiate()
 		enemy_holder.add_child(enemy)
 		enemy.hide()
 		enemy.process_mode = Node.PROCESS_MODE_DISABLED
-		enemy_pool.append(enemy)
+		pool.append(enemy)
 
-func _get_pooled_enemy():
-	for enemy in enemy_pool:
+func _get_from_pool(pool: Array) -> Node:
+	for enemy in pool:
 		if not enemy.visible:
 			return enemy
 	return null
@@ -179,23 +192,43 @@ func spawn_enemy() -> void:
 	
 	var enemy
 	match chosen:
-		"slime": enemy = slime_scene.instantiate()
-		"slime2": enemy = slime2_scene.instantiate()
-		"plant": enemy = plant_scene.instantiate()
+		"slime":
+			enemy = _get_from_pool(slime_pool)
+			if enemy == null:
+				enemy = slime_scene.instantiate()
+				enemy_holder.add_child(enemy)
+				slime_pool.append(enemy)
+		"slime2":
+			enemy = _get_from_pool(slime2_pool)
+			if enemy == null:
+				enemy = slime2_scene.instantiate()
+				enemy_holder.add_child(enemy)
+				slime2_pool.append(enemy)
+		"plant":
+			enemy = _get_from_pool(plant_pool)
+			if enemy == null:
+				enemy = plant_scene.instantiate()
+				enemy_holder.add_child(enemy)
+				plant_pool.append(enemy)
+	
+	if enemy == null:
+		return
 	
 	enemy.global_position = get_offscreen_spawn_position()
-	enemy_holder.add_child(enemy)
+	enemy.show()
+	enemy.process_mode = Node.PROCESS_MODE_INHERIT
 	var enemy_level = get_enemy_level()
 	enemy.SetStats(enemy_level)
 	enemy_list.append(enemy)
 
 func return_to_pool(enemy) -> void:
-	enemy.hide()
-	enemy.is_dying = false 
-	enemy.process_mode = Node.PROCESS_MODE_DISABLED
-	enemy.current_hp = enemy.max_hp
 	if enemy_list.has(enemy):
 		enemy_list.erase(enemy)
+	enemy.velocity = Vector2.ZERO
+	enemy.knockback_velocity = Vector2.ZERO
+	enemy.is_dying = false
+	enemy.hide()
+	enemy.process_mode = Node.PROCESS_MODE_DISABLED
 
 var spawn_table = [
 	{"time": 0,   "count": 2,  "interval": 2.0, "enemies": ["slime"]},
@@ -237,11 +270,18 @@ func _spawn_horde() -> void:
 	var player_pos = get_tree().get_first_node_in_group("Player").global_position
 	var horde_angle = randf() * TAU
 	for i in range(20):
-		var enemy = slime_scene.instantiate()
+		var enemy = _get_from_pool(slime_pool)
+		if enemy == null:
+			enemy = slime_scene.instantiate()
+			enemy_holder.add_child(enemy)
+			slime_pool.append(enemy)
+		
 		var spread = randf_range(-0.3, 0.3)
 		var pos = player_pos + Vector2(cos(horde_angle + spread), sin(horde_angle + spread)) * 550
 		enemy.global_position = pos
-		enemy_holder.add_child(enemy)
+		enemy.show()
+		enemy.process_mode = Node.PROCESS_MODE_INHERIT
+		enemy.SetStats(get_enemy_level())
 		enemy_list.append(enemy)
 
 

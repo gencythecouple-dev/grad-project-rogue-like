@@ -315,11 +315,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_wqdo6"]
 radius = 18.027756
 
-[node name="Necromancer" type="CharacterBody2D" groups=["Boss", "Enemy"]]
+[node name="Necromancer" type="Area2D" groups=["Boss", "Enemy"]]
 material = SubResource("ShaderMaterial_5absv")
 scale = Vector2(3.6, 3.6)
 collision_layer = 2
-motion_mode = 1
 script = ExtResource("1_uww6i")
 damage_number_scene = ExtResource("2_gdvxf")
 summoncircle_scene = ExtResource("4_8ueyk")

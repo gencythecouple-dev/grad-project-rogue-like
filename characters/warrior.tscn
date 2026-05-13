@@ -127,7 +127,7 @@ radius = 20.0
 height = 84.0
 
 [node name="Warrior" type="CharacterBody2D" groups=["Player"]]
-collision_mask = 6
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_tnvvi")
 hammer_scene = ExtResource("3_em2o3")

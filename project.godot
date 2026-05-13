@@ -13,6 +13,7 @@ config_version=5
 config/name="Grad Project Rogue-like"
 run/main_scene="uid://b4pyp0x5s4kw5"
 config/features=PackedStringArray("4.5", "Forward Plus")
+run/max_fps=60
 config/icon="res://icon.svg"
 
 [autoload]
@@ -23,8 +24,6 @@ GameData="*res://GameData.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="viewport"
-window/stretch/scale_mode="integer"
 
 [global_group]
 
@@ -83,8 +82,8 @@ ui_down={
 2d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
 2d/physics_ticks_per_second=30
-2d/physics_jitter_fix=0.5
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+2d/snap/snap_2d_transforms_to_pixel=true

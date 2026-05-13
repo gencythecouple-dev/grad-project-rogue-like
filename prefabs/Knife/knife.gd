@@ -7,6 +7,7 @@ var damage: float
 var is_crit: bool = false
 
 func _ready() -> void:
+	area_entered.connect(_on_area_entered)
 	if has_meta("direction"):
 		flight_direction = get_meta("direction")
 		rotation = flight_direction.angle()
@@ -14,12 +15,12 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	position += flight_direction * flight_speed * delta
 
-func _on_body_entered(body: Node2D) -> void: 	
-	if body.is_in_group("Enemy"):
-		if "is_dying" in body and body.is_dying:
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		if "is_dying" in area and area.is_dying:
 			return
 		
-		body.TakeDamage(damage, is_crit)
+		area.TakeDamage(damage, is_crit)
 		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:

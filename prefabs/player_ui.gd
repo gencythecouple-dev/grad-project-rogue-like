@@ -3,6 +3,8 @@ extends CanvasLayer
 @onready var exp_bar = $"VBoxContainer/ExpBar"
 @onready var level_label = $"VBoxContainer/HBoxContainer/LevelLabel"
 @onready var timer_label = $"VBoxContainer/HBoxContainer/Label"
+@onready var fps_label = $"VBoxContainer/FPS"
+@onready var enemy_count_label = $"VBoxContainer/EnemyCount"
 @onready var active_slots = [
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot1/TextureRect",
 	$"VBoxContainer/HBoxContainer/ItemContainerDisplay/ActiveItemsRow/ActiveSlot2/TextureRect",
@@ -27,6 +29,14 @@ func _ready():
 	for slot in active_slots + passive_slots:
 		if slot:
 			slot.modulate = Color(0.3, 0.3, 0.3, 0.5)
+
+func _process(_delta: float) -> void:
+	if fps_label:
+		fps_label.text = "FPS: " + str(Engine.get_frames_per_second())
+	if enemy_count_label:
+		var level = get_tree().get_first_node_in_group("MainScene")
+		if level:
+			enemy_count_label.text = "Enemies: " + str(level.enemy_list.size())
 
 func update_exp(current: int, needed: int):
 	if exp_bar == null:
@@ -59,7 +69,6 @@ func add_passive_item(icon_texture: Texture2D):
 		slot.modulate = Color.WHITE
 		passive_count += 1
 
-#Timer stuff
 func update_timer(time: float) -> void:
 	var total_seconds: int = int(time)
 	var minutes: int = floor(total_seconds / 60.0)

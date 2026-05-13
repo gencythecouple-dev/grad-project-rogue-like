@@ -125,14 +125,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_jl1js"]
 radius = 17.029387
 
-[node name="Slime1" type="CharacterBody2D" groups=["Enemy"]]
+[node name="Slime1" type="Area2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 4
-motion_mode = 1
+monitoring = false
 script = ExtResource("1_i2kp5")
 damage_number_scene = ExtResource("2_tgr6y")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 material = SubResource("ShaderMaterial_tgr6y")
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cpi68")
@@ -145,7 +146,3 @@ position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_jl1js")
 
 [node name="AttackCooldown" type="Timer" parent="."]
-
-[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

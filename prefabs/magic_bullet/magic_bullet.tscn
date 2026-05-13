@@ -273,5 +273,3 @@ animation = &"attack1"
 position = Vector2(-8, 1)
 rotation = -1.5707964
 shape = SubResource("SeparationRayShape2D_35nk8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

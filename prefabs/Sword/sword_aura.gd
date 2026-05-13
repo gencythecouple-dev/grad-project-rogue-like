@@ -9,7 +9,7 @@ var is_crit: bool = false
 
 func _ready() -> void:
 	monitoring = true
-	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 	sprite.play("default")
 	sprite.animation_finished.connect(_on_animation_finished)
 
@@ -17,15 +17,15 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float) -> void:
 	player = spawn_player
 	damage = spawn_damage
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		if hit_enemies.has(body):
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		if hit_enemies.has(area):
 			return
-		if "is_dying" in body and body.is_dying:
+		if "is_dying" in area and area.is_dying:
 			return
 		
-		hit_enemies.append(body)
-		body.TakeDamage(damage,is_crit)
+		hit_enemies.append(area)
+		area.TakeDamage(damage, is_crit)
 		player.total_damage_dealt += damage
 
 func _on_animation_finished() -> void:

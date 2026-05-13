@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cmxqqfkp81tk0"]
+[gd_scene load_steps=14 format=3 uid="uid://cmxqqfkp81tk0"]
 
 [ext_resource type="Texture2D" uid="uid://b7s3btiogqmlt" path="res://Assets/plant/Plant1_Walk_full.png" id="1_1wvmx"]
 [ext_resource type="Script" uid="uid://bdlmq14dbuawi" path="res://prefabs/Plant/plant.gd" id="1_lr75d"]
@@ -8,6 +8,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_evxmu"]
 shader = ExtResource("2_aerc7")
 shader_parameter/flash_intensity = 0.0
+shader_parameter/buff_tint = Color(1, 1, 1, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lr75d"]
 atlas = ExtResource("1_1wvmx")
@@ -62,13 +63,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4pr78"]
 radius = 29.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lr75d"]
-radius = 37.01351
-
-[node name="plant" type="CharacterBody2D" groups=["Enemy"]]
+[node name="plant" type="Area2D" groups=["Enemy"]]
 collision_layer = 2
 collision_mask = 3
-motion_mode = 1
 script = ExtResource("1_lr75d")
 base_hp = 6
 damage_number_scene = ExtResource("2_evxmu")
@@ -82,10 +79,3 @@ frame_progress = 0.6930783
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 4)
 shape = SubResource("CircleShape2D_4pr78")
-
-[node name="AttackArea" type="Area2D" parent="."]
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-position = Vector2(5, 5)
-shape = SubResource("CircleShape2D_lr75d")

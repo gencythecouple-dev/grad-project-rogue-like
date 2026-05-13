@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var SPEED := 200
+var SPEED: float = 150.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var attack_timer: Timer = $AttackTimer
@@ -20,7 +20,7 @@ var SPEED := 200
 
 var flash_timer: float = 0.0
 const FLASH_DURATION: float = 0.1
-var target: CharacterBody2D
+var target: Area2D
 var current_scene: Node
 var player_ui  
 var level_up_menu
@@ -39,7 +39,7 @@ var base_attack: float = 3.0
 var current_attack: float
 var base_armor: float = 5.0
 var current_armor: float
-var base_hp := 200
+var base_hp := 2000000
 var max_hp: int
 var current_hp: int
 
@@ -195,9 +195,9 @@ func has_valid_enemy() -> bool:
 			return true
 	return false
 
-func _get_closest_enemy() -> CharacterBody2D:
+func _get_closest_enemy() -> Area2D:
 	var closest_distance: float = INF
-	var target_enemy: CharacterBody2D = null
+	var target_enemy: Area2D = null
 	for enemy in current_scene.enemy_list:
 		if enemy == null or !is_instance_valid(enemy):
 			continue
@@ -382,7 +382,7 @@ func _spawn_hammer() -> void:
 	hammer_instance.setup(self, current_attack, hammer_level, hammer_scale)
 	add_child(hammer_instance)
 
-func _spawn_magic_bullets(target_enemy: CharacterBody2D) -> void:
+func _spawn_magic_bullets(target_enemy: Area2D) -> void:
 	var total_projectiles = magic_bullet_projectile_count + global_projectile_bonus
 	var targets = _get_n_closest_enemies_in_cone(total_projectiles, 50.0)
 	
@@ -393,7 +393,7 @@ func _spawn_magic_bullets(target_enemy: CharacterBody2D) -> void:
 			func(): _spawn_single_magic_bullet_at_target(target)
 		)
 
-func _spawn_single_magic_bullet_at_target(target: CharacterBody2D) -> void:
+func _spawn_single_magic_bullet_at_target(target: Area2D) -> void:
 	if magic_bullet_scene == null:
 		return
 	if target == null or !is_instance_valid(target):
@@ -464,7 +464,7 @@ func _spawn_holy_smite() -> void:
 		smite.is_crit = crit_result["is_crit"]
 		current_scene.add_child(smite)
 
-func _get_random_enemy() -> CharacterBody2D:
+func _get_random_enemy() -> Area2D:
 	var valid_enemies = []
 	for enemy in current_scene.enemy_list:
 		if enemy != null and is_instance_valid(enemy):

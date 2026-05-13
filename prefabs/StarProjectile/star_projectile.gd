@@ -1,24 +1,20 @@
 extends Area2D
 class_name StarProjectile
-
 var speed: float = 300.0
 var damage: float = 3.0
 var velocity: Vector2
 var hit_enemies: Array = []
 var lifetime: float = 0.0
 var max_lifetime: float = 10.0
-
 var trail_points: Array = []
 var max_trail_length: int = 60
 var is_crit: bool = false
-
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 	$AnimatedSprite2D.play("default")
 	
 	var random_angle = randf() * TAU
 	velocity = Vector2(cos(random_angle), sin(random_angle)) * speed
-
 func _physics_process(delta: float) -> void:
 	lifetime += delta
 	
@@ -44,7 +40,6 @@ func _physics_process(delta: float) -> void:
 		trail_points.pop_front()
 	
 	queue_redraw()
-
 func _draw() -> void:
 	if trail_points.size() < 2:
 		return
@@ -55,16 +50,15 @@ func _draw() -> void:
 		var start = to_local(trail_points[i])
 		var end = to_local(trail_points[i + 1])
 		draw_line(start, end, color, 2.0)
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		if hit_enemies.has(body):
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		if hit_enemies.has(area):
 			return
-		if "is_dying" in body and body.is_dying:
+		if "is_dying" in area and area.is_dying:
 			return
 		
-		hit_enemies.append(body)
-		body.TakeDamage(damage,is_crit)
+		hit_enemies.append(area)
+		area.TakeDamage(damage, is_crit)
 		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:

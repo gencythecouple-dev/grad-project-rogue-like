@@ -14,7 +14,7 @@ func _ready() -> void:
 	lifetime_timer.wait_time = 1.0
 	lifetime_timer.one_shot = true
 	lifetime_timer.timeout.connect(_on_timer_timeout)
-	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 	sprite.animation_finished.connect(_on_animation_finished)
 	sprite.frame_changed.connect(_on_frame_changed)
 	lifetime_timer.start()
@@ -25,14 +25,13 @@ func _on_frame_changed() -> void:
 		_spawn_shockwave()
 	elif sprite.frame == 9:
 		monitoring = false
-		
+
 func _spawn_shockwave() -> void:
 	var spike_count = 1
 	var shockwave_scale = 1.0
 	var shockwave_spacing = 100
-
 	match hammer_level:
-		1: 
+		1:
 			spike_count = 1
 		2:
 			spike_count = 1
@@ -46,7 +45,6 @@ func _spawn_shockwave() -> void:
 		5:
 			spike_count = 3
 			shockwave_scale = 2.5
-
 	var crit_result = player.get_crit_damage(damage * 0.5)
 	var direction = Vector2(1, 0) if !sprite.flip_h else Vector2(-1, 0)
 	
@@ -56,7 +54,7 @@ func _spawn_shockwave() -> void:
 		shockwave.global_position = global_position + offset
 		shockwave.setup(crit_result["damage"], shockwave_scale, sprite.flip_h, crit_result["is_crit"])
 		get_tree().root.get_node("Level").get_node("ShockwaveHolder").add_child(shockwave)
-		
+
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale_mult: float) -> void:
 	player = spawn_player
 	damage = spawn_damage
@@ -67,10 +65,9 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale
 	anim_sprite.flip_h = !spawn_player.facing_right
 	anim_sprite.play("swing")
 
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		body.TakeDamage(damage,is_crit)
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		area.TakeDamage(damage, is_crit)
 		player.total_damage_dealt += damage
 
 func _on_animation_finished() -> void:

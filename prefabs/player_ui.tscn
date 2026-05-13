@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dwd10uw4xqpe4"]
 
-[ext_resource type="Script" uid="uid://b8mhdkjxf21gv" path="res://player_ui.gd" id="1_66t03"]
+[ext_resource type="Script" uid="uid://b8mhdkjxf21gv" path="res://prefabs/player_ui.gd" id="1_66t03"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_66t03"]
 bg_color = Color(0, 0, 0, 1)
@@ -168,3 +168,9 @@ size_flags_stretch_ratio = 0.0
 localize_numeral_system = false
 text = "Level 1"
 horizontal_alignment = 2
+
+[node name="FPS" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="EnemyCount" type="Label" parent="VBoxContainer"]
+layout_mode = 2

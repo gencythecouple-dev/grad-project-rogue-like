@@ -4,7 +4,6 @@ class_name WindShuriken
 var damage: float = 5.0
 var player: CharacterBody2D
 var hit_enemies: Array = []
-
 var start_pos: Vector2
 var throw_direction: Vector2
 var lifetime: float = 0.0
@@ -13,7 +12,7 @@ var curve_strength: float = 200.0
 var is_crit: bool = false
 
 func _ready() -> void:
-	body_entered.connect(_on_body_entered)
+	area_entered.connect(_on_area_entered)
 	$AnimatedSprite2D.play("default")
 
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, spawn_direction: Vector2) -> void:
@@ -41,15 +40,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		global_position = start_pos + forward + sideways
 
-func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("Enemy"):
-		if hit_enemies.has(body):
+func _on_area_entered(area: Area2D) -> void:
+	if area.is_in_group("Enemy"):
+		if hit_enemies.has(area):
 			return
-		if "is_dying" in body and body.is_dying:
+		if "is_dying" in area and area.is_dying:
 			return
 		
-		hit_enemies.append(body)
-		body.TakeDamage(damage,is_crit)
+		hit_enemies.append(area)
+		area.TakeDamage(damage, is_crit)
 		
 		if player:
 			player.total_damage_dealt += damage

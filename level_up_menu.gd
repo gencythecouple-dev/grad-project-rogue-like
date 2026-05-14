@@ -1,3 +1,4 @@
+
 extends CanvasLayer
 signal upgrade_selected(upgrade_type: String)
 
@@ -17,6 +18,9 @@ var active_upgrades_taken := 0
 var passive_upgrades_taken := 0
 const MAX_ACTIVE := 4
 const MAX_PASSIVE := 4
+
+var selected_index: int = 0
+var buttons: Array = []
 
 var all_upgrades := [
 	{
@@ -177,6 +181,7 @@ var current_choices := []
 func _ready():
 	hide()
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	buttons = [choice1, choice2, choice3]
 	
 	for upgrade in all_upgrades:
 		upgrade_levels[upgrade["stat"]] = 0
@@ -185,7 +190,40 @@ func _ready():
 	choice2.pressed.connect(_on_choice2_pressed)
 	choice3.pressed.connect(_on_choice3_pressed)
 
+func _input(event: InputEvent) -> void:
+	if not visible:
+		return
+	
+	if event.is_action_pressed("ui_focus_next") or event.is_action_pressed("ui_focus_prev"):
+		get_viewport().set_input_as_handled()
+		return
+	
+	if event.is_action_pressed("ui_down") or event.is_action_pressed("ui_right"):
+		selected_index = (selected_index + 1) % current_choices.size()
+		_update_selection()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_up") or event.is_action_pressed("ui_left"):
+		selected_index = (selected_index - 1 + current_choices.size()) % current_choices.size()
+		_update_selection()
+		get_viewport().set_input_as_handled()
+	elif event.is_action_pressed("ui_accept") or event.is_action_pressed("ui_select"):
+		_apply_upgrade(selected_index)
+		get_viewport().set_input_as_handled()
+
+func _update_selection() -> void:
+	for i in range(buttons.size()):
+		if i < current_choices.size():
+			var arrow_left = buttons[i].get_node_or_null("ArrowLeft")
+			var arrow_right = buttons[i].get_node_or_null("ArrowRight")
+			if i == selected_index:
+				if arrow_left: arrow_left.show()
+				if arrow_right: arrow_right.show()
+			else:
+				if arrow_left: arrow_left.hide()
+				if arrow_right: arrow_right.hide()
+
 func show_upgrades():
+	var player = get_tree().get_first_node_in_group("Player")
 	var owned_upgrades = []
 	var new_upgrades = []
 	
@@ -195,10 +233,17 @@ func show_upgrades():
 		if upgrade.has("requires") and upgrade["requires"] != "":
 			if upgrade_levels.get(upgrade["requires"], 0) < 1:
 				continue
-		if upgrade_levels[upgrade["stat"]] > 0:
-			owned_upgrades.append(upgrade)
-		else:
+		
+		var is_new = upgrade_levels[upgrade["stat"]] == 0
+		
+		if is_new:
+			if upgrade["upgrade_type"] == "active" and player and player.active_weapons.size() >= 4:
+				continue
+			if upgrade["upgrade_type"] == "passive" and player and player.passive_buffs.size() >= 4:
+				continue
 			new_upgrades.append(upgrade)
+		else:
+			owned_upgrades.append(upgrade)
 	
 	var weighted_pool = []
 	
@@ -229,9 +274,15 @@ func show_upgrades():
 	show()
 	get_tree().paused = true
 	
+	selected_index = 0
 	_update_button(choice1, choice1_label, choice1_icon, 0)
 	_update_button(choice2, choice2_label, choice2_icon, 1)
 	_update_button(choice3, choice3_label, choice3_icon, 2)
+	_update_selection()
+	
+	choice1.focus_mode = Control.FOCUS_NONE
+	choice2.focus_mode = Control.FOCUS_NONE
+	choice3.focus_mode = Control.FOCUS_NONE
 
 func _apply_upgrade(index: int):
 	if index < current_choices.size():
@@ -274,7 +325,6 @@ func _on_choice2_pressed():
 
 func _on_choice3_pressed():
 	_apply_upgrade(2)
-
 
 func close_menu():
 	hide()

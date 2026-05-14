@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://xnhalk4oi04s"]
+[gd_scene load_steps=6 format=3 uid="uid://xnhalk4oi04s"]
 
 [ext_resource type="Script" uid="uid://wntqgq4l5ek2" path="res://level_up_menu.gd" id="1_pn0h5"]
 [ext_resource type="Texture2D" uid="uid://hd74m31adhrj" path="res://Assets/UIBundleFree/UIBundleFree/UiCozyFree.png" id="2_j46r6"]
+[ext_resource type="Texture2D" uid="uid://baqpshrf2y73g" path="res://Assets/ArrowLeft.tres" id="3_nysvr"]
+[ext_resource type="Texture2D" uid="uid://cgsmwa03d4gef" path="res://Assets/ArrowRight.tres" id="4_rmkxh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nysvr"]
+bg_color = Color(0.972549, 0.98039216, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(18.892157, 16.145428, 0, 1)
 
 [node name="LevelUpMenu" type="CanvasLayer" groups=["PlayerUI"]]
 script = ExtResource("1_pn0h5")
@@ -36,7 +46,8 @@ patch_margin_bottom = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/NinePatchRect"]
 layout_mode = 0
-offset_left = 36.805
+offset_left = 35.000008
+offset_top = 24.0
 offset_right = 467.805
 offset_bottom = 698.0
 
@@ -54,11 +65,12 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
 layout_mode = 0
-offset_left = -1.8049927
-offset_top = -4.0
+offset_left = -3.0
+offset_top = -2.0
 offset_right = 432.195
 offset_bottom = 121.0
 texture = ExtResource("2_j46r6")
@@ -90,18 +102,36 @@ offset_right = 89.19501
 offset_bottom = 96.0
 expand_mode = 1
 
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")
+
 [node name="UpgradeChoice2" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
 layout_mode = 0
-offset_left = -1.8049927
+offset_left = -3.0
 offset_top = -2.0
 offset_right = 432.195
-offset_bottom = 122.0
+offset_bottom = 121.0
 texture = ExtResource("2_j46r6")
-region_rect = Rect2(131.93443, 99.83067, 24.10376, 25.66706)
+region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
@@ -129,18 +159,36 @@ offset_right = 89.19501
 offset_bottom = 96.0
 expand_mode = 1
 
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")
+
 [node name="UpgradeChoice3" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
 layout_mode = 0
-offset_left = -1.8049927
+offset_left = -3.0
 offset_top = -2.0
 offset_right = 432.195
-offset_bottom = 122.0
+offset_bottom = 121.0
 texture = ExtResource("2_j46r6")
-region_rect = Rect2(132.10059, 100.11846, 23.960052, 24.873787)
+region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
@@ -167,3 +215,19 @@ offset_top = 24.0
 offset_right = 89.19501
 offset_bottom = 96.0
 expand_mode = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")

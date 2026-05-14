@@ -80,7 +80,8 @@ func _process(delta: float) -> void:
 	if player:
 		flow_field.update(player.global_position)
 	if Input.is_action_pressed("ui_focus_next") and Engine.get_frames_per_second() >= 20:
-		_stress_spawn()
+		if player:
+			player.CollectExperience(1000)
 	game_time += delta
 	horde_timer += delta
 	directed_wave_timer += delta
@@ -263,11 +264,7 @@ func spawn_necromancer() -> void:
 	enemy_list.append(necro)
 
 func get_enemy_level() -> int:
-	if game_time < 120: return 1
-	elif game_time < 240: return 2
-	elif game_time < 360: return 3
-	elif game_time < 480: return 4
-	else: return 5
+	return int(game_time / 35.0) + 1
 
 func _update_spawn_config() -> void:
 	for config in spawn_table:

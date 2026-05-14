@@ -350,13 +350,14 @@ func _spawn_single_knife(vertical_offset: float = 0, horizontal_offset: float = 
 		return
 	
 	var crit_result = get_crit_damage(current_attack)
+	var dir = direction if direction != Vector2.ZERO else (Vector2.RIGHT if facing_right else Vector2.LEFT)
+	
+	var perp = Vector2(-dir.y, dir.x)
 	
 	var new_knife = knife_scene.instantiate()
-	new_knife.global_position = global_position
+	new_knife.global_position = global_position + perp * vertical_offset
 	new_knife.damage = crit_result["damage"]
 	new_knife.is_crit = crit_result["is_crit"]
-	
-	var dir = last_direction if last_direction != Vector2.ZERO else Vector2.RIGHT
 	new_knife.set_meta("direction", dir)
 	
 	current_scene.get_node("KnifeHolder").add_child(new_knife)

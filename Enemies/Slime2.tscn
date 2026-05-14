@@ -82,7 +82,7 @@ collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_ey5l8")
 exp_value = 10
-base_hp = 15
+base_hp = 9
 damage_number_scene = ExtResource("2_n0hi4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx5uciwx8e8hh"]
+
+[ext_resource type="Script" uid="uid://cmc33hf3dou24" path="res://prefabs/LightningBall/lightning_ball.gd" id="1_dx7sa"]
+[ext_resource type="Texture2D" uid="uid://cr62u14m8oerr" path="res://Assets/Blue Effect Bullet Impact Explosion 32x32.png" id="1_lf1ii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dx7sa"]
+atlas = ExtResource("1_lf1ii")
+region = Rect2(352, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vkndd"]
+atlas = ExtResource("1_lf1ii")
+region = Rect2(384, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n88tr"]
+atlas = ExtResource("1_lf1ii")
+region = Rect2(416, 256, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7hxij"]
+atlas = ExtResource("1_lf1ii")
+region = Rect2(448, 256, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ueljg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dx7sa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vkndd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n88tr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7hxij")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_he7vy"]
+radius = 16.03122
+
+[node name="LightningBall" type="Area2D"]
+scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_dx7sa")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ueljg")
+frame_progress = 0.93393075
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_he7vy")

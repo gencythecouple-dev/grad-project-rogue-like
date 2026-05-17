@@ -23,124 +23,124 @@ var selected_index: int = 0
 var buttons: Array = []
 
 var all_upgrades := [
-	{
-		"name": "Increase Attack", 
-		"description": "+1 Attack Damage", 
-		"stat": "attack", 
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/attk_up.png"),
-		"upgrade_type": "passive"  
-	},
-	{
-		"name": "Increase Max HP", 
-		"description": "+10 Max Health", 
-		"stat": "max_hp", 
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/HP_up.png"),
-		"upgrade_type": "passive"  
-	},
-	{
-		"name": "Attack Speed", 
-		"description": "+15% Faster Attacks", 
-		"stat": "attack_speed", 
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/attk_spd.png"),
-		"upgrade_type": "passive"  
-	},
-	{
-		"name": "Movement Speed", 
-		"description": "+5% Move Speed", 
-		"stat": "move_speed", 
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/move_spd.png"),
-		"upgrade_type": "passive" 
-	},
-	{
-		"name": "Dupplicator", 
-		"description": "+1 to ALL projectiles", 
-		"stat": "more_projectile", 
-		"max_level": 3,
-		"icon": preload("res://Assets/Upgrades/duplicator.png"),
-		"upgrade_type": "passive"  
-	},			
-	{
-		"name": "Glacial Maul",
-		"stat": "ice_hammer",
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/ice_hammer.png"),
-		"upgrade_type": "active",
-		"requires": "",
-		"level_descriptions": {
-			1: "Crush enemies with a heavy frontal strike",
-			2: "+2 Damage",
-			3: "Bigger Spikes",
-			4: "Faster Cooldown",
-			5: "ALL: +Damage, Bigger, Faster + Ice Shockwave!"
-		},
-		},
-		{
-		"name": "Iron Shield",
-		"description": "Reduce incoming damage",
-		"stat": "armor",
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/26.png"),
-		"upgrade_type": "passive",
-		"requires": ""
-	},
-	{
-		"name": "Mystic Orb",
-		"description": "Fire magical projectiles at nearby enemies",
-		"stat": "magic_bullet",
-		"max_level": 5,
-		"icon": preload("res://Assets/magic_bullet.png"),
-		"upgrade_type": "active",
-		"requires": ""
-	},
-	{
-		"name": "Phantom Edge",
-		"description": "Throw knives in your movement direction",
-		"stat": "knife",
-		"max_level": 5,
-		"icon": preload("res://Assets/knife_icon.png"),
-		"upgrade_type": "active",
-		"requires": ""
-	},
-	{
-		"name": "Divine Wrath",
-		"description": "Strike a random enemy from above",
-		"stat": "holy_smite",
-		"max_level": 5,
-		"icon": preload("res://Assets/Holy Smite/holysmite.png"),
-		"upgrade_type": "active",
-		"requires" : ""
-	},
-	{
-		"name": "Crimson Edge",
-		"description": "Slash enemies in front of you",
-		"stat": "sword",
-		"max_level": 5,
-		"icon": preload("res://Assets/Sword/sword.png"),
-		"upgrade_type": "active",
-		"requires" : ""
-	},
-	{
-		"name": "Wind Shuriken",
-		"description": "Throw spinning blades that return to you",
-		"stat": "wind_shuriken",
-		"max_level": 5,
-		"icon": preload("res://Assets/Wind Shuriken/wind_shuriken.png"),
-		"upgrade_type": "active",
-		"requires": ""
-	},
-	{
-		"name": "Starfall",
-		"description": "Bouncing stars that ricochet across the screen",
-		"stat": "star",
-		"max_level": 5,
-		"icon": preload("res://Assets/Bouncy thing/Star.png"),
-		"upgrade_type": "active",
-		"requires": ""
-	},
+	#{
+		#"name": "Increase Attack", 
+		#"description": "+1 Attack Damage", 
+		#"stat": "attack", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/attk_up.png"),
+		#"upgrade_type": "passive"  
+	#},
+	#{
+		#"name": "Increase Max HP", 
+		#"description": "+10 Max Health", 
+		#"stat": "max_hp", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/HP_up.png"),
+		#"upgrade_type": "passive"  
+	#},
+	#{
+		#"name": "Attack Speed", 
+		#"description": "+15% Faster Attacks", 
+		#"stat": "attack_speed", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/attk_spd.png"),
+		#"upgrade_type": "passive"  
+	#},
+	#{
+		#"name": "Movement Speed", 
+		#"description": "+5% Move Speed", 
+		#"stat": "move_speed", 
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/move_spd.png"),
+		#"upgrade_type": "passive" 
+	#},
+	#{
+		#"name": "Dupplicator", 
+		#"description": "+1 to ALL projectiles", 
+		#"stat": "more_projectile", 
+		#"max_level": 3,
+		#"icon": preload("res://Assets/Upgrades/duplicator.png"),
+		#"upgrade_type": "passive"  
+	#},			
+	#{
+		#"name": "Glacial Maul",
+		#"stat": "ice_hammer",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/ice_hammer.png"),
+		#"upgrade_type": "active",
+		#"requires": "",
+		#"level_descriptions": {
+			#1: "Crush enemies with a heavy frontal strike",
+			#2: "+2 Damage",
+			#3: "Bigger Spikes",
+			#4: "Faster Cooldown",
+			#5: "ALL: +Damage, Bigger, Faster + Ice Shockwave!"
+		#},
+		#},
+		#{
+		#"name": "Iron Shield",
+		#"description": "Reduce incoming damage",
+		#"stat": "armor",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/26.png"),
+		#"upgrade_type": "passive",
+		#"requires": ""
+	#},
+	#{
+		#"name": "Mystic Orb",
+		#"description": "Fire magical projectiles at nearby enemies",
+		#"stat": "magic_bullet",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/magic_bullet.png"),
+		#"upgrade_type": "active",
+		#"requires": ""
+	#},
+	#{
+		#"name": "Phantom Edge",
+		#"description": "Throw knives in your movement direction",
+		#"stat": "knife",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/knife_icon.png"),
+		#"upgrade_type": "active",
+		#"requires": ""
+	#},
+	#{
+		#"name": "Divine Wrath",
+		#"description": "Strike a random enemy from above",
+		#"stat": "holy_smite",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Holy Smite/holysmite.png"),
+		#"upgrade_type": "active",
+		#"requires" : ""
+	#},
+	#{
+		#"name": "Crimson Edge",
+		#"description": "Slash enemies in front of you",
+		#"stat": "sword",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Sword/sword.png"),
+		#"upgrade_type": "active",
+		#"requires" : ""
+	#},
+	#{
+		#"name": "Wind Shuriken",
+		#"description": "Throw spinning blades that return to you",
+		#"stat": "wind_shuriken",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Wind Shuriken/wind_shuriken.png"),
+		#"upgrade_type": "active",
+		#"requires": ""
+	#},
+	#{
+		#"name": "Starfall",
+		#"description": "Bouncing stars that ricochet across the screen",
+		#"stat": "star",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Bouncy thing/Star.png"),
+		#"upgrade_type": "active",
+		#"requires": ""
+	#},
 	{
 		"name": "Magnet",
 		"description": "+20% Pickup Range",
@@ -149,29 +149,45 @@ var all_upgrades := [
 		"icon": preload("res://Assets/Upgrades/magnet.jpg"),
 		"upgrade_type": "passive"
 	},
+	#{
+		#"name": "Cursed book of knowledge",
+		#"description": "+10% Experience Gain",
+		#"stat": "greed",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/greed.png"),
+		#"upgrade_type": "passive"
+	#},
+	#{
+		#"name": "Critical Strike",
+		#"description": "+5% Crit Chance (2x Damage)",
+		#"stat": "crit",
+		#"max_level": 5,
+		#"icon": preload("res://Assets/Upgrades/crit.png"),
+		#"upgrade_type": "passive"
+	#},
+	#{
+		#"name": "Vampirism",
+		#"description": "Heal 1 HP per kill",
+		#"stat": "vampirism",
+		#"max_level": 3,
+		#"icon": preload("res://Assets/Upgrades/vampirism.png"),
+		#"upgrade_type": "passive"
+	#},
 	{
-		"name": "Cursed book of knowledge",
-		"description": "+10% Experience Gain",
-		"stat": "greed",
+		"name": "Thunder Orb",
+		"description": "A bouncing ball of lightning that leaps between enemies",
+		"stat": "lightning_ball",
 		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/greed.png"),
-		"upgrade_type": "passive"
-	},
-	{
-		"name": "Critical Strike",
-		"description": "+5% Crit Chance (2x Damage)",
-		"stat": "crit",
-		"max_level": 5,
-		"icon": preload("res://Assets/Upgrades/crit.png"),
-		"upgrade_type": "passive"
-	},
-	{
-		"name": "Vampirism",
-		"description": "Heal 1 HP per kill",
-		"stat": "vampirism",
-		"max_level": 3,
-		"icon": preload("res://Assets/Upgrades/vampirism.png"),
-		"upgrade_type": "passive"
+		"icon": preload("res://Assets/lightningball.png"),
+		"upgrade_type": "active",
+		"requires": "",
+		"level_descriptions": {
+			1: "Launch a lightning ball that bounces twice",
+			2: "+1 Ball, +1 Bounce — balls target different enemies (2 balls, 3 bounces)",
+			3: "+2 Bounces, +50% Damage (2 balls, 5 bounces)",
+			4: "+1 Ball, +Damage (3 balls, 5 bounces)",
+			5: "+2 Balls, +Damage , first hit triggers 3 seconds of infinite bouncing at double speed!"
+		}
 	},
 ]
 

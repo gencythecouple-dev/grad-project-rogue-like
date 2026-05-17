@@ -29,4 +29,5 @@ func _on_area_entered(area: Area2D) -> void:
 		player.total_damage_dealt += damage
 
 func _on_animation_finished() -> void:
-	queue_free()
+	hit_enemies.clear()
+	$AnimatedSprite2D.play("default") 

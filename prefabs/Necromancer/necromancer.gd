@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 class_name Necromancer
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -7,8 +7,8 @@ class_name Necromancer
 
 var current_scene
 var player_ref
-var max_hp: int = 300
-var current_hp: int = 300
+var max_hp: int = 1500
+var current_hp: int = 1500
 var flash_timer: float = 0.0
 var is_dying: bool = false
 var exp_value: int = 50
@@ -59,37 +59,31 @@ func _physics_process(delta: float) -> void:
 		regen_timer = 0.0
 	
 	if is_summoning:
-		velocity = Vector2.ZERO
+		pass
 	else:
 		summon_timer -= delta
-		
 		if summon_timer <= 0:
 			start_summon()
 		else:
-			maintain_distance()
-	
-	move_and_slide()
+			maintain_distance(delta)
 
-func maintain_distance() -> void:
+func maintain_distance(delta: float) -> void:
 	var distance = global_position.distance_to(player_ref.global_position)
 	var dir = global_position.direction_to(player_ref.global_position)
 	
 	if distance < MIN_DISTANCE - 50:
-		velocity = -dir * SPEED
+		global_position += -dir * SPEED * delta
 		if sprite.animation != "run":
 			sprite.play("run")
+		sprite.flip_h = dir.x > 0
 	elif distance > MAX_DISTANCE + 50:
-		velocity = dir * SPEED
+		global_position += dir * SPEED * delta
 		if sprite.animation != "run":
 			sprite.play("run")
+		sprite.flip_h = dir.x < 0
 	else:
-		velocity = velocity.lerp(Vector2.ZERO, 0.1)
-		if velocity.length() < 10:
-			if sprite.animation != "default":
-				sprite.play("default")
-	
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
+		if sprite.animation != "default":
+			sprite.play("default")
 
 func start_summon() -> void:
 	if active_totems >= MAX_TOTEMS:

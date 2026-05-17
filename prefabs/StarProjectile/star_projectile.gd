@@ -1,7 +1,11 @@
 extends Area2D
 class_name StarProjectile
+
+@export var explosion_scene: PackedScene
+
 var speed: float = 300.0
 var damage: float = 3.0
+var star_level: int = 1
 var velocity: Vector2
 var hit_enemies: Array = []
 var lifetime: float = 0.0
@@ -29,11 +33,29 @@ func _physics_process(delta: float) -> void:
 	if cam:
 		var cam_pos = cam.global_position
 		var half_size = viewport_rect.size / (2.0 * cam.zoom)
+		var margin := 20.0
+		var left: float = cam_pos.x - half_size.x + margin
+		var right: float = cam_pos.x + half_size.x - margin
+		var top: float = cam_pos.y - half_size.y + margin
+		var bottom: float = cam_pos.y + half_size.y - margin
 		
-		if global_position.x <= cam_pos.x - half_size.x or global_position.x >= cam_pos.x + half_size.x:
-			velocity.x *= -1
-		if global_position.y <= cam_pos.y - half_size.y or global_position.y >= cam_pos.y + half_size.y:
-			velocity.y *= -1
+		if global_position.x <= left:
+			velocity.x = abs(velocity.x)
+			global_position.x = left
+			_spawn_explosion()
+		elif global_position.x >= right:
+			velocity.x = -abs(velocity.x)
+			global_position.x = right
+			_spawn_explosion()
+		
+		if global_position.y <= top:
+			velocity.y = abs(velocity.y)
+			global_position.y = top
+			_spawn_explosion()
+		elif global_position.y >= bottom:
+			velocity.y = -abs(velocity.y)
+			global_position.y = bottom
+			_spawn_explosion()
 	
 	trail_points.append(global_position)
 	if trail_points.size() > max_trail_length:
@@ -50,6 +72,14 @@ func _draw() -> void:
 		var start = to_local(trail_points[i])
 		var end = to_local(trail_points[i + 1])
 		draw_line(start, end, color, 2.0)
+func _spawn_explosion() -> void:
+	if explosion_scene == null or star_level < 5:
+		return
+	var explosion = explosion_scene.instantiate()
+	explosion.global_position = global_position
+	get_tree().root.get_node("Level").add_child(explosion)
+	explosion.setup(damage, is_crit)
+
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):
 		if hit_enemies.has(area):

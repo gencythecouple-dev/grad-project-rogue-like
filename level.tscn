@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=4 uid="uid://d1s5srth3378k"]
+[gd_scene load_steps=31 format=4 uid="uid://d1s5srth3378k"]
 
 [ext_resource type="Script" uid="uid://cxosg3s3o0a6l" path="res://level.gd" id="1_vonw3"]
 [ext_resource type="PackedScene" uid="uid://cafbuep0sx674" path="res://prefabs/level_tile.tscn" id="2_oi3di"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cmxqqfkp81tk0" path="res://prefabs/Plant/plant.tscn" id="10_h6smj"]
 [ext_resource type="PackedScene" uid="uid://bhnap5lnsjmn4" path="res://prefabs/Necromancer/fire_totem.tscn" id="11_v5j5c"]
 [ext_resource type="PackedScene" uid="uid://0gy231iqmblk" path="res://prefabs/Necromancer/necromancer.tscn" id="12_5pxul"]
+[ext_resource type="PackedScene" uid="uid://dkd4g13ftdmvv" path="res://deathboss.tscn" id="13_ait7k"]
 [ext_resource type="Script" uid="uid://b2poy02dkogws" path="res://prefabs/level_tile.gd" id="14_4c15r"]
 [ext_resource type="Script" uid="uid://bqh4rf68fdv4l" path="res://PlayerFlowField.gd" id="17_fedht"]
 
@@ -120,6 +121,7 @@ warrior_scene = ExtResource("7_aicyk")
 plant_scene = ExtResource("10_h6smj")
 fire_totem_scene = ExtResource("11_v5j5c")
 necromancer_scene = ExtResource("12_5pxul")
+death_boss_scene = ExtResource("13_ait7k")
 
 [node name="TileMapLayer" parent="." instance=ExtResource("2_oi3di")]
 position = Vector2(-845, -447)

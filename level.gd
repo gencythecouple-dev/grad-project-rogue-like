@@ -14,6 +14,7 @@ signal enemy_died(dead_enemy : Area2D)
 @export var plant_scene: PackedScene
 @export var fire_totem_scene: PackedScene
 @export var necromancer_scene: PackedScene
+@export var death_boss_scene: PackedScene
 
 @onready var game_over_screen = $GameOver
 @onready var spawn_timer: Timer = $SpawnTimer
@@ -28,7 +29,7 @@ var horde_timer: float = 0.0
 var horde_interval: float = 30.0
 var directed_wave_timer: float = 0.0
 var directed_wave_interval: float = 20.0
-var game_time: float = 0.0
+var game_time: float = 660.0
 var player_ui
 var player: CharacterBody2D
 var enemy_list = []
@@ -37,6 +38,7 @@ var slime2_pool: Array = []
 var plant_pool: Array = []
 const POOL_SIZE := 300
 var necromancer_spawned: bool = false
+var death_boss_spawned: bool = false
 var last_config_check: float = 0.0
 var current_spawn_config = {}
 
@@ -80,8 +82,7 @@ func _process(delta: float) -> void:
 	if player:
 		flow_field.update(player.global_position)
 	if Input.is_action_pressed("ui_focus_next") and Engine.get_frames_per_second() >= 20:
-		if player:
-			player.CollectExperience(1000)
+		_stress_spawn()
 	game_time += delta
 	horde_timer += delta
 	directed_wave_timer += delta
@@ -94,6 +95,10 @@ func _process(delta: float) -> void:
 	if game_time >= 540 and not necromancer_spawned:
 		necromancer_spawned = true
 		spawn_necromancer()
+
+	if game_time >= 660 and not death_boss_spawned:
+		death_boss_spawned = true
+		spawn_death_boss()
 
 	if horde_timer >= horde_interval:
 		horde_timer = 0.0
@@ -158,9 +163,9 @@ func _on_enemy_died(enemy_that_died: Area2D) -> void:
 			player.health_bar.value = player.current_hp
 	var exp_to_drop = enemy_that_died.exp_value
 	var anim = "default"
-	if exp_to_drop >= 3:
-		anim = "tier2"
 	if exp_to_drop >= 10:
+		anim = "tier2"
+	if exp_to_drop >= 15:
 		anim = "tier3"
 	call_deferred("spawn_experience_gem", enemy_that_died.global_position, exp_to_drop, anim)
 
@@ -263,8 +268,19 @@ func spawn_necromancer() -> void:
 	enemy_holder.add_child(necro)
 	enemy_list.append(necro)
 
+func spawn_death_boss() -> void:
+	if death_boss_scene == null:
+		return
+	var boss = death_boss_scene.instantiate()
+	boss.global_position = get_offscreen_spawn_position()
+	enemy_holder.add_child(boss)
+
 func get_enemy_level() -> int:
-	return int(game_time / 35.0) + 1
+	if game_time < 120: return 1
+	elif game_time < 240: return 2
+	elif game_time < 360: return 3
+	elif game_time < 480: return 4
+	else: return 5
 
 func _update_spawn_config() -> void:
 	for config in spawn_table:

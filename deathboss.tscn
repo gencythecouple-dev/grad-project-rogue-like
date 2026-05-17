@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://dkd4g13ftdmvv"]
+
+[ext_resource type="Texture2D" uid="uid://dy7j8dmym3nm5" path="res://Assets/Undead executioner puppet/png/idle2.png" id="1_mem2l"]
+[ext_resource type="Script" uid="uid://gcqdu63ake5r" path="res://deathboss.gd" id="1_qhfq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qhfq5"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_474xy"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iihll"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edshq"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ple2q"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ngcn"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8lu4"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xthnw"]
+atlas = ExtResource("1_mem2l")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ykd5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qhfq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_474xy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iihll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edshq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ple2q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ngcn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8lu4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xthnw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao6fw"]
+radius = 22.022715
+
+[node name="DeathBoss" type="Area2D"]
+scale = Vector2(4, 4)
+script = ExtResource("1_qhfq5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_0ykd5")
+frame_progress = 0.23611727
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4)
+shape = SubResource("CircleShape2D_ao6fw")

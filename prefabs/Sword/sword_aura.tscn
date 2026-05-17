@@ -74,6 +74,7 @@ animations = [{
 radius = 132.01515
 
 [node name="SwordAura" type="Area2D"]
+scale = Vector2(2, 2)
 collision_mask = 2
 script = ExtResource("1_ccnbl")
 

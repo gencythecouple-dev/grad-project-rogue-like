@@ -1,7 +1,8 @@
-[gd_scene load_steps=65 format=3 uid="uid://ybxiwfgop782"]
+[gd_scene load_steps=66 format=3 uid="uid://ybxiwfgop782"]
 
 [ext_resource type="Texture2D" uid="uid://bswnjyinvwasr" path="res://Assets/Bouncy thing/SmallStar_64x64.png" id="1_27iyr"]
 [ext_resource type="Script" uid="uid://dn2sa5iscdc5" path="res://prefabs/StarProjectile/star_projectile.gd" id="1_c7834"]
+[ext_resource type="PackedScene" uid="uid://bam10x1ekuehm" path="res://prefabs/explosion.tscn" id="2_boyxm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c7834"]
 atlas = ExtResource("1_27iyr")
@@ -435,9 +436,11 @@ animations = [{
 radius = 8.0
 
 [node name="StarProjectile" type="Area2D"]
-collision_layer = 8
+collision_layer = 4
 collision_mask = 2
+monitorable = false
 script = ExtResource("1_c7834")
+explosion_scene = ExtResource("2_boyxm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.9375, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cdij3nl4hr8ap"]
+[gd_scene load_steps=32 format=3 uid="uid://cdij3nl4hr8ap"]
 
 [ext_resource type="Script" uid="uid://beofbn8me25a3" path="res://characters/playa.gd" id="1_ip2qp"]
 [ext_resource type="Shader" uid="uid://conkg5wtibima" path="res://Enemies/player_flash.gdshader" id="1_qdg01"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cu5y0ryqk6o1s" path="res://prefabs/Sword/sword_aura.tscn" id="8_vptib"]
 [ext_resource type="PackedScene" uid="uid://ybxiwfgop782" path="res://prefabs/StarProjectile/star_projectile.tscn" id="9_whf0c"]
 [ext_resource type="PackedScene" uid="uid://ef04fkxj2osm" path="res://prefabs/LevelUp/level_up.tscn" id="10_uso0a"]
+[ext_resource type="PackedScene" uid="uid://bx5uciwx8e8hh" path="res://prefabs/LightningBall/lightning_ball.tscn" id="11_bgphr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tnvvi"]
 bg_color = Color(0, 0, 0, 1)
@@ -21,6 +22,7 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0.99386305, 0.039003525, 0.16260794, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vptib"]
+resource_local_to_scene = true
 shader = ExtResource("1_qdg01")
 shader_parameter/flash_intensity = 0.0
 
@@ -139,6 +141,7 @@ sword_aura_scene = ExtResource("8_vptib")
 wind_shuriken_scene = ExtResource("8_ud6d6")
 star_projectile_scene = ExtResource("9_whf0c")
 level_up_effect_scene = ExtResource("10_uso0a")
+lightning_ball_scene = ExtResource("11_bgphr")
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_left = -47.0

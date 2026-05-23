@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c063l12mfc5bb"
+path="res://.godot/imported/Cloak of Darkness 3.ogg-415d9ce061df15a0c74d3c4596938633.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/BGM and SFX/Cloak of Darkness 3.ogg"
+dest_files=["res://.godot/imported/Cloak of Darkness 3.ogg-415d9ce061df15a0c74d3c4596938633.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

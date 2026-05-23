@@ -33,7 +33,7 @@ var base_attack: float = 3.0
 var current_attack: float
 var base_armor: float = 5.0
 var current_armor: float
-var base_hp := 2000000
+var base_hp := 200
 var max_hp: int
 var current_hp: int
 
@@ -89,18 +89,24 @@ var player_level: int = 1
 var total_damage_dealt: float = 0.0
 var total_kills: int = 0
 var total_exp_collected: int = 0
+var run_gold: int = 0
 
 # Passives
 var magnet_range: float = 50.0
 var exp_multiplier: float = 1.0
 var crit_chance: float = 0.0
 var vampirism: int = 0
+var might_multiplier: float = 1.0
+var revivals_remaining: int = 0
+var recovery_rate: float = 0.0
+var recovery_timer: float = 0.0
 
 
 func _ready() -> void:
 	if sprite.material:
 		sprite.material = sprite.material.duplicate()
 	SetStats()
+	_apply_meta_upgrades()
 	add_to_group("Player")
 	current_scene = get_tree().root.get_node("Level")
 	player_ui = get_tree().get_first_node_in_group("PlayerUI")
@@ -156,6 +162,7 @@ func _physics_process(delta: float) -> void:
 	update_facing()
 	move_and_slide()
 	_tick_weapons(delta)
+	_tick_recovery(delta)
 
 
 func _tick_weapons(delta: float) -> void:
@@ -468,6 +475,42 @@ func _spawn_sword() -> void:
 		sword.is_crit = crit_result["is_crit"]
 
 
+func _apply_meta_upgrades() -> void:
+	var meta := GameData.meta_upgrades
+	might_multiplier = 1.0 + (meta["might"] * 0.10)
+	base_hp += meta["max_hp"] * 50
+	max_hp = base_hp
+	current_hp = max_hp
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
+	base_armor += meta["armor"] * 1.0
+	current_armor = base_armor
+	SPEED *= 1.0 + (meta["move_speed"] * 0.03)
+	for key in ["hammer_cooldown", "magic_bullet_cooldown", "knife_cooldown",
+				"holy_smite_cooldown", "sword_cooldown", "wind_shuriken_cooldown",
+				"star_cooldown", "lightning_ball_cooldown"]:
+		set(key, get(key) * pow(0.97, meta["attack_speed"]))
+	recovery_rate = meta["recovery"] * 0.5
+	magnet_range += meta["magnet"] * 50.0
+	exp_multiplier += meta["greed"] * 0.05
+	crit_chance += meta["crit"] * 0.02
+	revivals_remaining = meta["revivals"]
+
+func _tick_recovery(delta: float) -> void:
+	if recovery_rate <= 0:
+		return
+	recovery_timer += delta
+	if recovery_timer >= 1.0:
+		recovery_timer = 0.0
+		current_hp = min(current_hp + recovery_rate, max_hp)
+		health_bar.value = current_hp
+	current_attack = base_attack
+	current_armor = base_armor
+	max_hp = base_hp
+	current_hp = max_hp
+	health_bar.max_value = max_hp
+	health_bar.value = current_hp
+
 func SetStats() -> void:
 	current_attack = base_attack
 	current_armor = base_armor
@@ -487,13 +530,13 @@ func CollectExperience(amount: int) -> void:
 
 func _calculate_exp_to_next_level(level: int) -> int:
 	if level == 1:
-		return 10
+		return 25
 	elif level <= 30:
-		return 10 + (level - 1) * 10
+		return 25 + (level - 1) * 20
 	elif level <= 55:
-		return 10 + (29 * 10) + (level - 30) * 13
+		return 25 + (29 * 20) + (level - 30) * 28
 	else:
-		return 10 + (29 * 10) + (25 * 13) + (level - 55) * 16
+		return 25 + (29 * 20) + (25 * 28) + (level - 55) * 35
 
 func level_up() -> void:
 	player_level += 1
@@ -577,6 +620,7 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 					holy_smite_count += 3
 					current_attack += 5.0
 					holy_smite_aoe += 0.5
+					holy_smite_cooldown = 0.5
 			holy_smite_timer = 0.0
 
 		"sword":
@@ -678,8 +722,9 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 
 
 func get_crit_damage(base_damage: float) -> Dictionary:
+	var scaled := base_damage * might_multiplier
 	var is_crit = randf() < crit_chance
-	var damage = base_damage * 2.0 if is_crit else base_damage
+	var damage = scaled * 2.0 if is_crit else scaled
 	return {"damage": damage, "is_crit": is_crit}
 
 func TakeDamage(damage: float) -> void:
@@ -692,6 +737,11 @@ func TakeDamage(damage: float) -> void:
 		Die()
 
 func Die() -> void:
+	if revivals_remaining > 0:
+		revivals_remaining -= 1
+		current_hp = int(max_hp * 0.25)
+		health_bar.value = current_hp
+		return
 	var level = get_tree().root.get_node("Level")
 	if level and level.has_method("show_game_over"):
 		level.show_game_over(self)

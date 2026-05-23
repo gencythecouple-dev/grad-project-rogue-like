@@ -128,3 +128,5 @@ animation = &"swing"
 
 [node name="Timer" type="Timer" parent="."]
 autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

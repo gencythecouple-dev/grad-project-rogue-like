@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://cvsqlp50vpldc"]
+[gd_scene load_steps=19 format=3 uid="uid://cvsqlp50vpldc"]
 
 [ext_resource type="Script" uid="uid://baua5upkhbnrb" path="res://prefabs/exp_gem.gd" id="1_dlrey"]
 [ext_resource type="Texture2D" uid="uid://bto34l7ku3l1t" path="res://Coin_Gems/spr_coin_strip4.png" id="2_n4i0c"]
 [ext_resource type="Texture2D" uid="uid://l5flgoika4o7" path="res://Coin_Gems/spr_coin_azu.png" id="3_amfjm"]
+[ext_resource type="Texture2D" uid="uid://c54ttjw7tta8g" path="res://Coin_Gems/spr_coin_roj.png" id="4_amfjm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amfjm"]
 atlas = ExtResource("2_n4i0c")
@@ -34,6 +35,22 @@ region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sfahg"]
 atlas = ExtResource("3_amfjm")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s21k"]
+atlas = ExtResource("4_amfjm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ehct"]
+atlas = ExtResource("4_amfjm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ft5lo"]
+atlas = ExtResource("4_amfjm")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mfj22"]
+atlas = ExtResource("4_amfjm")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n4i0c"]
@@ -72,10 +89,22 @@ animations = [{
 "name": &"tier2",
 "speed": 4.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s21k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ehct")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ft5lo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mfj22")
+}],
 "loop": true,
 "name": &"tier3",
-"speed": 5.0
+"speed": 4.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_amfjm"]
@@ -90,6 +119,7 @@ move_speed = null
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_n4i0c")
+animation = &"tier2"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)

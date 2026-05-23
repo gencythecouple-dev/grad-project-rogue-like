@@ -29,7 +29,7 @@ var horde_timer: float = 0.0
 var horde_interval: float = 30.0
 var directed_wave_timer: float = 0.0
 var directed_wave_interval: float = 20.0
-var game_time: float = 660.0
+var game_time: float = 0.0
 var player_ui
 var player: CharacterBody2D
 var enemy_list = []
@@ -163,9 +163,9 @@ func _on_enemy_died(enemy_that_died: Area2D) -> void:
 			player.health_bar.value = player.current_hp
 	var exp_to_drop = enemy_that_died.exp_value
 	var anim = "default"
-	if exp_to_drop >= 10:
+	if exp_to_drop >= 4:
 		anim = "tier2"
-	if exp_to_drop >= 15:
+	if exp_to_drop >= 8:
 		anim = "tier3"
 	call_deferred("spawn_experience_gem", enemy_that_died.global_position, exp_to_drop, anim)
 
@@ -173,9 +173,9 @@ func spawn_experience_gem(position: Vector2, exp_amount: int, anim: String = "de
 	if experience_gem_scene == null:
 		return
 	var gem = experience_gem_scene.instantiate()
-	gem.setup(exp_amount, anim)
 	gem.global_position = position
 	gem_holder.add_child(gem)
+	gem.setup(exp_amount, anim)
 
 func spawn_enemy() -> void:
 	if enemy_list.size() >= MAX_ENEMIES:
@@ -292,7 +292,7 @@ func _game_over() -> void:
 
 func show_game_over(player: CharacterBody2D) -> void:
 	get_tree().paused = true
-	game_over_screen.setup(game_time, player.total_kills, player.total_damage_dealt, player.total_exp_collected)
+	game_over_screen.setup(game_time, player.total_kills, player.total_damage_dealt, player.total_exp_collected, player.run_gold)
 	game_over_screen.show()
 
 func get_enemy_quota() -> int:

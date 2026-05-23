@@ -3,7 +3,7 @@ class_name EnemyBase
 
 @export var exp_value: int = 5
 @export var base_hp: int = 3
-@export var speed: float = 80.0
+@export var speed: float = 60.0
 @export var damage_number_scene: PackedScene
 
 const ATTACK_DAMAGE: float = 8.0

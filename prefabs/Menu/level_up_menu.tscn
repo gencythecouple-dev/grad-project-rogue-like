@@ -1,0 +1,233 @@
+[gd_scene load_steps=6 format=3 uid="uid://xnhalk4oi04s"]
+
+[ext_resource type="Script" uid="uid://wntqgq4l5ek2" path="res://prefabs/Menu/level_up_menu.gd" id="1_pn0h5"]
+[ext_resource type="Texture2D" uid="uid://hd74m31adhrj" path="res://Assets/UIBundleFree/UIBundleFree/UiCozyFree.png" id="2_j46r6"]
+[ext_resource type="Texture2D" uid="uid://baqpshrf2y73g" path="res://Assets/ArrowLeft.tres" id="3_nysvr"]
+[ext_resource type="Texture2D" uid="uid://cgsmwa03d4gef" path="res://Assets/ArrowRight.tres" id="4_rmkxh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nysvr"]
+bg_color = Color(0.972549, 0.98039216, 0, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(18.892157, 16.145428, 0, 1)
+
+[node name="LevelUpMenu" type="CanvasLayer" groups=["PlayerUI"]]
+script = ExtResource("1_pn0h5")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.70000005)
+
+[node name="CenterContainer" type="CenterContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 3.0
+offset_right = 1.0
+offset_bottom = 3.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer"]
+custom_minimum_size = Vector2(500, 700)
+layout_mode = 2
+texture = ExtResource("2_j46r6")
+region_rect = Rect2(7.3393974, 167.7345, 87.85022, 80.720856)
+patch_margin_top = 2
+patch_margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/NinePatchRect"]
+layout_mode = 0
+offset_left = 35.000008
+offset_top = 24.0
+offset_right = 467.805
+offset_bottom = 698.0
+
+[node name="LEVEL UP!" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.885, 0.9, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 37
+text = "LEVEL UP!!!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UpgradeChoice1" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 432.195
+offset_bottom = 121.0
+texture = ExtResource("2_j46r6")
+region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+offset_top = 15.0
+offset_right = -3.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = 14.195007
+offset_top = 24.0
+offset_right = 89.19501
+offset_bottom = 96.0
+expand_mode = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")
+
+[node name="UpgradeChoice2" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 432.195
+offset_bottom = 121.0
+texture = ExtResource("2_j46r6")
+region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+offset_top = 15.0
+offset_right = -3.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = 14.195007
+offset_top = 24.0
+offset_right = 89.19501
+offset_bottom = 96.0
+expand_mode = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")
+
+[node name="UpgradeChoice3" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -2.0
+offset_right = 432.195
+offset_bottom = 121.0
+texture = ExtResource("2_j46r6")
+region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 105.0
+offset_top = 15.0
+offset_right = -3.0
+offset_bottom = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = 14.195007
+offset_top = 24.0
+offset_right = 89.19501
+offset_bottom = 96.0
+expand_mode = 1
+
+[node name="ArrowLeft" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = -43.804993
+offset_top = 40.0
+offset_right = -3.8049927
+offset_bottom = 80.0
+texture = ExtResource("3_nysvr")
+
+[node name="ArrowRight" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 0
+offset_left = 436.195
+offset_top = 40.0
+offset_right = 476.195
+offset_bottom = 80.0
+texture = ExtResource("4_rmkxh")

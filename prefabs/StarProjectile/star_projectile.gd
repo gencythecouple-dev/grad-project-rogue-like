@@ -3,6 +3,12 @@ class_name StarProjectile
 
 @export var explosion_scene: PackedScene
 
+const BOUNCE_COOLDOWN_TIME: float = 0.3
+const MIN_ANGLE_COMPONENT: float = 0.3
+
+
+var bounce_cooldown: float = 0.0
+
 var speed: float = 300.0
 var damage: float = 3.0
 var star_level: int = 1
@@ -13,18 +19,30 @@ var max_lifetime: float = 10.0
 var trail_points: Array = []
 var max_trail_length: int = 60
 var is_crit: bool = false
+
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	$AnimatedSprite2D.play("default")
-	
 	var random_angle = randf() * TAU
 	velocity = Vector2(cos(random_angle), sin(random_angle)) * speed
+
+func _enforce_min_angle() -> void:
+	if abs(velocity.x) < speed * MIN_ANGLE_COMPONENT:
+		velocity.x = speed * MIN_ANGLE_COMPONENT * (1.0 if velocity.x >= 0 else -1.0)
+	if abs(velocity.y) < speed * MIN_ANGLE_COMPONENT:
+		velocity.y = speed * MIN_ANGLE_COMPONENT * (1.0 if velocity.y >= 0 else -1.0)
+	velocity = velocity.normalized() * speed
+
+
 func _physics_process(delta: float) -> void:
 	lifetime += delta
-	
 	if lifetime >= max_lifetime:
 		queue_free()
 		return
+	
+	if bounce_cooldown > 0:
+		bounce_cooldown -= delta
 	
 	position += velocity * delta
 	
@@ -41,27 +59,37 @@ func _physics_process(delta: float) -> void:
 		
 		if global_position.x <= left:
 			velocity.x = abs(velocity.x)
-			global_position.x = left
-			_spawn_explosion()
+			global_position.x = left + 1.0
+			_enforce_min_angle()
+			_try_spawn_explosion()
 		elif global_position.x >= right:
 			velocity.x = -abs(velocity.x)
-			global_position.x = right
-			_spawn_explosion()
+			global_position.x = right - 1.0
+			_enforce_min_angle()
+			_try_spawn_explosion()
 		
 		if global_position.y <= top:
 			velocity.y = abs(velocity.y)
-			global_position.y = top
-			_spawn_explosion()
+			global_position.y = top + 1.0
+			_enforce_min_angle()
+			_try_spawn_explosion()
 		elif global_position.y >= bottom:
 			velocity.y = -abs(velocity.y)
-			global_position.y = bottom
-			_spawn_explosion()
+			global_position.y = bottom - 1.0
+			_enforce_min_angle()
+			_try_spawn_explosion()
 	
 	trail_points.append(global_position)
 	if trail_points.size() > max_trail_length:
 		trail_points.pop_front()
-	
 	queue_redraw()
+
+func _try_spawn_explosion() -> void:
+	if bounce_cooldown > 0:
+		return
+	bounce_cooldown = BOUNCE_COOLDOWN_TIME
+	_spawn_explosion()
+	
 func _draw() -> void:
 	if trail_points.size() < 2:
 		return
@@ -72,6 +100,7 @@ func _draw() -> void:
 		var start = to_local(trail_points[i])
 		var end = to_local(trail_points[i + 1])
 		draw_line(start, end, color, 2.0)
+
 func _spawn_explosion() -> void:
 	if explosion_scene == null or star_level < 5:
 		return

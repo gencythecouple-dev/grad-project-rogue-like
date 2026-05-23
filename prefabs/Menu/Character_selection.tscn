@@ -1,0 +1,414 @@
+[gd_scene load_steps=23 format=3 uid="uid://drqapjm448eli"]
+
+[ext_resource type="Script" uid="uid://c4l7ju5icuk43" path="res://prefabs/Menu/character_selection.gd" id="1_7kkj2"]
+[ext_resource type="Texture2D" uid="uid://badrbt51f1ksn" path="res://Assets/mage.png" id="2_7kkj2"]
+[ext_resource type="Texture2D" uid="uid://cmxa5a1dwucoe" path="res://Assets/UIBundleFree/UIBundleFree/UI books & more.png" id="2_iljqm"]
+[ext_resource type="Texture2D" uid="uid://b07oqac0lfymr" path="res://Assets/Border All 6.png" id="2_owrom"]
+[ext_resource type="Texture2D" uid="uid://btjka85l1s2qr" path="res://Assets/magic_bullet.png" id="3_bpeam"]
+[ext_resource type="Texture2D" uid="uid://2u0np6xogjan" path="res://Assets/rogue.png" id="3_owrom"]
+[ext_resource type="Texture2D" uid="uid://bke5dqr5ied1v" path="res://Assets/warrior.png" id="4_7kkj2"]
+[ext_resource type="Texture2D" uid="uid://w5xvhnxtbyeh" path="res://Assets/knife_icon.png" id="4_ui0k4"]
+[ext_resource type="Texture2D" uid="uid://b4r63v67tj8c5" path="res://Assets/UIBundleFree/UIBundleFree/FreeDemo.png" id="5_bpeam"]
+[ext_resource type="Texture2D" uid="uid://ncc4fuj3tvud" path="res://Assets/Sword/sword.png" id="5_k2fxx"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_48b54"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+texture = ExtResource("2_iljqm")
+expand_margin_left = 14.0
+expand_margin_top = 14.0
+expand_margin_right = 14.0
+expand_margin_bottom = 14.0
+region_rect = Rect2(352.03235, 272.3212, 32.04074, 16.243652)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48b54"]
+bg_color = Color(0, 0, 0, 0.74509805)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8965571, 0.659794, 1.540184e-06, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pxgfv"]
+atlas = ExtResource("2_7kkj2")
+region = Rect2(0, 0, 256, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f5jgl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pxgfv")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ui0k4"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 10.0
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.9178, 150.9464, 48.131256, 16.094604)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k2fxx"]
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.91777, 151.18889, 47.836197, 12.837402)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_bpeam"]
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.95921, 150.91563, 48.131332, 16.121307)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iljqm"]
+atlas = ExtResource("3_owrom")
+region = Rect2(0, 0, 256, 384)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bpeam"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iljqm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glx1p"]
+atlas = ExtResource("4_7kkj2")
+region = Rect2(0, 0, 256, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jykbw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glx1p")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_iljqm"]
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+texture = ExtResource("5_bpeam")
+region_rect = Rect2(138.90773, 150.86946, 48.131317, 16.234344)
+
+[node name="CharacterSelect" type="Node2D"]
+script = ExtResource("1_7kkj2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 1919.0
+offset_bottom = 1080.0
+color = Color(0.086214535, 0.32305026, 1, 0.57254905)
+
+[node name="Tittle" type="Label" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -272.0
+offset_top = 112.0
+offset_right = 208.0
+offset_bottom = 240.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.99999994, 0.18407416, 0.21886703, 1)
+theme_override_font_sizes/font_size = 39
+theme_override_styles/normal = SubResource("StyleBoxTexture_48b54")
+text = "SELECT A CHARACTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
+layout_direction = 1
+offset_left = 257.0
+offset_top = 709.0
+offset_right = 597.0
+offset_bottom = 815.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_48b54")
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer"]
+layout_mode = 2
+
+[node name="WeaponInfo" type="Label" parent="CanvasLayer/PanelContainer/Control"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 340.0
+offset_bottom = 101.0
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 14
+text = "Mystic Orb:Forbidden knowledge, made lethal."
+vertical_alignment = 1
+autowrap_mode = 2
+autowrap_trim_flags = 0
+
+[node name="WeaponIcon" type="TextureRect" parent="CanvasLayer/PanelContainer"]
+custom_minimum_size = Vector2(110.62, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("3_bpeam")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="PanelContainer2" type="PanelContainer" parent="CanvasLayer"]
+layout_direction = 1
+offset_left = 784.0
+offset_top = 712.0
+offset_right = 1124.0
+offset_bottom = 818.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_48b54")
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer2"]
+layout_mode = 2
+
+[node name="WeaponInfo2" type="Label" parent="CanvasLayer/PanelContainer2/Control"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 340.0
+offset_bottom = 101.0
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 14
+text = "Strike fast. Strike often. Never stop moving."
+vertical_alignment = 1
+autowrap_mode = 2
+autowrap_trim_flags = 0
+
+[node name="WeaponIcon2" type="TextureRect" parent="CanvasLayer/PanelContainer2"]
+custom_minimum_size = Vector2(110.62, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_ui0k4")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="PanelContainer3" type="PanelContainer" parent="CanvasLayer"]
+layout_direction = 1
+offset_left = 1296.0
+offset_top = 712.0
+offset_right = 1634.0
+offset_bottom = 816.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_48b54")
+
+[node name="Control" type="Control" parent="CanvasLayer/PanelContainer3"]
+layout_mode = 2
+
+[node name="WeaponInfo3" type="Label" parent="CanvasLayer/PanelContainer3/Control"]
+custom_minimum_size = Vector2(60, 60)
+layout_mode = 0
+offset_left = 103.0
+offset_top = 1.0
+offset_right = 340.0
+offset_bottom = 101.0
+size_flags_stretch_ratio = 0.0
+theme_override_font_sizes/font_size = 14
+text = "Mystic Orb:Forbidden knowledge, made lethal."
+vertical_alignment = 1
+autowrap_mode = 2
+autowrap_trim_flags = 0
+
+[node name="WeaponIcon3" type="TextureRect" parent="CanvasLayer/PanelContainer3"]
+custom_minimum_size = Vector2(110.62, 100)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("5_k2fxx")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = -0.004166667
+anchor_right = 0.99583334
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+metadata/_edit_use_anchors_ = true
+
+[node name="Card1" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card1"]
+layout_mode = 0
+offset_left = 308.0
+offset_top = 328.0
+offset_right = 535.0
+offset_bottom = 657.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Sprite1" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card1"]
+position = Vector2(422, 407)
+scale = Vector2(0.504, 0.5)
+sprite_frames = SubResource("SpriteFrames_f5jgl")
+frame_progress = 0.95057124
+
+[node name="Name1" type="Label" parent="CanvasLayer/HBoxContainer/Card1/Sprite1"]
+offset_left = -43.65079
+offset_top = 220.0
+offset_right = 35.34921
+offset_bottom = 262.0
+theme_override_font_sizes/font_size = 30
+text = "Mage"
+horizontal_alignment = 1
+
+[node name="Lore" type="Label" parent="CanvasLayer/HBoxContainer/Card1/Sprite1"]
+offset_left = -210.31741
+offset_top = 266.0
+offset_right = 210.31741
+offset_bottom = 484.0
+theme_override_font_sizes/font_size = 25
+text = "She bound a demon - not to unleash it, but to keep it from destroying a village. The Circle deemed the act an abomination. The village still stands. She does not regret it."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card1"]
+layout_mode = 0
+offset_left = 368.0
+offset_top = 664.0
+offset_right = 480.0
+offset_bottom = 705.0
+
+[node name="Select1" type="Button" parent="CanvasLayer/HBoxContainer/Card1/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
+text = "SELECT"
+
+[node name="Card2" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card2"]
+layout_mode = 0
+offset_left = 828.0
+offset_top = 328.0
+offset_right = 1055.0
+offset_bottom = 657.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Sprite2" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card2"]
+position = Vector2(940, 416)
+scale = Vector2(0.504, 0.5)
+sprite_frames = SubResource("SpriteFrames_bpeam")
+
+[node name="Name2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/Sprite2"]
+offset_left = -53.571426
+offset_top = 172.0
+offset_right = 37.428574
+offset_bottom = 214.0
+theme_override_font_sizes/font_size = 30
+text = "Rogue"
+horizontal_alignment = 1
+
+[node name="Lore2" type="Label" parent="CanvasLayer/HBoxContainer/Card2/Sprite2"]
+offset_left = -212.30154
+offset_top = 220.0
+offset_right = 216.26987
+offset_bottom = 476.0
+theme_override_font_sizes/font_size = 25
+text = "He stole a cursed relic from the Thieves Guild — not to sell it, but to destroy it. Hundreds would have died had it reached the black market. The Guild saw only the theft."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card2"]
+layout_mode = 0
+offset_left = 884.0
+offset_top = 664.0
+offset_right = 996.0
+offset_bottom = 705.0
+
+[node name="Select2" type="Button" parent="CanvasLayer/HBoxContainer/Card2/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
+text = "SELECT"
+
+[node name="Card3" type="NinePatchRect" parent="CanvasLayer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HBoxContainer/Card3"]
+layout_mode = 0
+offset_left = 1336.0
+offset_top = 328.0
+offset_right = 1563.0
+offset_bottom = 657.0
+texture = ExtResource("2_owrom")
+region_rect = Rect2(128.9148, 320.86984, 62.257538, 62.256927)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="Sprite3" type="AnimatedSprite2D" parent="CanvasLayer/HBoxContainer/Card3"]
+position = Vector2(1448, 400)
+scale = Vector2(0.504, 0.5)
+sprite_frames = SubResource("SpriteFrames_jykbw")
+
+[node name="Name3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/Sprite3"]
+offset_left = -51.5873
+offset_top = 232.0
+offset_right = 59.4127
+offset_bottom = 274.0
+theme_override_font_sizes/font_size = 30
+text = "Warrior"
+horizontal_alignment = 1
+
+[node name="Lore3" type="Label" parent="CanvasLayer/HBoxContainer/Card3/Sprite3"]
+offset_left = -210.31741
+offset_top = 280.0
+offset_right = 218.254
+offset_bottom = 536.0
+theme_override_font_sizes/font_size = 25
+text = "She refused to raze an elven settlement on her commander's orders. She stood her shield between her soldiers and the innocent. Her reward was chains."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HBoxContainer/Card3"]
+layout_mode = 0
+offset_left = 1392.0
+offset_top = 664.0
+offset_right = 1504.0
+offset_bottom = 705.0
+
+[node name="Select3" type="Button" parent="CanvasLayer/HBoxContainer/Card3/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_k2fxx")
+theme_override_styles/hover = SubResource("StyleBoxTexture_bpeam")
+text = "SELECT"
+
+[node name="Back" type="Button" parent="CanvasLayer"]
+offset_left = 800.0
+offset_top = 920.0
+offset_right = 1048.0
+offset_bottom = 992.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_ui0k4")
+theme_override_styles/hover = SubResource("StyleBoxTexture_iljqm")
+text = "Return to main menu"

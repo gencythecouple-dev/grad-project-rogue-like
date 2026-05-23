@@ -1,0 +1,125 @@
+[gd_scene load_steps=6 format=3 uid="uid://hqqy6drcwbdh"]
+
+[ext_resource type="Script" uid="uid://cjufwjiy0gqrc" path="res://prefabs/Menu/game_over.gd" id="1_ccer4"]
+[ext_resource type="Texture2D" uid="uid://hd74m31adhrj" path="res://Assets/UIBundleFree/UIBundleFree/UiCozyFree.png" id="2_8u835"]
+[ext_resource type="Texture2D" uid="uid://b4r63v67tj8c5" path="res://Assets/UIBundleFree/UIBundleFree/FreeDemo.png" id="3_ftari"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_28vn7"]
+texture = ExtResource("3_ftari")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_vertical = 2
+region_rect = Rect2(138.99219, 150.70645, 48.27083, 16.52098)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_k2vha"]
+texture = ExtResource("3_ftari")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+region_rect = Rect2(139.78746, 150.86543, 47.411606, 16.332932)
+
+[node name="GameOver" type="CanvasLayer"]
+script = ExtResource("1_ccer4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.23, 0.23, 0.23, 0.74509805)
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -333.0
+offset_top = -299.5
+offset_right = 333.0
+offset_bottom = 299.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_8u835")
+region_rect = Rect2(8, 168, 87.297905, 80.02612)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 46.0
+offset_right = -50.0
+offset_bottom = 471.5
+grow_horizontal = 2
+alignment = 1
+
+[node name="TimeSurvived" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Time Survived:"
+
+[node name="TotalKills" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Total Kill:"
+
+[node name="TotalDamage" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Total Damage Dealt:"
+
+[node name="TotalExp" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Total Exp Collected:"
+
+[node name="GoldEarned" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 25
+text = "Total Gold Earned:"
+
+[node name="GameOver" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = 795.0
+offset_top = 249.0
+offset_right = 1120.0
+offset_bottom = 304.0
+theme_override_colors/font_color = Color(0.92941177, 0.93333334, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 40
+text = "GAME OVER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="ColorRect"]
+layout_mode = 0
+offset_left = 168.0
+offset_top = 297.0
+offset_right = 376.0
+offset_bottom = 396.0
+
+[node name="Retry" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 928.0
+offset_top = 662.0
+offset_right = 1004.0
+offset_bottom = 705.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_28vn7")
+text = "Retry"
+
+[node name="Menu" type="Button" parent="ColorRect"]
+layout_mode = 0
+offset_left = 880.0
+offset_top = 726.0
+offset_right = 1049.0
+offset_bottom = 769.0
+theme_override_styles/normal = SubResource("StyleBoxTexture_k2vha")
+text = "Back to Main Menu"

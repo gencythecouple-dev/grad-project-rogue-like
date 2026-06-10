@@ -21,6 +21,8 @@ var target: Area2D
 var current_scene: Node
 var player_ui
 var level_up_menu
+var rainbow_active: bool = false
+var rainbow_timer: float = 0.0
 
 var active_weapons: Array = []
 var passive_buffs: Array = []
@@ -70,7 +72,7 @@ var magic_bullet_cooldown: float = 3.25
 var knife_timer: float = 0.0
 var knife_cooldown: float = 2.75
 var holy_smite_timer: float = 0.0
-var holy_smite_cooldown: float = 2.75
+var holy_smite_cooldown: float = 3.5
 var sword_timer: float = 0.0
 var sword_cooldown: float = 1.95
 var wind_shuriken_timer: float = 0.0
@@ -82,7 +84,7 @@ var lightning_ball_cooldown: float = 4.25
 
 # Player exp and level
 var current_exp: int = 0
-var exp_to_next_level: int = 20
+var exp_to_next_level: int = 15
 var player_level: int = 1
 
 # End game summary
@@ -158,6 +160,12 @@ func _physics_process(delta: float) -> void:
 	if flash_timer > 0:
 		flash_timer -= delta
 		apply_flash(flash_timer / FLASH_DURATION)
+	if rainbow_active:
+		rainbow_timer += delta
+		var mat = sprite.material as ShaderMaterial
+		if mat:
+			mat.set_shader_parameter("rgb_cycle", fmod(rainbow_timer * 0.5, 1.0))
+			mat.set_shader_parameter("rainbow_active", true)
 	update_animation()
 	update_facing()
 	move_and_slide()
@@ -431,7 +439,8 @@ func _spawn_holy_smite() -> void:
 	for enemy in enemies_in_range:
 		if enemy != null and is_instance_valid(enemy):
 			if "is_dying" in enemy and not enemy.is_dying:
-				valid_targets.append(enemy)
+				if enemy.visible:
+					valid_targets.append(enemy)
 	if valid_targets.is_empty():
 		return
 	for i in range(holy_smite_count):
@@ -440,9 +449,9 @@ func _spawn_holy_smite() -> void:
 		var t = valid_targets.pick_random()
 		var crit_result = get_crit_damage(current_attack)
 		var smite = holy_smite_scene.instantiate()
-		smite.global_position = t.global_position
 		smite.damage = crit_result["damage"]
 		smite.is_crit = crit_result["is_crit"]
+		smite.setup(t.global_position)
 		current_scene.add_child(smite)
 
 func _get_random_enemy() -> Area2D:
@@ -490,8 +499,8 @@ func _apply_meta_upgrades() -> void:
 				"holy_smite_cooldown", "sword_cooldown", "wind_shuriken_cooldown",
 				"star_cooldown", "lightning_ball_cooldown"]:
 		set(key, get(key) * pow(0.97, meta["attack_speed"]))
-	recovery_rate = meta["recovery"] * 0.5
-	magnet_range += meta["magnet"] * 50.0
+	recovery_rate = meta["recovery"] * 0.2
+	magnet_range += meta["magnet"] * 15.0
 	exp_multiplier += meta["greed"] * 0.05
 	crit_chance += meta["crit"] * 0.02
 	revivals_remaining = meta["revivals"]
@@ -520,6 +529,7 @@ func SetStats() -> void:
 	health_bar.value = current_hp
 
 func CollectExperience(amount: int) -> void:
+	AudioManager.play_exp_sfx()
 	var actual_exp = int(amount * exp_multiplier)
 	current_exp += actual_exp
 	total_exp_collected += actual_exp
@@ -527,16 +537,17 @@ func CollectExperience(amount: int) -> void:
 		player_ui.update_exp(current_exp, exp_to_next_level)
 	while current_exp >= exp_to_next_level:
 		level_up()
+		AudioManager.play_level_up()
 
 func _calculate_exp_to_next_level(level: int) -> int:
 	if level == 1:
-		return 25
+		return 15
 	elif level <= 30:
-		return 25 + (level - 1) * 20
+		return 15 + (level - 1) * 20
 	elif level <= 55:
-		return 25 + (29 * 20) + (level - 30) * 28
+		return 15 + (29 * 20) + (level - 30) * 28
 	else:
-		return 25 + (29 * 20) + (25 * 28) + (level - 55) * 35
+		return 15 + (29 * 20) + (25 * 28) + (level - 55) * 35
 
 func level_up() -> void:
 	player_level += 1
@@ -701,7 +712,7 @@ func _on_upgrade_selected(upgrade_stat: String) -> void:
 				_equip_passive("armor", preload("res://Assets/Upgrades/26.png"))
 
 		"magnet":
-			magnet_range += 200.0
+			magnet_range += 100.0
 			if not passive_buffs.has("magnet"):
 				_equip_passive("magnet", preload("res://Assets/Upgrades/magnet.jpg"))
 

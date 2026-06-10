@@ -1,0 +1,80 @@
+[gd_scene load_steps=13 format=3 uid="uid://dhaiohoor3r6u"]
+
+[ext_resource type="Texture2D" uid="uid://x6pwc2wyxjiv" path="res://Assets/plant/Plant2_Walk_full.png" id="1_aitud"]
+[ext_resource type="Script" uid="uid://duus8jiexf2pl" path="res://Enemies/plant_2.gd" id="1_xk4is"]
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="2_h5i0j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sspme"]
+shader = ExtResource("2_h5i0j")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/buff_tint = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xk4is"]
+atlas = ExtResource("1_aitud")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5i0j"]
+atlas = ExtResource("1_aitud")
+region = Rect2(64, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sspme"]
+atlas = ExtResource("1_aitud")
+region = Rect2(128, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vbnlr"]
+atlas = ExtResource("1_aitud")
+region = Rect2(192, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7b74d"]
+atlas = ExtResource("1_aitud")
+region = Rect2(256, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8i0eb"]
+atlas = ExtResource("1_aitud")
+region = Rect2(320, 192, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hudse"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xk4is")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5i0j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sspme")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vbnlr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7b74d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8i0eb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x5ina"]
+radius = 16.124516
+
+[node name="Plant2" type="Area2D" groups=["Enemy"]]
+collision_layer = 2
+collision_mask = 12
+script = ExtResource("1_xk4is")
+exp_value = 15
+base_hp = 12
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_sspme")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_hudse")
+frame_progress = 0.13655777
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_x5ina")

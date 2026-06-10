@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3d1xy87kdjer"
+path="res://.godot/imported/Demetori - Ego,Schizoid,Beat.mp3-b52aebfddecda073f4cc51c2985c3891.mp3str"
+
+[deps]
+
+source_file="res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3"
+dest_files=["res://.godot/imported/Demetori - Ego,Schizoid,Beat.mp3-b52aebfddecda073f4cc51c2985c3891.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

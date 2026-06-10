@@ -79,7 +79,7 @@ radius = 5.0249376
 
 [node name="Slime2" type="Area2D" groups=["Enemy"]]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 12
 script = ExtResource("1_ey5l8")
 exp_value = 8
 base_hp = 9

@@ -1,566 +1,332 @@
-[gd_scene load_steps=83 format=3 uid="uid://cxyklpycmimaw"]
+[gd_scene load_steps=82 format=3 uid="uid://cxyklpycmimaw"]
 
-[ext_resource type="Texture2D" uid="uid://d30r5k7vee4w3" path="res://Assets/Necromancer/espantalho_summon-Sheet.png" id="1_0x4vc"]
+[ext_resource type="Texture2D" uid="uid://mfrqoidqevkt" path="res://Assets/Necromancer/ezgif-split/summoncircle000.png" id="1_o5idu"]
 [ext_resource type="Script" uid="uid://bglqplyq8g0vo" path="res://prefabs/Necromancer/summoncircle.gd" id="2_ex65p"]
+[ext_resource type="Texture2D" uid="uid://hkqt2usxn6i4" path="res://Assets/Necromancer/ezgif-split/summoncircle001.png" id="2_hk13f"]
+[ext_resource type="Texture2D" uid="uid://b56u16ydv0rsx" path="res://Assets/Necromancer/ezgif-split/summoncircle002.png" id="3_j3tft"]
 [ext_resource type="PackedScene" uid="uid://bhnap5lnsjmn4" path="res://prefabs/Necromancer/fire_totem.tscn" id="3_kph8j"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7rwr"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(0, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8iwdh"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(420, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8n3ka"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(840, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5l7fm"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(1260, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtp7n"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(1680, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_57c3u"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(2100, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q5h5v"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(2520, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xby65"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(2940, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h48w6"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(3360, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_or4s4"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(3780, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_20kre"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(4200, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k6sme"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(4620, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6gcb1"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(5040, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vhm3s"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(5460, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_a4s8r"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(5880, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qaq3w"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(6300, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_abfl1"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(6720, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uigaq"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(7140, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uw2dn"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(7560, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2465b"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(7980, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fg0dh"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(8400, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tjapc"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(8820, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f6qjw"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(9240, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s3pte"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(9660, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1d4tp"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(10080, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b1ekw"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(10500, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rhr5r"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(10920, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nxaq6"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(11340, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6spdn"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(11760, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3d6h"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(12180, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_e6wqg"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(12600, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5gjms"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(13020, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_tvk2t"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(13440, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cn831"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(13860, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4w5ti"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(14280, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_is01t"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(14700, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kto1s"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(15120, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k0wre"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(15540, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_i7c2n"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(15960, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fnk1j"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(16380, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2cug"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(16800, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y5sku"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(17220, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ixnts"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(17640, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_f5xe8"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(18060, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t1glu"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(18480, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w8kpy"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(18900, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cms44"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(19320, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_y7ril"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(19740, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_awuw7"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(20160, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sgi3c"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(20580, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2a52d"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(21000, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2abb0"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(21420, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x50t1"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(21840, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pxaa8"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(22260, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_inmpl"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(22680, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cfp76"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(23100, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxhqc"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(23520, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7it3f"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(23940, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ijolf"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(24360, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_luqbk"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(24780, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1gdey"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(25200, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_541ff"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(25620, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l3rl1"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(26040, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mncek"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(26460, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04fu4"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(26880, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lj58h"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(27300, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_72g5t"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(27720, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_skh3a"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(28140, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mb105"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(28560, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hnwa3"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(28980, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_04gna"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(29400, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_pwqo6"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(29820, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4sp6g"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(30240, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_beghk"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(30660, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hdyfr"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(31080, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q2bud"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(31500, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w22su"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(31920, 0, 420, 420)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ticxg"]
-atlas = ExtResource("1_0x4vc")
-region = Rect2(32340, 0, 420, 420)
+[ext_resource type="Texture2D" uid="uid://ca6u83t372i0g" path="res://Assets/Necromancer/ezgif-split/summoncircle003.png" id="4_v35sq"]
+[ext_resource type="Texture2D" uid="uid://oaqainy3dmal" path="res://Assets/Necromancer/ezgif-split/summoncircle004.png" id="5_em185"]
+[ext_resource type="Texture2D" uid="uid://cm817c0p2wpes" path="res://Assets/Necromancer/ezgif-split/summoncircle005.png" id="6_lq4c6"]
+[ext_resource type="Texture2D" uid="uid://bfpsnhvlotygj" path="res://Assets/Necromancer/ezgif-split/summoncircle006.png" id="7_1lur4"]
+[ext_resource type="Texture2D" uid="uid://bm62i53cbnje3" path="res://Assets/Necromancer/ezgif-split/summoncircle007.png" id="8_f54hj"]
+[ext_resource type="Texture2D" uid="uid://dni6cj6oagiyi" path="res://Assets/Necromancer/ezgif-split/summoncircle008.png" id="9_fmxtv"]
+[ext_resource type="Texture2D" uid="uid://cjomjkxv78b4m" path="res://Assets/Necromancer/ezgif-split/summoncircle009.png" id="10_nevap"]
+[ext_resource type="Texture2D" uid="uid://bbtynxfufaid2" path="res://Assets/Necromancer/ezgif-split/summoncircle010.png" id="11_mfs6a"]
+[ext_resource type="Texture2D" uid="uid://vo35o6rt1ctv" path="res://Assets/Necromancer/ezgif-split/summoncircle011.png" id="12_5bh7n"]
+[ext_resource type="Texture2D" uid="uid://cu712rdk7d5o5" path="res://Assets/Necromancer/ezgif-split/summoncircle012.png" id="13_f3yen"]
+[ext_resource type="Texture2D" uid="uid://tvjfm1u483tn" path="res://Assets/Necromancer/ezgif-split/summoncircle013.png" id="14_rfion"]
+[ext_resource type="Texture2D" uid="uid://6e3ggjx5yavh" path="res://Assets/Necromancer/ezgif-split/summoncircle014.png" id="15_bbfve"]
+[ext_resource type="Texture2D" uid="uid://bf2lfqexv0u3y" path="res://Assets/Necromancer/ezgif-split/summoncircle015.png" id="16_lq8qb"]
+[ext_resource type="Texture2D" uid="uid://ds1fu0hrlaito" path="res://Assets/Necromancer/ezgif-split/summoncircle016.png" id="17_j37tg"]
+[ext_resource type="Texture2D" uid="uid://cgcqps4kgtwo0" path="res://Assets/Necromancer/ezgif-split/summoncircle017.png" id="18_p45k7"]
+[ext_resource type="Texture2D" uid="uid://by78n7l25ldxe" path="res://Assets/Necromancer/ezgif-split/summoncircle018.png" id="19_qv2gl"]
+[ext_resource type="Texture2D" uid="uid://c7gpv4hjqwpfe" path="res://Assets/Necromancer/ezgif-split/summoncircle019.png" id="20_81wny"]
+[ext_resource type="Texture2D" uid="uid://btjdplg2rmrot" path="res://Assets/Necromancer/ezgif-split/summoncircle020.png" id="21_njks4"]
+[ext_resource type="Texture2D" uid="uid://nvedoosofr8n" path="res://Assets/Necromancer/ezgif-split/summoncircle021.png" id="22_858ck"]
+[ext_resource type="Texture2D" uid="uid://byf2a0mto7ex8" path="res://Assets/Necromancer/ezgif-split/summoncircle022.png" id="23_jdq6n"]
+[ext_resource type="Texture2D" uid="uid://ciwwyo11nj7de" path="res://Assets/Necromancer/ezgif-split/summoncircle023.png" id="24_a1xo2"]
+[ext_resource type="Texture2D" uid="uid://7y1lpfgtwq16" path="res://Assets/Necromancer/ezgif-split/summoncircle024.png" id="25_vtbrk"]
+[ext_resource type="Texture2D" uid="uid://d33a3nidno836" path="res://Assets/Necromancer/ezgif-split/summoncircle025.png" id="26_cl0ca"]
+[ext_resource type="Texture2D" uid="uid://dqx7wlfoi5q6f" path="res://Assets/Necromancer/ezgif-split/summoncircle026.png" id="27_bq0nn"]
+[ext_resource type="Texture2D" uid="uid://loyr2bv7k67j" path="res://Assets/Necromancer/ezgif-split/summoncircle027.png" id="28_8qw0u"]
+[ext_resource type="Texture2D" uid="uid://cknsux77n1syv" path="res://Assets/Necromancer/ezgif-split/summoncircle028.png" id="29_hw17k"]
+[ext_resource type="Texture2D" uid="uid://dm3588l7tpaqm" path="res://Assets/Necromancer/ezgif-split/summoncircle029.png" id="30_uyncq"]
+[ext_resource type="Texture2D" uid="uid://mwfin6slwl5v" path="res://Assets/Necromancer/ezgif-split/summoncircle030.png" id="31_bvu2t"]
+[ext_resource type="Texture2D" uid="uid://if7s6nwni60n" path="res://Assets/Necromancer/ezgif-split/summoncircle031.png" id="32_80t2f"]
+[ext_resource type="Texture2D" uid="uid://2tdg3yypi0ey" path="res://Assets/Necromancer/ezgif-split/summoncircle032.png" id="33_cdmae"]
+[ext_resource type="Texture2D" uid="uid://bo7agb68nk4fx" path="res://Assets/Necromancer/ezgif-split/summoncircle033.png" id="34_q13of"]
+[ext_resource type="Texture2D" uid="uid://l58gnw7d6mqk" path="res://Assets/Necromancer/ezgif-split/summoncircle034.png" id="35_pq81t"]
+[ext_resource type="Texture2D" uid="uid://p48lv4xxey2g" path="res://Assets/Necromancer/ezgif-split/summoncircle035.png" id="36_jg8nx"]
+[ext_resource type="Texture2D" uid="uid://ivesvdaxtmgt" path="res://Assets/Necromancer/ezgif-split/summoncircle036.png" id="37_k5jsm"]
+[ext_resource type="Texture2D" uid="uid://7rhha3bipboi" path="res://Assets/Necromancer/ezgif-split/summoncircle037.png" id="38_jjst3"]
+[ext_resource type="Texture2D" uid="uid://bt41jxsde8hi2" path="res://Assets/Necromancer/ezgif-split/summoncircle038.png" id="39_idcpa"]
+[ext_resource type="Texture2D" uid="uid://bddx173qvab86" path="res://Assets/Necromancer/ezgif-split/summoncircle039.png" id="40_idugf"]
+[ext_resource type="Texture2D" uid="uid://dcl8bt7h6qw1w" path="res://Assets/Necromancer/ezgif-split/summoncircle040.png" id="41_0wjjb"]
+[ext_resource type="Texture2D" uid="uid://cumnrqovwmq0q" path="res://Assets/Necromancer/ezgif-split/summoncircle041.png" id="42_k27ti"]
+[ext_resource type="Texture2D" uid="uid://lxsa7l5fqs8v" path="res://Assets/Necromancer/ezgif-split/summoncircle042.png" id="43_44d48"]
+[ext_resource type="Texture2D" uid="uid://oc5q0o32wyro" path="res://Assets/Necromancer/ezgif-split/summoncircle043.png" id="44_1jaxs"]
+[ext_resource type="Texture2D" uid="uid://42cerc6adsvi" path="res://Assets/Necromancer/ezgif-split/summoncircle044.png" id="45_fgi3u"]
+[ext_resource type="Texture2D" uid="uid://bcpjleujjxmrk" path="res://Assets/Necromancer/ezgif-split/summoncircle045.png" id="46_or7bv"]
+[ext_resource type="Texture2D" uid="uid://h5y6k1o0wk00" path="res://Assets/Necromancer/ezgif-split/summoncircle046.png" id="47_gjji2"]
+[ext_resource type="Texture2D" uid="uid://cauq6eo41f2ai" path="res://Assets/Necromancer/ezgif-split/summoncircle047.png" id="48_2i1py"]
+[ext_resource type="Texture2D" uid="uid://c1illk0a2lwjl" path="res://Assets/Necromancer/ezgif-split/summoncircle048.png" id="49_84io5"]
+[ext_resource type="Texture2D" uid="uid://bvtoerfbmado0" path="res://Assets/Necromancer/ezgif-split/summoncircle049.png" id="50_ito1n"]
+[ext_resource type="Texture2D" uid="uid://c02j6yumijtbc" path="res://Assets/Necromancer/ezgif-split/summoncircle050.png" id="51_fjxxy"]
+[ext_resource type="Texture2D" uid="uid://vbbp77ub0y5i" path="res://Assets/Necromancer/ezgif-split/summoncircle051.png" id="52_wui87"]
+[ext_resource type="Texture2D" uid="uid://ctyynkksnqg4g" path="res://Assets/Necromancer/ezgif-split/summoncircle052.png" id="53_ayi75"]
+[ext_resource type="Texture2D" uid="uid://c5x2hq5oc42ui" path="res://Assets/Necromancer/ezgif-split/summoncircle053.png" id="54_p1kvp"]
+[ext_resource type="Texture2D" uid="uid://caqj6la3a7lar" path="res://Assets/Necromancer/ezgif-split/summoncircle054.png" id="55_i1rd2"]
+[ext_resource type="Texture2D" uid="uid://dm7kdktofjpej" path="res://Assets/Necromancer/ezgif-split/summoncircle055.png" id="56_sjxb6"]
+[ext_resource type="Texture2D" uid="uid://xxgfbpnpwkbn" path="res://Assets/Necromancer/ezgif-split/summoncircle056.png" id="57_tp5oi"]
+[ext_resource type="Texture2D" uid="uid://tg35q48nll07" path="res://Assets/Necromancer/ezgif-split/summoncircle057.png" id="58_mvubr"]
+[ext_resource type="Texture2D" uid="uid://bgny7hubecpv1" path="res://Assets/Necromancer/ezgif-split/summoncircle058.png" id="59_y3y1c"]
+[ext_resource type="Texture2D" uid="uid://c3mjwk80aaiic" path="res://Assets/Necromancer/ezgif-split/summoncircle059.png" id="60_20apf"]
+[ext_resource type="Texture2D" uid="uid://jl3i306gstrw" path="res://Assets/Necromancer/ezgif-split/summoncircle060.png" id="61_txpl8"]
+[ext_resource type="Texture2D" uid="uid://dtgkdkhaoco61" path="res://Assets/Necromancer/ezgif-split/summoncircle061.png" id="62_rad68"]
+[ext_resource type="Texture2D" uid="uid://evft1kgb1hop" path="res://Assets/Necromancer/ezgif-split/summoncircle062.png" id="63_u66cw"]
+[ext_resource type="Texture2D" uid="uid://beb83dh1imyvd" path="res://Assets/Necromancer/ezgif-split/summoncircle063.png" id="64_g0u7a"]
+[ext_resource type="Texture2D" uid="uid://cmeroboflwhib" path="res://Assets/Necromancer/ezgif-split/summoncircle064.png" id="65_1rcox"]
+[ext_resource type="Texture2D" uid="uid://byy32q5p83far" path="res://Assets/Necromancer/ezgif-split/summoncircle065.png" id="66_nrdx1"]
+[ext_resource type="Texture2D" uid="uid://cdn734gday03q" path="res://Assets/Necromancer/ezgif-split/summoncircle066.png" id="67_67euo"]
+[ext_resource type="Texture2D" uid="uid://dad33soiyu055" path="res://Assets/Necromancer/ezgif-split/summoncircle067.png" id="68_uyfpn"]
+[ext_resource type="Texture2D" uid="uid://ybm7sg25sk2r" path="res://Assets/Necromancer/ezgif-split/summoncircle068.png" id="69_ahyvg"]
+[ext_resource type="Texture2D" uid="uid://86vagcou83wx" path="res://Assets/Necromancer/ezgif-split/summoncircle069.png" id="70_r4wv6"]
+[ext_resource type="Texture2D" uid="uid://bfkkavamdtu5r" path="res://Assets/Necromancer/ezgif-split/summoncircle070.png" id="71_ddag0"]
+[ext_resource type="Texture2D" uid="uid://bbviivg8yrrny" path="res://Assets/Necromancer/ezgif-split/summoncircle071.png" id="72_3g4gy"]
+[ext_resource type="Texture2D" uid="uid://bsn1mygp1w6e7" path="res://Assets/Necromancer/ezgif-split/summoncircle072.png" id="73_o6qb3"]
+[ext_resource type="Texture2D" uid="uid://dr25jrmn22bna" path="res://Assets/Necromancer/ezgif-split/summoncircle073.png" id="74_iwnmy"]
+[ext_resource type="Texture2D" uid="uid://dqwqaus2f3js7" path="res://Assets/Necromancer/ezgif-split/summoncircle074.png" id="75_oci2m"]
+[ext_resource type="Texture2D" uid="uid://w584smfd7oy2" path="res://Assets/Necromancer/ezgif-split/summoncircle075.png" id="76_hsywp"]
+[ext_resource type="Texture2D" uid="uid://y2hgtkoi30kh" path="res://Assets/Necromancer/ezgif-split/summoncircle076.png" id="77_4xlks"]
+[ext_resource type="Texture2D" uid="uid://m7r1r2l06yp7" path="res://Assets/Necromancer/ezgif-split/summoncircle077.png" id="78_013i1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ex65p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c7rwr")
+"texture": ExtResource("1_o5idu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8iwdh")
+"texture": ExtResource("2_hk13f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_8n3ka")
+"texture": ExtResource("3_j3tft")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5l7fm")
+"texture": ExtResource("4_v35sq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gtp7n")
+"texture": ExtResource("5_em185")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_57c3u")
+"texture": ExtResource("6_lq4c6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q5h5v")
+"texture": ExtResource("7_1lur4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xby65")
+"texture": ExtResource("8_f54hj")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h48w6")
+"texture": ExtResource("9_fmxtv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_or4s4")
+"texture": ExtResource("10_nevap")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_20kre")
+"texture": ExtResource("11_mfs6a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k6sme")
+"texture": ExtResource("12_5bh7n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6gcb1")
+"texture": ExtResource("13_f3yen")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vhm3s")
+"texture": ExtResource("14_rfion")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_a4s8r")
+"texture": ExtResource("15_bbfve")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_qaq3w")
+"texture": ExtResource("16_lq8qb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_abfl1")
+"texture": ExtResource("17_j37tg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uigaq")
+"texture": ExtResource("18_p45k7")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uw2dn")
+"texture": ExtResource("19_qv2gl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2465b")
+"texture": ExtResource("20_81wny")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fg0dh")
+"texture": ExtResource("21_njks4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tjapc")
+"texture": ExtResource("22_858ck")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f6qjw")
+"texture": ExtResource("23_jdq6n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s3pte")
+"texture": ExtResource("24_a1xo2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1d4tp")
+"texture": ExtResource("25_vtbrk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b1ekw")
+"texture": ExtResource("26_cl0ca")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rhr5r")
+"texture": ExtResource("27_bq0nn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nxaq6")
+"texture": ExtResource("28_8qw0u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6spdn")
+"texture": ExtResource("29_hw17k")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b3d6h")
+"texture": ExtResource("30_uyncq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_e6wqg")
+"texture": ExtResource("31_bvu2t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5gjms")
+"texture": ExtResource("32_80t2f")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tvk2t")
+"texture": ExtResource("33_cdmae")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cn831")
+"texture": ExtResource("34_q13of")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4w5ti")
+"texture": ExtResource("35_pq81t")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_is01t")
+"texture": ExtResource("36_jg8nx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kto1s")
+"texture": ExtResource("37_k5jsm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k0wre")
+"texture": ExtResource("38_jjst3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i7c2n")
+"texture": ExtResource("39_idcpa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fnk1j")
+"texture": ExtResource("40_idugf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_s2cug")
+"texture": ExtResource("41_0wjjb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y5sku")
+"texture": ExtResource("42_k27ti")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ixnts")
+"texture": ExtResource("43_44d48")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f5xe8")
+"texture": ExtResource("44_1jaxs")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_t1glu")
+"texture": ExtResource("45_fgi3u")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w8kpy")
+"texture": ExtResource("46_or7bv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cms44")
+"texture": ExtResource("47_gjji2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y7ril")
+"texture": ExtResource("48_2i1py")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_awuw7")
+"texture": ExtResource("49_84io5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_sgi3c")
+"texture": ExtResource("50_ito1n")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2a52d")
+"texture": ExtResource("51_fjxxy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2abb0")
+"texture": ExtResource("52_wui87")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_x50t1")
+"texture": ExtResource("53_ayi75")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pxaa8")
+"texture": ExtResource("54_p1kvp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_inmpl")
+"texture": ExtResource("55_i1rd2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cfp76")
+"texture": ExtResource("56_sjxb6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mxhqc")
+"texture": ExtResource("57_tp5oi")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_7it3f")
+"texture": ExtResource("58_mvubr")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ijolf")
+"texture": ExtResource("59_y3y1c")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_luqbk")
+"texture": ExtResource("60_20apf")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1gdey")
+"texture": ExtResource("61_txpl8")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_541ff")
+"texture": ExtResource("62_rad68")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l3rl1")
+"texture": ExtResource("63_u66cw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mncek")
+"texture": ExtResource("64_g0u7a")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_04fu4")
+"texture": ExtResource("65_1rcox")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_lj58h")
+"texture": ExtResource("66_nrdx1")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_72g5t")
+"texture": ExtResource("67_67euo")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_skh3a")
+"texture": ExtResource("68_uyfpn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mb105")
+"texture": ExtResource("69_ahyvg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hnwa3")
+"texture": ExtResource("70_r4wv6")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_04gna")
+"texture": ExtResource("71_ddag0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pwqo6")
+"texture": ExtResource("72_3g4gy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4sp6g")
+"texture": ExtResource("73_o6qb3")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_beghk")
+"texture": ExtResource("74_iwnmy")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_hdyfr")
+"texture": ExtResource("75_oci2m")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_q2bud")
+"texture": ExtResource("76_hsywp")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_w22su")
+"texture": ExtResource("77_4xlks")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ticxg")
+"texture": ExtResource("78_013i1")
 }],
 "loop": false,
 "name": &"summon",
-"speed": 24.0
+"speed": 32.0
 }]
 
 [node name="summoncircle" type="AnimatedSprite2D" groups=["Boss", "Necromancer"]]
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_ex65p")
 animation = &"summon"
+frame_progress = 0.4451623
 script = ExtResource("2_ex65p")
 totem_scene = ExtResource("3_kph8j")

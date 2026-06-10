@@ -26,7 +26,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	sprite.play("default")
 	player_ref = get_tree().get_first_node_in_group("Player")
-	
+	AudioManager.play_lightning_ball()
 	if initial_target and is_instance_valid(initial_target):
 		flight_direction = global_position.direction_to(initial_target.global_position)
 	else:

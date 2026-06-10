@@ -18,7 +18,7 @@ func _ready() -> void:
 			$AnimatedSprite2D.play("attack2")
 		else:
 			$AnimatedSprite2D.play("attack1")
-	
+	AudioManager.play_magic_bullet()
 	if has_meta("direction"):
 		flight_direction = get_meta("direction")
 		rotation = flight_direction.angle()

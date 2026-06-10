@@ -1,5 +1,11 @@
 extends Node
 
+
+var unlocked_bgm_tracks: Array[String] = [
+	"res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3",
+]
+var selected_bgm: String = ""
+var show_damage_numbers: bool = true
 var selected_character: String = "mage"
 var selected_weapon: String = "magic_bullet"
 var characters = {
@@ -7,8 +13,19 @@ var characters = {
 	"rogue": "res://characters/rogue.tscn",
 	"warrior": "res://characters/warrior.tscn"
 }
-
+var music_gamble_cost: int = 100
+var music_volume: float = 100.0
 const SAVE_PATH := "user://save.cfg"
+var came_from_pause: bool = false
+var previous_scene: String = ""
+
+const ALL_BGM_TRACKS: Array[String] = [
+	"res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3",
+	"res://Assets/BGM_SFX/UI/Cyber Milk Chan - Condensed Milk.mp3",
+	"res://Assets/BGM_SFX/BGM/Everybody Falls.mp3",
+	"res://Assets/BGM_SFX/BGM/BGM_1.mp3",
+	"res://Assets/BGM_SFX/BGM/BGM_2.mp3"
+]
 
 var gold: int = 0
 
@@ -26,20 +43,66 @@ var meta_upgrades: Dictionary = {
 	"curse": 0,
 }
 
+var unlocked_characters: Dictionary = {
+	"mage": false,
+	"rogue": true,
+	"warrior": false,
+}
+
+const UNLOCK_COSTS: Dictionary = {
+	"mage": 500,
+	"warrior": 750,
+}
+
 func save() -> void:
 	var config := ConfigFile.new()
 	config.set_value("player", "gold", gold)
 	for key in meta_upgrades:
 		config.set_value("upgrades", key, meta_upgrades[key])
+	for key in unlocked_characters:
+		config.set_value("unlocks", key, unlocked_characters[key])
+	config.set_value("audio", "music_gamble_cost", music_gamble_cost)
+	config.set_value("audio", "music_volume", music_volume)
+	config.set_value("gameplay", "damage_numbers", show_damage_numbers)
 	config.save(SAVE_PATH)
+	config.set_value("audio", "unlocked_bgm", unlocked_bgm_tracks)
+	config.set_value("audio", "selected_bgm", selected_bgm)
+
+
+
 
 func load_data() -> void:
 	var config := ConfigFile.new()
+	unlocked_bgm_tracks.append("res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3")
 	if config.load(SAVE_PATH) != OK:
 		return
 	gold = config.get_value("player", "gold", 0)
 	for key in meta_upgrades:
 		meta_upgrades[key] = config.get_value("upgrades", key, 0)
+	for key in unlocked_characters:
+		unlocked_characters[key] = config.get_value("unlocks", key, unlocked_characters[key])
+	music_gamble_cost = config.get_value("audio", "music_gamble_cost", 100)
+	music_volume = config.get_value("audio", "music_volume", 100.0)
+	show_damage_numbers = config.get_value("gameplay", "damage_numbers", true)
+	selected_bgm = config.get_value("audio", "selected_bgm", "")
+	var loaded_tracks = config.get_value("audio", "unlocked_bgm", [])
+	for track in loaded_tracks:
+		var t := str(track)
+		if not unlocked_bgm_tracks.has(t):
+			unlocked_bgm_tracks.append(t)
+
+
+
+func unlock_random_bgm() -> void:
+	var locked: Array[String] = []
+	for track in ALL_BGM_TRACKS:
+		if not unlocked_bgm_tracks.has(track):
+			locked.append(track)
+	if locked.is_empty():
+		return
+	var new_track: String = locked[randi() % locked.size()]
+	unlocked_bgm_tracks.append(new_track)
+	save()
 
 func add_gold(amount: int) -> void:
 	gold += amount
@@ -88,6 +151,10 @@ func get_upgrade_cost(upgrade: String) -> int:
 	var level: int = meta_upgrades[upgrade]
 	var initial: int = UPGRADE_INITIAL_COSTS[upgrade]
 	return initial * (level + 1)
+
+func reset_music_gamble() -> void:
+	music_gamble_cost = 100
+	save()
 
 func reset_run_data() -> void:
 	selected_character = "mage"

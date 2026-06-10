@@ -1,14 +1,24 @@
 extends Area2D
 class_name HolySmite
 
+
+var target_position: Vector2
+
+
 var damage: float = 15.0
 var has_hit: bool = false
 var is_crit: bool = false
 
+func setup(pos: Vector2) -> void:
+	target_position = pos
+
 func _ready() -> void:
-	monitoring = true
+	process_mode = Node.PROCESS_MODE_PAUSABLE
+	global_position = target_position
+	monitoring = false
+	set_deferred("monitoring", true)
 	area_entered.connect(_on_area_entered)
-	
+	AudioManager.play_holy_smite()
 	$AnimatedSprite2D.play("strike")
 	$AnimatedSprite2D.frame_changed.connect(_on_frame_changed)
 	$AnimatedSprite2D.animation_finished.connect(_on_animation_finished)

@@ -19,12 +19,15 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameData="*res://GameData.gd"
+AudioManager="*res://prefabs/audio_manager.tscn"
+UiAudio="*res://UIAudio.gd"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/size/mode=2
+window/stretch/mode="viewport"
 
 [global_group]
 
@@ -34,6 +37,12 @@ Enemy=""
 PlayerUI=""
 Necromancer=""
 Boss=""
+Obstacle=""
+
+[gui]
+
+theme/custom="uid://dlmqcydtdu4wq"
+theme/custom_font="uid://hbxrbg7tkn5o"
 
 [input]
 
@@ -75,8 +84,7 @@ ui_down={
 2d_physics/layer_1="Player"
 2d_physics/layer_2="EnemyBody"
 2d_physics/layer_3="PlayerProjectiles"
-2d_physics/layer_5="Exp"
-2d_physics/layer_6="PushBox"
+2d_physics/layer_4="Obstacle"
 
 [physics]
 

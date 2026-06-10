@@ -43,8 +43,8 @@ animations = [{
 radius = 40.0
 
 [node name="wind_shuriken" type="Area2D"]
-collision_layer = 8
-collision_mask = 2
+collision_layer = 4
+collision_mask = 10
 script = ExtResource("1_ng5tb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

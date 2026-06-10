@@ -1,13 +1,14 @@
 extends Area2D
 class_name Knife
 
-@export var flight_speed := 350
+@export var flight_speed := 500
 var flight_direction: Vector2
 var damage: float
 var is_crit: bool = false
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
+	AudioManager.play_knife()
 	if has_meta("direction"):
 		flight_direction = get_meta("direction")
 		rotation = flight_direction.angle()

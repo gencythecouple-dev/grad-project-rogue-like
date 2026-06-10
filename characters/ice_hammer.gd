@@ -54,6 +54,7 @@ func _spawn_shockwave() -> void:
 		shockwave.global_position = global_position + offset
 		shockwave.setup(crit_result["damage"], shockwave_scale, sprite.flip_h, crit_result["is_crit"])
 		get_tree().root.get_node("Level").get_node("ShockwaveHolder").add_child(shockwave)
+		AudioManager.play_hammer_spike()
 
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale_mult: float) -> void:
 	player = spawn_player
@@ -64,6 +65,7 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int, scale
 	anim_sprite.scale = Vector2(scale_mult, scale_mult)
 	anim_sprite.flip_h = !spawn_player.facing_right
 	anim_sprite.play("swing")
+	AudioManager.play_hammer_swing()
 
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):

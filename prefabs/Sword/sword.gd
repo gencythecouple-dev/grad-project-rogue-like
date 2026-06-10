@@ -41,6 +41,7 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int) -> vo
 		sprite.play("attack2")
 	else:
 		sprite.play("attack1")
+	AudioManager.play_sword()
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):
 		if hit_enemies.has(area):

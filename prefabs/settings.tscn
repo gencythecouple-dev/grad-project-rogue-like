@@ -1,0 +1,182 @@
+[gd_scene load_steps=8 format=3 uid="uid://33o3c3fx827o"]
+
+[ext_resource type="Texture2D" uid="uid://bvo0ladgnab6t" path="res://Assets/main_background.jpg" id="1_2r5hh"]
+[ext_resource type="Script" uid="uid://dx6sd7l58wmtg" path="res://prefabs/settings.gd" id="1_llkql"]
+[ext_resource type="Script" uid="uid://btdir4rpo4207" path="res://prefabs/runaway_slider.gd" id="3_belmm"]
+[ext_resource type="Texture2D" uid="uid://dcj68bydnmfcp" path="res://Assets/UIBundleFree/UIBundleFree/FreeHorrorUi.png" id="4_1u5hq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_epys8"]
+texture = ExtResource("4_1u5hq")
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(13, 105, 43, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jhjkh"]
+texture = ExtResource("4_1u5hq")
+texture_margin_left = 5.0
+texture_margin_top = 6.0
+texture_margin_right = 5.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(8, 105, 48, 16)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3poq1"]
+texture = ExtResource("4_1u5hq")
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 6.0
+region_rect = Rect2(8, 105, 48, 16)
+
+[node name="Settings" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_llkql")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("1_2r5hh")
+expand_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -110.0
+offset_top = 348.0
+offset_right = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "SETTINGS
+"
+horizontal_alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Panel/CenterContainer"]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+columns = 2
+
+[node name="Master Volume" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "MASTER VOLUME:"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="MasterValue" type="Label" parent="Panel/CenterContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="RunawaySlider" type="Control" parent="Panel/CenterContainer/GridContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(400, 30)
+layout_mode = 2
+mouse_filter = 2
+script = ExtResource("3_belmm")
+
+[node name="MusicVolume" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "MUSIC VOLUME:"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="Panel/CenterContainer/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+editable = false
+
+[node name="MusicValue" type="Label" parent="Panel/CenterContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="GambleButton" type="Button" parent="Panel/CenterContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+text = "GAMBLE"
+
+[node name="GoldLabel" type="Label" parent="Panel/CenterContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="SFXVolume" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "SOUND EFFECTS VOLUME:"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="Panel/CenterContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="SFXValue" type="Label" parent="Panel/CenterContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Resolution" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "RESOLUTION"
+
+[node name="ResolutionOption" type="OptionButton" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+
+[node name="DamageNumber" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "TOGGLE DAMAGE NUMBER"
+
+[node name="DamageToggle" type="CheckButton" parent="Panel/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxTexture_epys8")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_jhjkh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxTexture_3poq1")
+
+[node name="FullScreen" type="Label" parent="Panel/CenterContainer/GridContainer"]
+layout_mode = 2
+text = "FULLSCREEN:"
+
+[node name="FullScreenToggle" type="CheckButton" parent="Panel/CenterContainer/GridContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Return" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -368.0
+offset_right = 33.0
+offset_bottom = -337.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "RETURN"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="Return" to="." method="_on_return_pressed"]

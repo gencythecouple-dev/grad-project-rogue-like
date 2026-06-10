@@ -4,6 +4,11 @@ extends Node2D
 @onready var grid: GridContainer = $CanvasLayer/CenterContainer/PanelContainer/VBoxContainer/ScrollContainer/GridContainer
 @onready var close_button: Button = $CanvasLayer/Close
 @onready var title_label: Label = $CanvasLayer/CenterContainer/PanelContainer/VBoxContainer/Tittle
+@onready var reset_button: Button = $CanvasLayer/ResetButton
+
+var reset_click_count: int = 0
+var reset_click_timer: float = 0.0
+const RESET_CLICK_TIMEOUT: float = 2.0
 
 const upgrades := [
 	{
@@ -75,14 +80,21 @@ const upgrades := [
 ]
 
 func _ready() -> void:
+	AudioManager.play_menu_bgm()
+	reset_button.pressed.connect(_on_reset_pressed)
 	close_button.pressed.connect(_on_close_pressed)
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_build_grid()
 	_update_gold()
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	var t := Time.get_ticks_msec() / 1000.0
 	title_label.add_theme_color_override("font_color", Color.from_hsv(fmod(t * 0.3, 1.0), 1.0, 1.0))
+	if reset_click_count > 0:
+		reset_click_timer -= delta
+		if reset_click_timer <= 0:
+			reset_click_count = 0
+
 
 func _update_gold() -> void:
 	gold_label.text = "Gold: " + str(GameData.gold)
@@ -123,7 +135,7 @@ func _build_grid() -> void:
 			buy_button.disabled = true
 		else:
 			buy_button.text = "Buy (" + str(cost) + "g)"
-			buy_button.disabled = false
+			buy_button.disabled = GameData.gold < cost
 		buy_button.pressed.connect(_on_buy_pressed.bind(upgrade["id"], buy_button, level_label))
 
 		var spacer := Control.new()
@@ -141,6 +153,7 @@ func _build_grid() -> void:
 		grid.add_child(panel)
 
 func _on_buy_pressed(id: String, buy_button: Button, level_label: Label) -> void:
+	AudioManager.play_ui_buy()
 	var cost := GameData.get_upgrade_cost(id)
 	if GameData.buy_upgrade(id, cost):
 		var max_level: int = GameData.UPGRADE_MAX_LEVELS[id]
@@ -152,6 +165,34 @@ func _on_buy_pressed(id: String, buy_button: Button, level_label: Label) -> void
 		else:
 			var new_cost := GameData.get_upgrade_cost(id)
 			buy_button.text = "Buy (" + str(new_cost) + "g)"
+		_update_gold()
+		_refresh_button_states()
+
+func _refresh_button_states() -> void:
+	for panel in grid.get_children():
+		var vbox = panel.get_child(0)
+		var btn = vbox.get_child(vbox.get_child_count() - 1) as Button
+		if btn and not btn.disabled:
+			var id = upgrades[grid.get_children().find(panel)]["id"]
+			var cost = GameData.get_upgrade_cost(id)
+			btn.disabled = GameData.gold < cost
+
+func _on_reset_pressed() -> void:
+	reset_click_count += 1
+	reset_click_timer = RESET_CLICK_TIMEOUT
+	reset_button.text = "RESET (" + str(5 - reset_click_count) + " more)"
+	if reset_click_count >= 5:
+		reset_click_count = 0
+		reset_button.text = "RESET"
+		GameData.gold = 0
+		for key in GameData.meta_upgrades:
+			GameData.meta_upgrades[key] = 0
+		for key in GameData.unlocked_characters:
+			GameData.unlocked_characters[key] = key == "rogue"
+		GameData.music_gamble_cost = 100
+		GameData.music_volume = 100.0
+		GameData.save()
+		_build_grid()
 		_update_gold()
 
 func _on_close_pressed() -> void:

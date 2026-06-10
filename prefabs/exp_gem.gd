@@ -4,10 +4,13 @@ class_name ExperienceGem
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var exp_value: int = 1
 @export var move_speed: float = 300.0
+
 var player_ref = null
 var is_collected := false
 var chase_timer: float = 0.0
 var speed_boosted: bool = false
+
+const CULL_DISTANCE: float = 800.0
 
 func _ready() -> void:
 	player_ref = get_tree().get_first_node_in_group("Player")
@@ -31,21 +34,30 @@ func setup(exp_amount: int, animation_name: String = "default") -> void:
 func _physics_process(delta: float) -> void:
 	if is_collected or player_ref == null:
 		return
-	
+
+	var distance := global_position.distance_to(player_ref.global_position)
+
+	if distance > CULL_DISTANCE:
+		return
+
 	var pickup_range: float = player_ref.magnet_range if "magnet_range" in player_ref else 100.0
-	var distance = global_position.distance_to(player_ref.global_position)
-	
+
 	if distance < pickup_range:
 		chase_timer += delta
 		if chase_timer >= 0.5 and not speed_boosted:
 			speed_boosted = true
 			move_speed *= 2.0
-		var direction = global_position.direction_to(player_ref.global_position)
+		var direction := global_position.direction_to(player_ref.global_position)
 		global_position += direction * move_speed * delta
 	else:
 		chase_timer = 0.0
 		speed_boosted = false
 		move_speed = 300.0
+
+func _start_chase() -> void:
+	speed_boosted = true
+	move_speed *= 2.0
+	chase_timer = 999.0
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Player") and not is_collected:

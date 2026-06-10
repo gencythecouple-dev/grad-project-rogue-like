@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5xn24j7rq14a"]
+
+[ext_resource type="Script" uid="uid://dlp35fjbdsmm3" path="res://prefabs/Menu/music_box.gd" id="1_ggqnt"]
+[ext_resource type="Texture2D" uid="uid://bw15reuntepie" path="res://Assets/UIBundleFree/UIBundleFree/FreeUI.png" id="2_uclpn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uclpn"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(161, 17, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgv5j"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(177, 18, 14, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tsga"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(161, 17, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npg1b"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(161, 17, 14, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xklpk"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(177, 18, 14, 13)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8etrh"]
+atlas = ExtResource("2_uclpn")
+region = Rect2(161, 17, 14, 14)
+
+[node name="MusicBox" type="PanelContainer"]
+offset_right = 328.0
+offset_bottom = 71.0
+script = ExtResource("1_ggqnt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="NOW PLAYING" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "NOW PLAYING"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="PrevButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+texture_normal = SubResource("AtlasTexture_uclpn")
+texture_pressed = SubResource("AtlasTexture_lgv5j")
+texture_hover = SubResource("AtlasTexture_6tsga")
+stretch_mode = 0
+flip_h = true
+
+[node name="TrackName" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="NextButton" type="TextureButton" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = SubResource("AtlasTexture_npg1b")
+texture_pressed = SubResource("AtlasTexture_xklpk")
+texture_hover = SubResource("AtlasTexture_8etrh")
+stretch_mode = 0

@@ -6,6 +6,7 @@ var is_crit: bool = false
 func _ready() -> void:
 	$AnimatedSprite2D.play("default")
 	$AnimatedSprite2D.animation_finished.connect(queue_free)
+	AudioManager.play_explosion()
 	await get_tree().physics_frame
 	_burst()
 

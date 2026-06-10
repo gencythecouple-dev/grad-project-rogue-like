@@ -24,6 +24,7 @@ var is_crit: bool = false
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	$AnimatedSprite2D.play("default")
+	AudioManager.play_star()
 	var random_angle = randf() * TAU
 	velocity = Vector2(cos(random_angle), sin(random_angle)) * speed
 

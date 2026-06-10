@@ -65,24 +65,24 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("15_fqjkt")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
 "speed": 15.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qo13x"]
-radius = 132.01515
+radius = 108.50115
 
 [node name="SwordAura" type="Area2D"]
 scale = Vector2(2, 2)
-collision_mask = 2
+collision_mask = 10
 script = ExtResource("1_ccnbl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_qbquc")
-frame_progress = 0.92473865
+frame = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5, 5)
+position = Vector2(0, 15.5)
 shape = SubResource("CircleShape2D_qo13x")

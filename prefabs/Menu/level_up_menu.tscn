@@ -1,9 +1,33 @@
-[gd_scene load_steps=6 format=3 uid="uid://xnhalk4oi04s"]
+[gd_scene load_steps=9 format=3 uid="uid://xnhalk4oi04s"]
 
 [ext_resource type="Script" uid="uid://wntqgq4l5ek2" path="res://prefabs/Menu/level_up_menu.gd" id="1_pn0h5"]
-[ext_resource type="Texture2D" uid="uid://hd74m31adhrj" path="res://Assets/UIBundleFree/UIBundleFree/UiCozyFree.png" id="2_j46r6"]
+[ext_resource type="Texture2D" uid="uid://tadukypcgh0n" path="res://Assets/UIBundleFree/UI books & more.png" id="2_wwws8"]
 [ext_resource type="Texture2D" uid="uid://baqpshrf2y73g" path="res://Assets/ArrowLeft.tres" id="3_nysvr"]
 [ext_resource type="Texture2D" uid="uid://cgsmwa03d4gef" path="res://Assets/ArrowRight.tres" id="4_rmkxh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ythmn"]
+texture = ExtResource("2_wwws8")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(721, 65, 46, 46)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wwws8"]
+texture = ExtResource("2_wwws8")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(721, 65, 46, 46)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dnhvm"]
+texture = ExtResource("2_wwws8")
+texture_margin_left = 7.0
+texture_margin_top = 7.0
+texture_margin_right = 7.0
+texture_margin_bottom = 7.0
+region_rect = Rect2(721, 65, 46, 46)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nysvr"]
 bg_color = Color(0.972549, 0.98039216, 0, 0)
@@ -39,10 +63,12 @@ grow_vertical = 2
 [node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer"]
 custom_minimum_size = Vector2(500, 700)
 layout_mode = 2
-texture = ExtResource("2_j46r6")
-region_rect = Rect2(7.3393974, 167.7345, 87.85022, 80.720856)
-patch_margin_top = 2
-patch_margin_bottom = 2
+texture = ExtResource("2_wwws8")
+region_rect = Rect2(721, 16, 45, 47)
+patch_margin_left = 15
+patch_margin_top = 16
+patch_margin_right = 14
+patch_margin_bottom = 15
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect/CenterContainer/NinePatchRect"]
 layout_mode = 0
@@ -65,34 +91,10 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_horizontal = 5
+theme_override_styles/normal = SubResource("StyleBoxTexture_ythmn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wwws8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dnhvm")
 theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -2.0
-offset_right = 432.195
-offset_bottom = 121.0
-texture = ExtResource("2_j46r6")
-region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 105.0
-offset_top = 15.0
-offset_right = -3.0
-offset_bottom = -9.0
-grow_horizontal = 2
-grow_vertical = 2
-autowrap_mode = 2
-text_overrun_behavior = 3
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
 layout_mode = 0
@@ -118,38 +120,28 @@ offset_right = 476.195
 offset_bottom = 80.0
 texture = ExtResource("4_rmkxh")
 
-[node name="UpgradeChoice2" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 5
-theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -2.0
-offset_right = 432.195
-offset_bottom = 121.0
-texture = ExtResource("2_j46r6")
-region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2/NinePatchRect"]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 105.0
-offset_top = 15.0
-offset_right = -3.0
-offset_bottom = -9.0
+offset_left = 102.0
+offset_top = 13.0
+offset_right = -6.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 autowrap_mode = 2
 text_overrun_behavior = 3
+
+[node name="UpgradeChoice2" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/normal = SubResource("StyleBoxTexture_ythmn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wwws8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dnhvm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
 layout_mode = 0
@@ -175,38 +167,28 @@ offset_right = 476.195
 offset_bottom = 80.0
 texture = ExtResource("4_rmkxh")
 
-[node name="UpgradeChoice3" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
-custom_minimum_size = Vector2(0, 120)
-layout_mode = 2
-size_flags_horizontal = 5
-theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -2.0
-offset_right = 432.195
-offset_bottom = 121.0
-texture = ExtResource("2_j46r6")
-region_rect = Rect2(131.5806, 99.47358, 24.15686, 24.809746)
-patch_margin_left = 10
-patch_margin_top = 10
-patch_margin_right = 10
-patch_margin_bottom = 10
-
-[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3/NinePatchRect"]
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 105.0
-offset_top = 15.0
-offset_right = -3.0
-offset_bottom = -9.0
+offset_left = 102.0
+offset_top = 13.0
+offset_right = -6.0
+offset_bottom = -11.0
 grow_horizontal = 2
 grow_vertical = 2
 autowrap_mode = 2
 text_overrun_behavior = 3
+
+[node name="UpgradeChoice3" type="Button" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 2
+size_flags_horizontal = 5
+theme_override_styles/normal = SubResource("StyleBoxTexture_ythmn")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_wwws8")
+theme_override_styles/hover = SubResource("StyleBoxTexture_dnhvm")
+theme_override_styles/focus = SubResource("StyleBoxFlat_nysvr")
 
 [node name="TextureRect" type="TextureRect" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
 layout_mode = 0
@@ -231,3 +213,17 @@ offset_top = 40.0
 offset_right = 476.195
 offset_bottom = 80.0
 texture = ExtResource("4_rmkxh")
+
+[node name="Label" type="Label" parent="ColorRect/CenterContainer/NinePatchRect/VBoxContainer/UpgradeChoice3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 102.0
+offset_top = 13.0
+offset_right = -6.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+autowrap_mode = 2
+text_overrun_behavior = 3

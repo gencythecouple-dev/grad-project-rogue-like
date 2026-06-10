@@ -7,6 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	GameData.load_data()
+	AudioManager.play_menu_bgm()
 	play_button.pressed.connect(_on_play_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	option_button.pressed.connect(_on_option_pressed)
@@ -19,7 +20,7 @@ func _on_quit_pressed() -> void:
 	get_tree().quit()
 
 func _on_option_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://prefabs/settings.tscn")
 
 func _on_upgrade_pressed() -> void:
 	get_tree().change_scene_to_file("res://prefabs/Menu/upgrade.tscn")

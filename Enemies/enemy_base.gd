@@ -3,7 +3,7 @@ class_name EnemyBase
 
 @export var exp_value: int = 5
 @export var base_hp: int = 3
-@export var speed: float = 60.0
+@export var speed: float = 80.0
 @export var damage_number_scene: PackedScene
 
 const ATTACK_DAMAGE: float = 8.0
@@ -63,13 +63,32 @@ func _physics_process(delta: float) -> void:
 		position += knockback_velocity * delta
 		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, KNOCKBACK_DECAY * delta)
 		return
+
 	var target_dir: Vector2 = current_scene.flow_field.get_direction(position)
 	if target_dir == Vector2.ZERO:
 		target_dir = (player_ref.position - position).normalized()
-	velocity = target_dir * speed
-	if cached_sprite:
-		if target_dir.x != 0:
-			cached_sprite.flip_h = target_dir.x < 0
+
+	var move_dir: Vector2 = target_dir
+
+	var obstacles := get_tree().get_nodes_in_group("Obstacle")
+	for obstacle in obstacles:
+		var diff: Vector2 = position - obstacle.global_position
+		var dist: float = diff.length()
+		var push_radius: float = SEPARATION_RADIUS * 1.2
+		if dist < push_radius and dist > 0:
+			var push_normal: Vector2 = diff / dist
+			var overlap: float = push_radius - dist
+			position += push_normal * overlap * 0.9
+			var into_obstacle: float = move_dir.dot(-push_normal)
+			if into_obstacle > 0:
+				move_dir += push_normal * into_obstacle
+
+	move_dir = move_dir.normalized() if move_dir.length() > 0.01 else Vector2.ZERO
+	velocity = move_dir * speed
+
+	if cached_sprite and move_dir.x != 0:
+		cached_sprite.flip_h = move_dir.x < 0
+
 	if (Engine.get_physics_frames() + tick_offset) % (SKIP_FRAMES + 1) == 0:
 		query.transform.origin = position
 		var results = get_world_2d().direct_space_state.intersect_shape(query, MAX_QUERY_RESULTS)
@@ -77,18 +96,23 @@ func _physics_process(delta: float) -> void:
 		for result in results:
 			cached_neighbors.append(result.collider.position)
 		_separate_from(player_ref.position, PLAYER_SEPARATION_STRENGTH)
+
 	for other_pos in cached_neighbors:
 		var diff: Vector2 = position - other_pos
 		var dist: float = diff.length()
 		if dist < SEPARATION_RADIUS and dist > 0:
 			position += (diff / dist) * (SEPARATION_RADIUS - dist) * 0.5
+
 	var player_dist: float = position.distance_to(player_ref.position)
 	if player_dist < SEPARATION_RADIUS and player_dist > 0:
 		var push: Vector2 = position - player_ref.position
 		position += push.normalized() * (SEPARATION_RADIUS - player_dist) * 0.5
+
 	position += velocity * delta
+
 	if position.distance_to(player_ref.position) < SEPARATION_RADIUS + 5.0:
 		player_ref.TakeDamage(ATTACK_DAMAGE * delta)
+
 	enemy_behavior(delta)
 
 func _separate_from(other_pos: Vector2, weight: float) -> void:
@@ -115,6 +139,7 @@ func TakeDamage(damage: float, is_crit: bool = false) -> void:
 		return
 	current_hp -= damage
 	flash_timer = FLASH_DURATION
+	AudioManager.play_hit()
 	spawn_damage_number(damage, is_crit)
 	if player_ref:
 		var knockback_dir: Vector2 = (position - player_ref.position).normalized()
@@ -130,6 +155,8 @@ func on_death() -> void:
 
 func spawn_damage_number(damage: float, is_crit: bool = false) -> void:
 	if damage_number_scene == null:
+		return
+	if not GameData.show_damage_numbers:
 		return
 	var dmg_num = damage_number_scene.instantiate()
 	var spawn_pos: Vector2 = position + Vector2(randf_range(-10, 10), -20)

@@ -13,6 +13,7 @@ var is_crit: bool = false
 
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
+	AudioManager.play_throw()
 	$AnimatedSprite2D.play("default")
 
 func setup(spawn_player: CharacterBody2D, spawn_damage: float, spawn_direction: Vector2) -> void:

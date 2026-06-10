@@ -1,0 +1,46 @@
+[gd_scene load_steps=10 format=3 uid="uid://k52ulwtgmqgm"]
+
+[ext_resource type="Script" uid="uid://cwe4fl72r6kli" path="res://prefabs/objects/barrel.gd" id="1_yxd4v"]
+[ext_resource type="PackedScene" uid="uid://bqmdbfsajv7or" path="res://prefabs/PickUp/gold_pickup.tscn" id="2_nyqfu"]
+[ext_resource type="Shader" uid="uid://bil4uve5s3egh" path="res://Enemies/flash.gdshader" id="2_v2wg7"]
+[ext_resource type="PackedScene" uid="uid://b4qklnmpibwf0" path="res://prefabs/PickUp/magnet_pick_up.tscn" id="3_nyqfu"]
+[ext_resource type="PackedScene" uid="uid://cfspl8mnrmovn" path="res://prefabs/PickUp/power_up.tscn" id="4_wdjwb"]
+[ext_resource type="Texture2D" uid="uid://b26cbxm62v2b5" path="res://Assets/Objects/Destructible Objects Sprite Sheet.png" id="6_b0egv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nyqfu"]
+shader = ExtResource("2_v2wg7")
+shader_parameter/flash_intensity = 0.0
+shader_parameter/buff_tint = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxd4v"]
+radius = 11.338235
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ucatk"]
+
+[node name="barrel" type="StaticBody2D" groups=["Obstacle"]]
+scale = Vector2(3, 3)
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_yxd4v")
+gold_scene = ExtResource("2_nyqfu")
+magnet_scene = ExtResource("3_nyqfu")
+power_up_scene = ExtResource("4_wdjwb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nyqfu")
+texture = ExtResource("6_b0egv")
+region_enabled = true
+region_rect = Rect2(1, 0, 63, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 4)
+shape = SubResource("CircleShape2D_yxd4v")
+
+[node name="HitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(1, 4.3333335)
+shape = SubResource("CircleShape2D_ucatk")

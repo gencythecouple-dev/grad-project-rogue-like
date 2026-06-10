@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=3 uid="uid://dj8n0x6x27lsk"]
+
+[ext_resource type="Script" uid="uid://bdwrkl5udjcut" path="res://prefabs/audio_manager.gd" id="1_73uix"]
+
+[node name="AudioManager" type="Node2D"]
+script = ExtResource("1_73uix")
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="KnifeSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="ExplosionSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+bus = &"SFX"
+
+[node name="PowerUpSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="HolySmiteSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="HammerSwingSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="HammerSpikeSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="GameOver" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+bus = &"SFX"
+
+[node name="SwordSwingSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="SwordAuraSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -25.0
+bus = &"SFX"
+
+[node name="ThrowSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="StarFallSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -25.0
+bus = &"SFX"
+
+[node name="MagicBulletSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="LightningBallSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="GoldPickUpSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="DamageUpSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="LevelUpSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -23.0
+bus = &"SFX"
+
+[node name="UIHoverSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="UIClickSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="UIBuySFX" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"SFX"
+
+[node name="MenuBGM" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0
+bus = &"Music"
+
+[node name="EXPSFX" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
+bus = &"SFX"

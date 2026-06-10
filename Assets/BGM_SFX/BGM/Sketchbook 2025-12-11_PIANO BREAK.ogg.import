@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cj137k5sjr2qt"
+path="res://.godot/imported/Sketchbook 2025-12-11_PIANO BREAK.ogg-f14db3415158f750409127495c09c3fe.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/BGM_SFX/BGM/Sketchbook 2025-12-11_PIANO BREAK.ogg"
+dest_files=["res://.godot/imported/Sketchbook 2025-12-11_PIANO BREAK.ogg-f14db3415158f750409127495c09c3fe.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

@@ -427,7 +427,7 @@ func _spawn_single_magic_bullet_at_target(target_enemy: Area2D) -> void:
 func _spawn_holy_smites() -> void:
 	for i in range(holy_smite_count):
 		var delay = i * 0.3
-		get_tree().create_timer(delay).timeout.connect(func(): _spawn_holy_smite())
+		get_tree().create_timer(delay, false, false, true).timeout.connect(func(): _spawn_holy_smite())
 
 func _spawn_holy_smite() -> void:
 	if holy_smite_scene == null:
@@ -513,12 +513,6 @@ func _tick_recovery(delta: float) -> void:
 		recovery_timer = 0.0
 		current_hp = min(current_hp + recovery_rate, max_hp)
 		health_bar.value = current_hp
-	current_attack = base_attack
-	current_armor = base_armor
-	max_hp = base_hp
-	current_hp = max_hp
-	health_bar.max_value = max_hp
-	health_bar.value = current_hp
 
 func SetStats() -> void:
 	current_attack = base_attack

@@ -220,8 +220,7 @@ radius = 24.0
 [node name="Explosion" type="Area2D"]
 scale = Vector2(4.5, 4.5)
 collision_layer = 4
-collision_mask = 2
-monitorable = false
+collision_mask = 10
 script = ExtResource("1_ah2ku")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

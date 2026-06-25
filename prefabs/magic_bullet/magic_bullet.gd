@@ -43,13 +43,14 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Enemy"):
 		if enemies_hit.has(area):
 			return
-		
 		enemies_hit.append(area)
 		area.TakeDamage(damage, is_crit)
-		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:
 			player.total_damage_dealt += damage
-		
+		if enemies_hit.size() > pierce_count:
+			queue_free()
+	elif area.get_parent().is_in_group("Obstacle"):
+		area.get_parent().take_damage()
 		if enemies_hit.size() > pierce_count:
 			queue_free()

@@ -36,7 +36,6 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	lifetime_timer += delta
-	
 	if infinite_mode:
 		infinite_timer += delta
 		if infinite_timer >= INFINITE_DURATION:
@@ -45,40 +44,40 @@ func _physics_process(delta: float) -> void:
 	elif lifetime_timer >= LIFETIME:
 		queue_free()
 		return
-	
 	global_position += flight_direction * flight_speed * delta
+	for area in get_overlapping_areas():
+		if area.get_parent().is_in_group("Obstacle"):
+			area.get_parent().take_damage()
+			break
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("Obstacle"):
+		area.get_parent().take_damage()
+		return
 	if not area.is_in_group("Enemy"):
 		return
 	if enemies_hit.has(area):
 		return
-	
 	enemies_hit.append(area)
 	area.TakeDamage(damage, is_crit)
-	
 	if player_ref:
 		player_ref.total_damage_dealt += damage
-	
 	if ball_level >= 5 and not infinite_mode:
 		infinite_mode = true
 		flight_speed = base_speed * 2.0
 		enemies_hit.clear()
-	
 	if not infinite_mode and bounce_count >= max_bounces:
 		queue_free()
 		return
-	
 	if not infinite_mode:
 		bounce_count += 1
-	
 	var target = _get_closest_unhit_enemy()
 	if target:
 		flight_direction = global_position.direction_to(target.global_position)
 	else:
 		flight_direction = _random_direction()
-	
 	rotation = flight_direction.angle()
+	global_position += flight_direction * 10.0
 
 func _get_closest_unfit_enemy() -> Area2D:
 	var closest_dist: float = BOUNCE_SEEK_RANGE

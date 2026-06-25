@@ -1,9 +1,8 @@
 extends Node
 
 
-var unlocked_bgm_tracks: Array[String] = [
-	"res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3",
-]
+var unlocked_bgm_tracks: Array[String] = []
+
 var selected_bgm: String = ""
 var show_damage_numbers: bool = true
 var selected_character: String = "mage"
@@ -63,18 +62,18 @@ func save() -> void:
 		config.set_value("unlocks", key, unlocked_characters[key])
 	config.set_value("audio", "music_gamble_cost", music_gamble_cost)
 	config.set_value("audio", "music_volume", music_volume)
-	config.set_value("gameplay", "damage_numbers", show_damage_numbers)
-	config.save(SAVE_PATH)
 	config.set_value("audio", "unlocked_bgm", unlocked_bgm_tracks)
 	config.set_value("audio", "selected_bgm", selected_bgm)
+	config.set_value("gameplay", "damage_numbers", show_damage_numbers)
+	config.save(SAVE_PATH)
 
 
 
 
 func load_data() -> void:
 	var config := ConfigFile.new()
-	unlocked_bgm_tracks.append("res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3")
 	if config.load(SAVE_PATH) != OK:
+		unlocked_bgm_tracks = ["res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3"]
 		return
 	gold = config.get_value("player", "gold", 0)
 	for key in meta_upgrades:
@@ -85,7 +84,7 @@ func load_data() -> void:
 	music_volume = config.get_value("audio", "music_volume", 100.0)
 	show_damage_numbers = config.get_value("gameplay", "damage_numbers", true)
 	selected_bgm = config.get_value("audio", "selected_bgm", "")
-	var loaded_tracks = config.get_value("audio", "unlocked_bgm", [])
+	var loaded_tracks = config.get_value("audio", "unlocked_bgm", ["res://Assets/BGM_SFX/BGM/Demetori - Ego,Schizoid,Beat.mp3"])
 	for track in loaded_tracks:
 		var t := str(track)
 		if not unlocked_bgm_tracks.has(t):

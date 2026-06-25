@@ -63,8 +63,15 @@ offset_bottom = 886.0
 text = "RETURN TO MENU "
 
 [node name="ResetButton" type="Button" parent="CanvasLayer"]
-offset_left = 8.0
-offset_top = 1036.0
-offset_right = 103.0
-offset_bottom = 1065.0
+offset_left = 7.0
+offset_top = 999.0
+offset_right = 190.0
+offset_bottom = 1030.0
 text = "RESET ALL PROGRESS"
+
+[node name="AddGold" type="Button" parent="CanvasLayer"]
+offset_left = 6.0
+offset_top = 1036.0
+offset_right = 189.0
+offset_bottom = 1067.0
+text = "ADD 1000 GOLD"

@@ -121,6 +121,7 @@ animations = [{
 }]
 
 [node name="Shockwave" type="Area2D"]
+collision_layer = 4
 collision_mask = 10
 script = ExtResource("1_yccnn")
 
@@ -136,3 +137,5 @@ frame = 14
 frame_progress = 1.0
 
 [node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

@@ -5,6 +5,8 @@ extends Node2D
 @onready var close_button: Button = $CanvasLayer/Close
 @onready var title_label: Label = $CanvasLayer/CenterContainer/PanelContainer/VBoxContainer/Tittle
 @onready var reset_button: Button = $CanvasLayer/ResetButton
+@onready var add_gold_button: Button = $CanvasLayer/AddGold
+
 
 var reset_click_count: int = 0
 var reset_click_timer: float = 0.0
@@ -21,7 +23,7 @@ const upgrades := [
 		"id": "max_hp",
 		"name": "Fortitude",
 		"description": "+50 Max HP",
-		"icon": preload("res://Assets/Upgrades/HP_up.png")
+		"icon": preload("res://Assets/maxhp/66.png")
 	},
 	{
 		"id": "armor",
@@ -69,13 +71,13 @@ const upgrades := [
 		"id": "revivals",
 		"name": "Second Chance",
 		"description": "Revive once per run with 25% HP",
-		"icon": preload("res://Assets/Upgrades/HP_up.png")
+		"icon": preload("res://Assets/Revive/revive.png")
 	},
 	{
 		"id": "curse",
 		"name": "Curse",
 		"description": "+10% more enemies, +10% Gold and EXP",
-		"icon": preload("res://Assets/Upgrades/greed.png")
+		"icon": preload("res://Assets/Curse/162.png")
 	},
 ]
 
@@ -83,6 +85,7 @@ func _ready() -> void:
 	AudioManager.play_menu_bgm()
 	reset_button.pressed.connect(_on_reset_pressed)
 	close_button.pressed.connect(_on_close_pressed)
+	add_gold_button.pressed.connect(_on_add_gold_pressed)
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	_build_grid()
 	_update_gold()
@@ -95,6 +98,11 @@ func _process(delta: float) -> void:
 		if reset_click_timer <= 0:
 			reset_click_count = 0
 
+func _on_add_gold_pressed() -> void:
+	GameData.gold += 1000
+	GameData.save()
+	_update_gold()
+	_refresh_button_states()
 
 func _update_gold() -> void:
 	gold_label.text = "Gold: " + str(GameData.gold)
@@ -172,7 +180,7 @@ func _refresh_button_states() -> void:
 	for panel in grid.get_children():
 		var vbox = panel.get_child(0)
 		var btn = vbox.get_child(vbox.get_child_count() - 1) as Button
-		if btn and not btn.disabled:
+		if btn and not btn.text == "MAXED":
 			var id = upgrades[grid.get_children().find(panel)]["id"]
 			var cost = GameData.get_upgrade_cost(id)
 			btn.disabled = GameData.gold < cost

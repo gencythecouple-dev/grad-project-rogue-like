@@ -71,6 +71,7 @@ text = "Total Gold Earned:"
 
 [node name="BGM_Unlocked" type="Label" parent="ColorRect/NinePatchRect/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 
 [node name="ScreenTitle" type="Label" parent="ColorRect"]
 layout_mode = 0

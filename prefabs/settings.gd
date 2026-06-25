@@ -94,9 +94,9 @@ func save_settings() -> void:
 	config.set_value("audio", "master", master_slider.value)
 	config.set_value("audio", "sfx", sfx_slider.value)
 	config.set_value("video", "resolution_index", resolution_option.selected)
+	config.set_value("video", "fullscreen", fullscreen_toggle.button_pressed)
 	config.set_value("gameplay", "damage_numbers", damage_toggle.button_pressed)
 	config.save(SETTINGS_PATH)
-	config.set_value("video", "fullscreen", fullscreen_toggle.button_pressed)
 
 func _apply_volumes() -> void:
 	AudioServer.set_bus_volume_db(
@@ -121,8 +121,10 @@ func _apply_resolution(index: int, from_load: bool = false) -> void:
 		return
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_size(res)
-	var screen_size := DisplayServer.screen_get_size()
-	var centered := (screen_size - res) / 2
+	var screen := DisplayServer.window_get_current_screen()
+	var screen_pos := DisplayServer.screen_get_position(screen)
+	var screen_size := DisplayServer.screen_get_size(screen)
+	var centered := screen_pos + (screen_size - res) / 2
 	DisplayServer.window_set_position(centered)
 
 func _on_fullscreen_toggled(pressed: bool) -> void:

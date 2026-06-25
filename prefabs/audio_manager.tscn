@@ -87,6 +87,7 @@ bus = &"SFX"
 
 [node name="MenuBGM" type="AudioStreamPlayer" parent="."]
 volume_db = -20.0
+autoplay = true
 bus = &"Music"
 
 [node name="EXPSFX" type="AudioStreamPlayer" parent="."]

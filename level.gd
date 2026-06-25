@@ -35,7 +35,7 @@ var horde_timer: float = 0.0
 var horde_interval: float = 30.0
 var directed_wave_timer: float = 0.0
 var directed_wave_interval: float = 20.0
-var game_time: float = 300.0
+var game_time: float = 0.0
 var player_ui
 var player: CharacterBody2D
 var enemy_list = []
@@ -50,7 +50,7 @@ var last_config_check: float = 0.0
 var current_spawn_config = {}
 var distance_traveled: float = 0.0
 var last_player_position: Vector2 = Vector2.ZERO
-var barrel_spawn_threshold: float = 500.0
+var barrel_spawn_threshold: float = 200.0
 var last_barrel_positions: Array[Vector2] = []
 const BARREL_MIN_DISTANCE: float = 400.0
 const BARREL_GRID_SIZE: float = 64.0
@@ -380,7 +380,7 @@ func _try_spawn_obstacle() -> void:
 	if game_time < 10.0:
 		return
 	var active_obstacles := get_tree().get_nodes_in_group("Obstacle")
-	if active_obstacles.size() >= 6:
+	if active_obstacles.size() >= 10:
 		return
 	var cam := get_viewport().get_camera_2d()
 	var viewport_size := get_viewport_rect().size / cam.zoom

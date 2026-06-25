@@ -262,7 +262,6 @@ length = 19.0
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 10
-monitorable = false
 script = ExtResource("1_o5lq0")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -273,3 +272,5 @@ animation = &"attack1"
 position = Vector2(-8, 1)
 rotation = -1.5707964
 shape = SubResource("SeparationRayShape2D_35nk8")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

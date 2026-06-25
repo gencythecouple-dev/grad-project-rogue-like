@@ -41,11 +41,13 @@ func _physics_process(delta: float) -> void:
 	if lifetime >= max_lifetime:
 		queue_free()
 		return
-	
 	if bounce_cooldown > 0:
 		bounce_cooldown -= delta
-	
-	position += velocity * delta
+	global_position += velocity * delta
+	for area in get_overlapping_areas():
+		if area.get_parent().is_in_group("Obstacle"):
+			area.get_parent().take_damage()
+			break
 	
 	var viewport_rect = get_viewport_rect()
 	var cam = get_viewport().get_camera_2d()
@@ -111,15 +113,16 @@ func _spawn_explosion() -> void:
 	explosion.setup(damage, is_crit)
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("Obstacle"):
+		area.get_parent().take_damage()
+		return
 	if area.is_in_group("Enemy"):
 		if hit_enemies.has(area):
 			return
 		if "is_dying" in area and area.is_dying:
 			return
-		
 		hit_enemies.append(area)
 		area.TakeDamage(damage, is_crit)
-		
 		var player = get_tree().get_first_node_in_group("Player")
 		if player:
 			player.total_damage_dealt += damage

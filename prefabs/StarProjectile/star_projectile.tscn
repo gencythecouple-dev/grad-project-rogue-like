@@ -437,8 +437,7 @@ radius = 8.0
 
 [node name="StarProjectile" type="Area2D"]
 collision_layer = 4
-collision_mask = 2
-monitorable = false
+collision_mask = 10
 script = ExtResource("1_c7834")
 explosion_scene = ExtResource("2_boyxm")
 
@@ -450,3 +449,5 @@ frame_progress = 0.68231237
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_18i6p")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

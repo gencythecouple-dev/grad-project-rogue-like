@@ -256,9 +256,8 @@ frame_progress = 0.5966211
 shape = SubResource("CircleShape2D_yxd4v")
 
 [node name="HitArea" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 8
 collision_mask = 4
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
 shape = SubResource("CircleShape2D_ucatk")

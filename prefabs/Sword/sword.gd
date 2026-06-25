@@ -42,16 +42,20 @@ func setup(spawn_player: CharacterBody2D, spawn_damage: float, level: int) -> vo
 	else:
 		sprite.play("attack1")
 	AudioManager.play_sword()
+
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("Obstacle"):
+		area.get_parent().take_damage()
+		return
 	if area.is_in_group("Enemy"):
 		if hit_enemies.has(area):
 			return
 		if "is_dying" in area and area.is_dying:
 			return
-		
 		hit_enemies.append(area)
 		area.TakeDamage(damage, is_crit)
 		player.total_damage_dealt += damage
+		
 func _on_animation_finished() -> void:
 	hide()
 	queue_free()

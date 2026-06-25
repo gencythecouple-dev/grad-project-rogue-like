@@ -42,14 +42,15 @@ func _physics_process(delta: float) -> void:
 		global_position = start_pos + forward + sideways
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent() is ObstacleBase:
+		area.get_parent().take_damage()
+		return
 	if area.is_in_group("Enemy"):
 		if hit_enemies.has(area):
 			return
 		if "is_dying" in area and area.is_dying:
 			return
-		
 		hit_enemies.append(area)
 		area.TakeDamage(damage, is_crit)
-		
 		if player:
 			player.total_damage_dealt += damage

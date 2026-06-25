@@ -24,6 +24,9 @@ func _on_frame_changed() -> void:
 		monitoring = false
 
 func _on_area_entered(area: Area2D) -> void:
+	if area.get_parent().is_in_group("Obstacle"):
+		area.get_parent().take_damage()
+		return
 	if area.is_in_group("Enemy"):
 		area.TakeDamage(damage, is_crit)
 

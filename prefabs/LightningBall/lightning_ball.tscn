@@ -46,7 +46,6 @@ radius = 16.03122
 scale = Vector2(2, 2)
 collision_layer = 4
 collision_mask = 10
-monitorable = false
 script = ExtResource("1_dx7sa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -55,3 +54,5 @@ frame_progress = 0.93393075
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_he7vy")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

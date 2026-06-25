@@ -12,6 +12,9 @@ func _ready() -> void:
 
 func _burst() -> void:
 	for area in get_overlapping_areas():
+		if area.get_parent().is_in_group("Obstacle"):
+			area.get_parent().take_damage()
+			continue
 		if area.is_in_group("Enemy"):
 			if "is_dying" in area and area.is_dying:
 				continue

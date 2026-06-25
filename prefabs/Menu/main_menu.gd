@@ -6,6 +6,27 @@ extends Node2D
 @onready var upgrade_button: Button = $CenterContainer/VBoxContainer/Upgrade
 
 func _ready() -> void:
+	var config := ConfigFile.new()
+	if config.load("user://settings.cfg") == OK:
+		var is_fullscreen: bool = config.get_value("video", "fullscreen", false)
+		if is_fullscreen:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			var index: int = config.get_value("video", "resolution_index", 0)
+			var RESOLUTIONS := [
+				Vector2i(1920, 1080),
+				Vector2i(1600, 900),
+				Vector2i(1280, 720),
+				Vector2i(1024, 576),
+			]
+			var res: Vector2i = RESOLUTIONS[index]
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_size(res)
+			var screen := DisplayServer.window_get_current_screen()
+			var screen_pos := DisplayServer.screen_get_position(screen)
+			var screen_size := DisplayServer.screen_get_size(screen)
+			var centered := screen_pos + (screen_size - res) / 2
+			DisplayServer.window_set_position(centered)
 	GameData.load_data()
 	AudioManager.play_menu_bgm()
 	play_button.pressed.connect(_on_play_pressed)

@@ -59,6 +59,7 @@ func _ready() -> void:
 	ui_buy_sfx.stream = preload("res://Assets/BGM_SFX/UI/ui_buy.wav")
 	menu_bgm.stream = preload("res://Assets/BGM_SFX/BGM/Menu_BGM.ogg")
 	menu_bgm.autoplay = true
+	menu_bgm.stream.loop = true
 	exp_sfx.stream = preload("res://Assets/BGM_SFX/SFX/EXP.wav")
 
 func play_hit() -> void:

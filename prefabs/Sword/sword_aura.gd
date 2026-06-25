@@ -24,3 +24,5 @@ func _on_frame_changed() -> void:
 			area.TakeDamage(damage, is_crit)
 			if player:
 				player.total_damage_dealt += damage
+		elif area.get_parent().is_in_group("Obstacle"):
+			area.get_parent().take_damage()
